@@ -1,0 +1,473 @@
+<div class="page" data-ng-controller="chatCtrl as vm" data-ng-cloak>
+    <ol class="breadcrumb-alt">
+        <li><a href="#/dashboard">Home</a></li>
+        <li class="active"><a href="">Chat</a></li>
+    </ol>
+
+    <div style="padding:15px; background-color:white;">
+
+        <div class="row col-d-12">
+            <div class="col-sm-9">
+                <section class="panel panel-default mail-container">
+                    <div class="panel-heading"><strong> Welcome to PayAnyBiz Chat Room</strong></div>
+                    <div class="col-md-12">
+                      <br />
+					  <section>
+						
+	                    <ul class="filters list-inline nav nav-tabs">
+	                        <li>
+	                            <a ng-hide="!chatuser" id="companyname"
+	                               data-toggle="tab"
+	                               data-ng-click="vm.filter('all')">{{chatuser}}</a>
+	                        </li>
+	                    </ul>
+						<div class="rightContent">
+							<style>
+div.box div.overlay
+{
+    display:none;
+}
+
+div.box:hover div.overlay
+{
+ display:block;   
+}
+
+.away{ color:#f3c536}
+.overlay ul{ margin:0; padding:0}
+.overlay li{list-style:none;padding: 6px 3px;
+    border: 1px solid #f3f3f3;
+    border-bottom: none; 
+    border-radius: 3px;}
+	.overlay li:last-child{border-bottom: 1px solid #F3F0F0;}
+	.status-hd{color: #767676;
+    background-color: #f6f6f6;
+    border-color: #f3f3f3;}
+	.overlay li:hover{background-color: #fafafa;}
+</style>
+							<h4>My profile</h4>
+							<div id="companyname">
+								<img alt="" class="img-rounded img30_30" src="uploads/image_profile/"> {{currcomp}}
+							</div>
+							<div class="clr"></div>
+							<div class="dropdown">
+							  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{current_username}}&nbsp;&nbsp;<span class="icon glyphicon glyphicon-user {{(img_online==1) ? 'color-success' : 'away'}}"></span>
+							  <span class="caret"></span></button>
+							  <ul class="dropdown-menu">
+							    <li ng-click="online(1)"><a href="#">Online</a></li>
+							    <li ng-click="online(0)"><a href="#">Away</a></li>
+							 
+							  </ul>
+							</div>
+							<div class="box" style="display:none;">
+							    <div class="panel-heading status-hd">{{current_username}}&nbsp;&nbsp;
+									<span class="icon glyphicon glyphicon-user {{(img_online==1) ? 'color-success' : 'away'}}"></span>
+								</div>
+						    <div class="overlay">
+								<ul>
+								    <li ng-click="online(1)"> <span class="icon glyphicon glyphicon-user color-success"></span>&nbsp;Online </li>
+								    <li ng-click="online(0)">  <span class="icon glyphicon glyphicon-user away"></span>&nbsp;Away </li>
+							    </ul>
+						    </div><br />
+						</div>
+							<h4>Recent Messages</h4>
+						
+					  </section>
+	                  <div id="chatLineHolder">
+                           <div class="jspContainer">
+                              <div class="jspPane">
+                               	<p class="noChats">No chats yet</p>
+                              </div>
+                           </div>
+                       </div>
+                       <div id="chatBottomBar" class="rounded" style="display:none;">
+					    	<div class="tip"></div>
+					    	<form action="" id="chatsubmitfrm" ng-submit="submit($event)">
+					    		<input type="hidden" id="messagelen" name="messagelen" value="{{messagelen}}" />
+					    		<input type="hidden" id="userid" name="userid" value="{{userid}}" />
+					        	<input type="hidden" id="currentreceiverid" name="currentreceiverid" value="{{chatuserid}}" />
+					            <textarea id="chatText" name="chatText" class="rounded" style="width:100%"></textarea>
+					            <!-- <input id="chatText" name="chatText" class="rounded" maxlength="255">
+					            <input type="submit" class="blueButton" value="Submit"> -->
+					            <!-- ng-click="chatSubmit()" -->
+					         </form>
+					   </div>
+                </div>
+                </section>
+            </div>
+            <div class="col-sm-3">
+                <section class="panel panel-default mail-categories">
+                    <div class="panel-heading">
+                        <strong>Contacts of your company</strong>
+                    </div>
+                    <section class="mail-categories">
+          				<div ng-if="otherusers.length!=0">	
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="loguser in otherusers">
+                                <a href="javascript:;" ng-hide="loguser.chat_status == 0" ng-click="userClick($event)" cname="{{loguser.cname}}" cid="{{loguser.userid}}">
+                                    <span class="icon glyphicon glyphicon-user {{(loguser.is_logged_in==1) ? 'color-success' : 'color-danger'}}"></span>
+                                    {{loguser.cname}}<i class="fa fa-circle {{(loguser.is_logged_in==1) ? 'color-success' : 'color-danger'}} pull-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        </div>
+                        <div ng-if="otherusers.length==0">
+                        	<p class="notExists">There are no registred users.</p>
+                        </div>
+                    </section>
+                </section>
+                <!-- Other companies list -->
+                <section class="panel panel-default mail-categories"  id="othercompanies">
+                    <div class="panel-heading">
+                        <strong>Other Companies</strong>
+                    </div>
+                    <section class="mail-categories">
+          				<div ng-if="othercompanies.length!=0">
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="othercompany in othercompanies">
+                                <a href="javascript:;" ng-click="companyClick($event)" othercompanyname="{{othercompany.companyname}}">
+                                    <span class="icon fa fa-bank"></span>
+                                    {{othercompany.companyname}} ({{othercompany.noofusers}})
+                                </a>
+                            </li>
+                        </ul>
+                        </div>
+                        <div ng-if="othercompanies.length==0">
+                        	No other Comapanies exists
+                        </div>
+                    </section>
+                     <!-- Other companies end -->
+                </section>
+                
+                <section class="panel panel-default mail-categories" id="othercompanyusers" style="display:none;">
+                    <div class="panel-heading">
+                        <strong>Contacts of {{chatwithcompany}}</strong>
+                    </div>
+                    <section class="mail-categories">
+          				<div ng-if="othercompanyusers.length!=0">
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="loguser in othercompanyusers">
+                                <a href="javascript:;" ng-hide="loguser.chat_status == 0" ng-click="userClick($event)" cname="{{loguser.cname}}" cid="{{loguser.userid}}">
+                                    <span class="icon glyphicon glyphicon-user {{(loguser.is_logged_in==1) ? 'color-success' : 'color-danger'}}"></span>
+                                    {{loguser.cname}}<i class="fa fa-circle {{(loguser.is_logged_in==1) ? 'color-success' : 'color-danger'}} pull-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        </div>
+                        <div ng-if="othercompanyusers.length==0">
+                        	There are no users registered in this Comapany
+                        </div>
+                       <div class="panel-heading"> 
+                        <a href="#dashboard/chat" id="backtocompanies">&laquo;Back to Companies</a>
+                        </div>
+                    </section>
+                </section>
+             
+            </div>
+
+
+            <!--Action Buttons -->
+            <div class="row">
+                <div class="col-md-6">
+
+                </div>
+                <div class="col-md-6">
+                    <!--<div class="pull-right">
+                        <a data-ng-click="vm.goToDashboard()" class="btn btn-warning">Cancel</a>
+                        <button type="button" class="btn btn-primary" data-ng-click="vm.save()"> <i class="fa fa-save"></i> Save</button>
+                    </div>-->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<style>
+/* Main chat container */
+
+#chatContainer{
+	width:100%;
+	margin:100px auto;
+	position:relative;
+}
+
+
+/* Top Bar */
+
+
+#chatTopBar{
+	height:40px;
+	background:url('../images/solid_gray.jpg') repeat-x #d0d0d0;
+	border:1px solid #fff;
+	margin-bottom:15px;
+	position:relative;
+	
+	color:#777;
+	text-shadow:1px 1px 0 #FFFFFF;
+}
+
+#chatTopBar .name{
+	position:absolute;
+	top:10px;
+	left:40px;
+}
+
+#chatTopBar img{
+	left:9px;
+	position:absolute;
+	top:8px;
+}
+
+
+/* Chats */
+
+
+#chatLineHolder{
+	height:360px;
+	width:100%px;
+	clear:both;
+	margin-bottom:20px;
+}
+
+.chat{
+	background:url('../images/chat_line_bg.jpg') repeat-x #d5d5d5;
+	min-height:24px;
+	padding:6px;
+	border:1px solid #FFFFFF;
+	
+	padding:8px 6px 4px 37px;
+	position:relative;
+	margin:0 10px 10px 0;
+}
+
+.chat:last-child{
+	margin-bottom:0;
+}
+
+.chat span{
+	color:#777777;
+	text-shadow:1px 1px 0 #FFFFFF;
+	font-size:12px;
+}
+
+.chat .text{
+	color:#444444;
+	display:inline-block;
+	font-size:15px;
+	overflow:hidden;
+	vertical-align:top;
+	width:535px;
+	word-wrap: break-word;
+}
+
+.chat .gravatar{
+	background:url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=23') no-repeat;
+	left:7px;
+	position:absolute;
+	top:7px;
+}
+
+.chat img{
+	display:block;
+	visibility:hidden;
+}
+
+.chat .time{
+	position:absolute;
+	right:10px;
+	top:12px;
+	font-size:11px;
+}
+
+.chat .author{
+	margin-right:6px;
+	font-size:11px;
+}
+
+
+/* Chat User Area */
+
+
+#chatUsers{
+	background-color:#202020;
+	border:1px solid #111111;
+	height:360px;
+	position:absolute;
+	right:0;
+	top:56px;
+	width:150px;
+}
+
+#chatUsers .user{
+	background:url('http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?size=30') no-repeat 1px 1px #444444;
+	border:1px solid #111111;
+	float:left;
+	height:32px;
+	margin:10px 0 0 10px;
+	width:32px;
+}
+
+#chatUsers .user img{
+	border:1px solid #444444;
+	display:block;
+	visibility:hidden;
+}
+
+
+/* Bottom Bar */
+
+
+#chatBottomBar{
+	background:url('../images/solid_gray.jpg') repeat-x #d0d0d0;
+	position:relative;
+	padding:10px;
+	border:1px solid #fff;
+}
+
+#chatBottomBar .tip{
+	position:absolute;
+	width:0;
+	height:0;
+	border:10px solid transparent;
+	border-bottom-color:#eeeeee;
+	top:-20px;
+	left:20px;
+}
+
+#chatContainer input{
+	background:url('../images/input_bg.jpg') repeat-x #dcdcdc;
+	height:26px;
+	font:13px/26px Calibri,Arial,sans-serif;
+	color:#777;
+	border:1px solid;
+	border-color:#c1c1c1 #eee #eee #c1c1c1;
+	text-shadow:1px 1px 0 #E4E4E4;
+	padding:0 5px;
+	margin-right:5px;
+	width:185px;
+	outline:none;
+}
+
+
+#submitForm{
+	display:none;
+}
+
+input#chatText{
+	/* The chat submit text field */
+	width:385px;
+}
+
+
+/* Overloading the default styles of jScrollPane */
+
+
+.jspVerticalBar{
+	background:none;
+	width:20px;
+}
+
+.jspTrack{
+	background-color:#202020;
+	border:1px solid #111111;
+	width:3px;
+	right:-16px;
+}
+
+.jspDrag {
+	background:url('../images/slider.png') no-repeat;
+	width:20px;
+	left:-9px;
+	height:20px !important;
+	margin-top:-5px;
+}
+
+.jspDrag:hover{
+	background-position:left bottom;
+}
+
+
+/* Additional styles */
+
+
+a.logoutButton{
+	background-color:#bbb;
+	border:1px solid #eee !important;
+	color:#FFFFFF !important;
+	font-size:12px;
+	padding:5px 9px;
+	position:absolute;
+	right:10px;
+	text-shadow:1px 1px 0 #888;
+	top:7px;
+	
+	-moz-box-shadow:0 0 7px #888 inset;
+	-webkit-box-shadow:0 0 7px #888 inset;
+	box-shadow:0 0 7px #888 inset;
+}
+
+a.logoutButton:hover{
+	text-shadow:1px 1px 0 #888;
+	
+	-moz-box-shadow:0 0 7px #666 inset;
+	-webkit-box-shadow:0 0 7px #666 inset;
+	box-shadow:0 0 7px #666 inset;
+}
+
+#chatContainer .blueButton{
+	background:url('../images/button_blue.png') no-repeat;
+	border:none !important;
+	color:#516D7F !important;
+	display:inline-block;
+	font-size:13px;
+	height:29px;
+	text-align:center;
+	text-shadow:1px 1px 0 rgba(255, 255, 255, 0.4);
+	width:75px;
+	margin:0;
+	cursor:pointer;
+}
+
+#chatContainer .blueButton:hover{
+	background-position:left bottom;
+}
+
+p.noChats,
+#chatUsers .count{
+	clear:both;
+	font-size:12px;
+	padding:10px;
+	text-align:center;
+	font-weight:bold;
+}
+
+#chatUsers .count{
+	font-size:11px;
+}
+
+.rounded{
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+}
+
+#chatErrorMessage{
+	width:100%;
+	top:0;
+	left:0;
+	position:fixed;
+	background-color:#ab0909;
+	border-bottom:1px solid #d32a2a;
+	font-size:23px;
+	padding:16px;
+	text-align:center;
+	color:#fff;
+	
+	text-shadow:1px 1px 0 #940f0f;
+}
+
+.jspPane{width:100% !important;}
+.nav-tabs{border-bottom:none !important;}
+.notExists{margin: 11px 3px 14px 8px;font-size: 12px;}
+</style>

@@ -1,0 +1,170 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> 
+
+
+<div class="page page-profile" data-ng-controller="userProfileCtrl" data-ng-cloak>
+    <toaster-container toaster-options="{'position-class': 'toast-bottom-right','close-button':true}"></toaster-container>
+         <div class="row bg-bright">
+        <div id="panel_profile" class="panel panel-default bg-bright">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Profile Info</strong></div>
+            <div class="panel-body bg-bright">   
+        <div class="col-md-4">
+            <div class="panel panel-profile">
+                <div class="panel-heading text-center bg-bright">                 
+                      <form id="upload-image-form" action="" method="post" enctype="multipart/form-data">
+                        <div class="panel-heading text-center bg-bright" id="image-preview-div">
+                            <label for="exampleInputFile">Selected image:</label>
+                            <br>
+                            <img id="preview-img" src="uploads/image_profile/{{users.image_profile}}" data-ng-model="image_profile"   class="img-rounded img80_80">
+                             <h3>{{users.name}}</h3>
+                        </div>
+                        <div class="form-group">
+                            <input class="align-middle text-center" data-ng-model="users.image_profile"  type="file" name="file" id="file" required>
+                        </div>
+                          <button class="btn btn-lg btn-primary" style="float: left;padding: 5px 16px;" id="upload-button"  type="submit" disabled>Upload image</button>
+                    </form>
+
+                    <br>
+                    <div class="alert alert-info" id="loading" style="display: none;" role="alert">
+                        Uploading image...
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <input style="display: none"  value="{{user_id}}" id="user_id"/>
+                    </div>
+                        
+                    <div id="message"></div>
+                </div>
+            </div>
+</div>
+  <form name="form_update_user_profile">
+        <div class="col-md-4 bg-bright">
+        <div id="panel_profile" class="panel panel-default bg-bright">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> User Info</strong></div>
+            <div class="panel-body bg-bright">
+                <div class="media">
+                    <div class="media-body">
+                        <ul class="list-unstyled list-info">
+                            <li>
+                                <span class="icon glyphicon glyphicon-user"></span>
+                                <label>Name</label>
+                                <input type="text" name="name"
+                                       class="form-control"
+                                       data-ng-model="users.name" ng-pattern="/^[A-Za-z ]{2,30}$/" required/>
+                                <span class="error-custom" data-ng-show="!form_update_user_profile.name.$pristine && form_update_user_profile.name.$error.required">The Name is required.</span>
+                                <span class="error-custom" data-ng-show=" form_update_user_profile.name.$error.pattern">The format of  Name is invalid.</span>
+                                <span class="error-custom" >{{message}}</span>
+
+
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-text-size"></span>
+                                <label>User name</label>
+                                <input type="text" name="username"
+                                       class="form-control"
+                                       data-ng-model="users.username" ng-pattern="/^[a-z][a-z0-9ü_]{3,25}$/" required/>
+                                <span class="error-custom" data-ng-show="!form_update_user_profile.username.$pristine && form_update_user_profile.username.$error.required">Username is required.</span>
+                                <span class="error-custom" data-ng-show="form_update_user_profile.username.$error.pattern">Invalid format (6 - 25 characters)</span>
+                                <span class="error-custom"></span>
+
+                            </li>                          
+                            <li>
+                                <span class="icon glyphicon glyphicon-text-background"></span>
+                                <label>Last Name</label>
+                                <input type="text" name="lastname"
+                                       class="form-control"
+                                       data-ng-model="users.lastname" ng-pattern="/^[A-Za-z ]{2,30}$/" required/>
+                                <span class="error-custom" data-ng-show="!form_update_user_profile.lastname.$pristine && form_update_user_profile.lastname.$error.required">Last Name is required.</span>
+                                <span class="error-custom" data-ng-show=" form_update_user_profile.lastname.$error.pattern">The format of Last Name is invalid.</span>
+                                <span class="error-custom" ></span>
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-envelope"></span>
+                                <label>Email</label>
+                                <input type="text" name="email"
+                                       class="form-control"
+                                       data-ng-model="users.email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required />
+                                <span class="error-custom" data-ng-show="!form_update_user_profile.email.$pristine && form_update_user_profile.email.$error.required">Email is required.</span>
+                                <span class="error-custom" data-ng-show=" form_update_user_profile.email.$error.pattern">Email is invalid.This is the format example@email.com </span>
+                                <span class="error-custom" ></span>
+
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-earphone"></span>
+                                <label>Contact</label>
+                                <input type="text" name="phone"
+                                       class="form-control"
+                                       data-ng-model="users.phone" ng-pattern="/^[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}$/" />
+                                <span class="error-custom" data-ng-show=" form_update_user_profile.phone.$error.pattern">Phone is invalid.This is the format ###-###-#### </span> 
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4 bg-bright">
+      <div class="panel panel-default bg-bright">
+           <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Change Password</strong></div>
+           <div class="panel-body bg-bright">
+                <div class="list-justified-container bg-bright">
+                    <ul class="list-justified ">
+                        <li>
+      
+                            <div class="form-group">
+                                <div class="">
+                                    <div class="label-form">Old password</div>
+                                    <input type="password" id="old_password" name="old_password" class="form-control"
+                                           data-ng-model="old_password">
+                                    <span class="error-custom" >{{password_old}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="">
+                                    <div class="label-form">New password</div>
+                                    <input type="password" id="password" name="password" class="form-control"
+                                           data-ng-model="users.password">
+                                    <span class="error-custom" >{{message_new_p}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="">
+                                    <div class="label-form">Confirm new password</div>
+                                    <input type="password" id="confirm_password" name="confirm_password" class="form-control"
+                                           data-ng-model="confirm_password">
+                                    <span class="error-custom" >{{password_confirm}}</span>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+           </div>
+           
+        </div>
+      </div>
+    
+        <div class="col-md-12">
+            <div class="btn-group pull-right">
+                <button data-ng-click="cancel()" class="btn btn-warning">Cancel</button>
+                <button id="submit_upl" data-ng-click="submit()" class=" btn btn-primary"><span class="fa fa-save"></span> Save</button>
+            </div>
+        </div>
+    </form>
+   </div>  
+ </div>
+ </div>   
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="js/upload-image.js"></script> 
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+<div class="nav-wrapper ng-scope">
+    <div data-ng-controller="AppController" class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
+        <ul data-ng-if="customer_service" id="nav" class="nav ng-scope"    style="overflow: hidden; width: auto; height: 100%;">
+            <li data-ng-if="customer_service">
+                <a href="#/dashboard/home"> <i class="fa fa-dashboard"></i><span data-i18n="Dashboard">Dashboard</span> </a>
+            </li>
+            <li data-ng-if="customer_service">
+                <a ui-sref=".clientsList"><i class="fa fa-users"></i><span data-i18n="Clients">Clients</span></a>
+                <ul>
+
+                </ul>
+            </li>
+            <li data-ng-if="customer_service">
+                <a ui-sref=".transactionsList"><i class="fa fa-dollar"></i><span data-i18n="Transactions">Transactions</span></a>
+                <ul>
+
+                </ul>
+                <i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i>
+            </li>
+
+            <li data-ng-if="customer_service">
+                <a href=""><i class="fa fa-key"></i><span data-i18n="Configuration">Configuration</span></a>
+                <ul>
+                </ul>
+                <i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i>
+            </li>
+
+
+            <li data-ng-if="customer_service">
+                <a href=""><i class="fa fa-bank"></i><span data-i18n="Company Profile">Company Profile</span></a>
+                <ul>
+                    <li><a ui-sref="company-profile">My Profile</a></li>
+                </ul>
+                <i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i>
+            </li>
+             <li data-ng-if="customer_service">
+                <a ui-sref=".CSbillerList"><i class="fa fa-cube"></i><span data-i18n="Biller(s)">Biller(s)</span></a>
+                <ul>
+                    <!--                <li><a href="#/billerList/">List of Billers</a></li>
+                                    <li><a href="#/newBiller">Create Biller</a></li> -->
+                    <li ><a ui-sref=".CSbillerList">List of Billers</a></li>
+<!--                    <li><a ui-sref=".inviteBiller">Invite Biller</a></li>-->
+                    <li ><a ui-sref=".CSaddBiller">Create Biller</a></li>
+                    <li ><a  href="javascript:popup('templates/views/uploader/billers.html','900','500')">Import Billers</a></li>
+                </ul>
+                 <i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i>
+            </li>
+             <li data-ng-if="customer_service">
+                <a ui-sref=".clientsList"><i class="fa fa-cubes"></i><span data-i18n="Customer Service">Customer Service</span></a>
+               <ul>
+                    <!--                <li><a href="#/billerList/">List of Billers</a></li>
+                                    <li><a href="#/newBiller">Create Biller</a></li> -->
+                    <!--<li ><a ui-sref=".billerList">List of Customer Service</a></li>-->
+<!--                    <li><a ui-sref=".inviteBiller">Invite Biller</a></li>-->
+                    <!--<li><a ui-sref=".newBiller">Create Customer Service</a></li>-->
+					<li><a ui-sref="usersCS"> Customer Service Users</a></li>
+					<!--<li><a ui-sref="customerFees">Customer Fees</a></li>-->
+                </ul>
+                 <i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i>
+            </li>
+            <li data-ng-if="customer_service" class="nav-task">
+                <a ui-sref="logout">
+                    <i class="fa fa-sign-out"></i><span data-i18n="Logout">Logout</span>
+                </a>
+            </li>
+        </ul><div class="slimScrollBar" style="width: 7px; position: absolute; top: 24px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 73px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+</div>

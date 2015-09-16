@@ -1,0 +1,351 @@
+<div class="page page-profile" data-ng-controller="EditBankInfoCtrl as vm" data-ng-cloak>
+<form name="mybankinfodatafrm" id="mybankinfodatafrm" data-ng-submit="submit()">
+   <div class="row">
+      <div id="panel_profile" class="panel panel-default">
+         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Billing Information (required)</strong></div>
+         <div class="panel-body">
+            <div class="media">
+               <div class="media-body">
+                  <ul class="list-unstyled list-info col-md-6">
+                     <li class="col-md-12 " >
+                        <button type="button" class="btn btn-back-message-list col-md-4"> First Name</button>
+                        <div class="col-md-6">
+                           <input type="text"
+                              name="first_name"
+                              class="form-control"
+                              data-ng-model="customer.firstname"
+                              data-ng-pattern="/^[a-zA-Z][a-zA-Z0-9\s]*$/"
+                              data-ng-minlength="3"
+                              data-ng-maxlength="20"
+                              required />
+                        </div>
+                     </li>
+                     <li class="col-md-12" >
+                        <button type="button"class="btn btn-back-message-list col-md-4">Last Name</button>
+                        <div class="col-md-6">
+                           <input type="text"
+                              name="last_name"
+                              class="form-control"
+                              data-ng-model="customer.lastname"
+                              ng-pattern="/^[a-zA-Z][a-zA-Z0-9\s]*$/"
+                              data-ng-minlength="3"
+                              data-ng-maxlength="20"
+                              data-ng-trim="false"
+                              required />
+                        </div>
+                     </li>
+                     <li class="col-md-12" >
+                        <button type="button"class="btn btn-back-message-list col-md-4">Company (optional)</button>
+                        <div class="col-md-6">
+                           <input type="text"
+                              name="company"
+                              class="form-control"
+                              data-ng-model="customer.legal_name"
+                              ng-pattern="/^[a-zA-Z][a-zA-Z0-9\s]*$/"
+                              data-ng-maxlength="20"
+                              />
+                        </div>
+                     </li>
+                     <li class="col-md-12 " >
+                        <button type="button"class="btn btn-back-message-list col-md-4">Street Address (1)</button>
+                        <div class="col-md-6">
+                           <input type="text"
+                              name="address"
+                              class="form-control"
+                              data-ng-model="customer.address"
+                              ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                              data-ng-trim="false"
+                              data-ng-maxlength="40"
+                              required />
+                        </div>
+                     </li>
+                     
+                  </ul>
+                  <ul class="list-unstyled list-info col-md-6">
+                     <li class="col-md-12" >
+                        <button type="button"class="btn btn-back-message-list col-md-4">Zip/Postal Code</button>
+                        <div class="col-md-6">
+                           <input type="tel"
+                              name="zip_postal"
+                              class="form-control"
+                              data-ng-model="customer.zip_postal"
+                              ng-pattern="/^[0-9-]*$/"
+                              data-ng-maxlength="5"
+                              data-ng-trim="false"
+                              required />
+                        </div>
+                     </li>
+                     <script type="text/javascript">
+                        $(document).ready(function () {
+                        
+                            $('#zip_postal').keyup(function () {
+                                $('#city').empty();
+                                $.getJSON('/cities', {Action: 'giveMeCities', id_state: $('#zip_postal').val()}, function (data) {
+                                    for (i = 0; i < data.length; i++) {
+                                        $('#city').append(new Option(data[i].name, data[i].id));
+                                    }
+                                });
+                            });
+                        });
+                     </script>
+                     <script type="text/javascript">
+                        $(document).ready(function () {
+                        
+                            $('#zip_postal').keyup(function () {
+                                $('#state').empty();
+                                $.getJSON('/states', {Action: 'giveMeStates', id_state: $('#zip_postal').val()}, function (data) {
+                                    for (i = 0; i < data.length; i++) {
+                                        $('#state').append(new Option(data[i].name, data[i].id));
+                                    }
+                                });
+                            });
+                        });
+                     </script>
+                     <script type="text/javascript">
+                        $(document).ready(function(){
+                        
+                        $('#state').change(function(){
+                        $('#city').empty();
+                        $.getJSON('/cities_state', {Action:'giveMeCities', id_state:$('#state option:selected').val()}, function(data){
+                        for (i = 0; i < data.length; i++){
+                        $('#city').append(new Option(data[i].name, data[i].id));
+                        }
+                        });
+                        });
+                        });
+                     </script>
+                     <li class="col-md-12">
+                        <button type="button"class="btn btn-back-message-list col-md-4">City</button>
+                        <span class="col-md-6">
+                           <select class=" form-control" name="city" id="city" ng-model="customer.citySelected"  ng-options="city.name for city in citys track by city.id">
+                              <option value="">-- CHOOSE CITY--</option>
+                           </select>
+                        </span>
+                     </li>
+                     <li class="col-md-12" data-ng-controller="StateCtrl" >
+                        <button type="button"class="btn btn-back-message-list col-md-4">State</button>
+                        <span class="col-md-6">
+                           <select class=" form-control" name="state" id="state" data-ng-model="customer.stateSelected"
+                              data-ng-options="state.name for state in states track by state.id" required>
+                              <option value="">-- CHOOSE STATE --</option>
+                           </select>
+                        </span>
+                     </li>
+                     <li class="col-md-12" data-ng-controller="CountryCtrl">
+                        <button type="button"class="btn btn-back-message-list col-md-4">Country</button>
+                        <span class="col-md-6" >
+                           <select name="country" ng-model="customer.countrySelected"  class="form-control" ng-options="country.name for country in countrys track by country.id" required>
+                              <option value="">-- CHOOSE COUNTRY --</option>
+                           </select>
+                        </span>
+                        <span class="error-custom" data-ng-show="form_create_biller.country.$dirty && form_create_biller.country.$error.required">Country is required.</span>
+                     </li>
+                     <li class="col-md-12" >
+                        <button type="button" class="btn btn-back-message-list col-md-4">Phone</button>
+                        <div class="col-md-6">
+                           <input type="text"
+                              name="phone"
+                              class="form-control"
+                              data-ng-model="customer.phone"
+                              ng-pattern="/^[0-9-]*$/"
+                              data-ng-minlength="10"
+                              data-ng-maxlength="13"
+                              data-ng-trim="false"
+                              required />
+                        </div>
+                     </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                  <ul class="list-unstyled list-info col-md-6">
+                     <li class="col-md-12">
+                        <strong><span class="glyphicon glyphicon-th"></span> Debit Account</strong>
+                     </li>
+                     <li class="col-md-12 " >
+                        <button type="button"class="btn btn-back-message-list col-md-4">Bank Name</button>
+                        <input type="hidden" name="debitbankid" data-ng-model="customer.debitaccount['id']" />
+                        <div class="col-md-6">
+                           <input type="text"
+                              name="debit_bank_name"
+                              class="form-control"
+                              data-ng-model="customer.debitaccount['bank_name']"
+                              ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                              data-ng-maxlength="20"
+                              required />
+                        </div>
+                     </li>
+                     <li class="col-md-12 " >
+                        <button type="button"class="btn btn-back-message-list col-md-4">Account Number</button>
+                        <div class="col-md-6">
+                           <input type="text"
+                              name="debit_number"
+                              class="form-control"
+                              data-ng-model="customer.debitaccount['number']"
+                              data-ng-maxlength="15"
+                              data-ng-trim="false"
+                              required only-digits  />
+                        </div>
+                     </li>
+                     <li class="col-md-12 " >
+                        <button type="button"class="btn btn-back-message-list col-md-4">Routing Number</button>
+                        <div class="col-md-6">
+                           <input type="text"
+                              name="debit_routing_number"
+                              class="form-control"
+                              data-ng-model="customer.debitaccount['routing_number']"
+                              data-ng-maxlength="15"
+                              data-ng-trim="false"
+                              required  only-digits  />
+                        </div>
+                     </li>
+                     <!--<li class="col-md-12" style="margin-top: 40px">
+                        <strong><span class="glyphicon glyphicon-th"></span> Credit Card</strong>
+                        </li>
+                        <li class="col-md-12  ">
+                        <button type="button"class="btn btn-back-message-list col-md-4">Credit Card Number</button>
+                        >>>>>>> origin/PAB-LATEST
+                        
+                        <div class="col-md-6">
+                            <input type="text"
+                                   name="credit_card"
+                                   class="form-control"
+                                    />
+                        </div>
+                        </li>
+                        <<<<<<< HEAD
+                        <li class="col-md-12" >
+                        =======
+                        <li class="col-md-12" >
+                        >>>>>>> origin/PAB-LATEST
+                        
+                        <button type="button"class="btn btn-back-message-list col-md-4">Expiry Date</button>
+                        
+                        <span class="col-md-3" >
+                            <select name="CCExpiresMonth" class="form-control" >
+                                <OPTION VALUE="" SELECTED>--Month--
+                                <OPTION VALUE="01">January (01)
+                                <OPTION VALUE="02">February (02)
+                                <OPTION VALUE="03">March (03)
+                                <OPTION VALUE="04">April (04)
+                                <OPTION VALUE="05">May (05)
+                                <OPTION VALUE="06">June (06)
+                                <OPTION VALUE="07">July (07)
+                                <OPTION VALUE="08">August (08)
+                                <OPTION VALUE="09">September (09)
+                                <OPTION VALUE="10">October (10)
+                                <OPTION VALUE="11">November (11)
+                                <OPTION VALUE="12">December (12)
+                            </select>
+                        
+                        </span>
+                        <span class="col-md-3" >
+                            <select name="CCExpiresYear"   class="form-control" >
+                                <OPTION VALUE="" SELECTED>--Year--
+                                <OPTION VALUE="04">2004
+                                <OPTION VALUE="05">2005
+                                <OPTION VALUE="06">2006
+                                <OPTION VALUE="07">2007
+                                <OPTION VALUE="08">2008
+                                <OPTION VALUE="09">2009
+                                <OPTION VALUE="10">2010
+                                <OPTION VALUE="11">2011
+                                <OPTION VALUE="12">2012
+                                <OPTION VALUE="13">2013
+                                <OPTION VALUE="14">2014
+                                <OPTION VALUE="15">2015
+                                <OPTION VALUE="11">2016
+                                <OPTION VALUE="12">2017
+                                <OPTION VALUE="13">2018
+                                <OPTION VALUE="14">2019
+                                <OPTION VALUE="15">2020
+                            </select>
+                        
+                        </span>
+                        </li> -->
+                  </ul>
+                  <ul class="list-unstyled list-info col-md-6">
+                     <li class="col-md-12">
+                        <strong><span class="glyphicon glyphicon-th"></span> Credit Account</strong>
+                     </li>
+                     <li class="col-md-12">
+                        <button type="button"class="btn btn-back-message-list col-md-4">Bank Name</button>
+                        <input type="hidden" name="creditbankid" data-ng-model="customer.creditaccount['id']" />	
+                        <div class="col-md-6">
+                           <input type="text"
+                              name="credit_bank_name"
+                              class="form-control"
+                              data-ng-model="customer.creditaccount['bank_name']"
+                              ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                              data-ng-trim="false"
+                              data-ng-maxlength="20"
+                              required />
+                        </div>
+                     </li>
+                     <li class="col-md-12 " >
+                        <button type="button"class="btn btn-back-message-list col-md-4">Account Number</button>
+                        <div class="col-md-6">
+                           <input type="text"
+                              name="credit_number"
+                              class="form-control"
+                              data-ng-model="customer.creditaccount['number']"
+                              data-ng-maxlength="15"
+                              data-ng-trim="false"
+                              required only-digits />
+                        </div>
+                     </li>
+                     <li class="col-md-12 " >
+                        <button type="button"class="btn btn-back-message-list col-md-4">Routing Number</button>
+                        <div class="col-md-6">
+                           <input type="text"
+                              name="credit_routing_number"
+                              class="form-control"
+                              data-ng-model="customer.creditaccount['routing_number']"
+                              data-ng-maxlength="15"
+                              data-ng-trim="false"
+                              required  only-digits />
+                        </div>
+                     </li>
+                  </ul>
+                  <div class="clearfix" />
+                     <ul class="list-unstyled list-info col-md-6">
+                        <li class="col-md-12">
+                           <strong><span class="glyphicon glyphicon-th"></span> Additional Information</strong>
+                        </li>
+                        <li class="col-md-12" >
+                           <button type="button"class="btn btn-back-message-list col-md-4">Contact Email</button>
+                           <div class="col-md-6">
+                              <input type="text"
+                                 name="contact_email"
+                                 class="form-control"
+                                 data-ng-model="customer.email"
+                                 data-ng-trim="false"
+                                 data-ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/"
+                                 required />
+                           </div>
+                        </li>
+                        <li class="col-md-12" >
+                           <button type="button"class="btn btn-back-message-list col-md-4">Special Notes</button>
+                           <div class="col-md-6">
+                              <textarea name="notes" cols="45" rows="4" data-ng-model="customer.special_notes" data-ng-maxlength="500" data-ng-trim="false" ng-pattern="/^[a-zA-Z0-9\s]*$/"></textarea>
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-12">
+            <div class="btn-group pull-right">
+               <button type="button" data-ng-click="cancel()" class="btn btn-warning">Cancel</button>
+               <button type="submit" data-ng-disabled="!mybankinfodatafrm.$valid" class=" btn btn-primary"><span class="fa"></span>Send Secure Form</button>
+            </div>
+         </div>
+      </div>
+</form>
+</div>
+<style>
+   .form-control.ng-invalid {
+   border-color: #f00;
+   box-shadow: none;
+   }
+   #mybankinfodatafrm button[type="button"]{cursor:default !important;}
+</style>

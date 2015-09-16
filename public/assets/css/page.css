@@ -1,0 +1,76 @@
+.no-padding {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.no-left-padding {
+	padding-left: 0px
+}
+
+.modal-header {
+	background-color: #fff;
+}
+
+#modal-wizard .modal-content,
+#forgotModal .modal-content {
+	background-color: #eee;
+}
+
+.modal-content textarea {
+	resize: none;
+}
+
+.modal-body {
+	padding-bottom: 0px;
+}
+
+.modal-footer {
+	background-color: #fff!important;
+}
+
+.step-pane {
+	padding-bottom: 0px;
+}
+
+.wizard-steps span.title {
+	text-transform: uppercase;
+}
+
+.upper {
+	text-transform: uppercase;
+}
+
+.blue-span {
+	color: #5293c4;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.block {
+	display: block;
+}
+
+.error-div {
+	padding: 5px 0px 10px 5px;
+}
+
+.error-div em {
+    color: red;
+    font-size: small;
+    font-weight: bold;
+    display: block;	
+}
+
+.step-error {
+	color: #f43a07;
+	font-size: 18px;
+}
+
+.step-ok {
+	color: #18a18d;
+	font-size: 18px;
+}
+
+.space-10 {
+	min-height: 10px;
+}

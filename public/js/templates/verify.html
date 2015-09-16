@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>PayAnyBiz Login Form</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+                <link href="css/bootstrap.min.css" rel="stylesheet">
+                <link rel="stylesheet" href="assets/css/modal.css" />
+                <link rel="stylesheet" href="css/landing-page.css">
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+                <link href="css/styles_login.css" rel="stylesheet">
+	</head>
+	<body>
+<!--login modal-->
+<div id="loginModal"   align="center" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog"  align="center">
+  <div class="modal-content" id="content_modal_login" >
+      <div class="modal-header" align="center">
+          
+          <img src="assets/images/pabLogo.png" alt="logo"  />
+<!--          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h1 class="text-center">Login</h1>-->
+      </div>
+      <div class="modal-body">
+          <form ng-submit="verifyLogin()" class="form col-md-12 center-block" >
+               <span ng-init="errorMessage='Verification code has been sent to your mail.';error=1" ng-show="error == 1" class="input-round label label-danger" >{{errorMessage}}</span>
+            <div class="form-group">
+              <input type="text" class="form-control input-lg" id="userName"  placeholder="Please enter verification code." ng-model="verification_code">
+            </div>
+            <div class="form-group">
+                <button type="submit" style="background-color: #337ab7;" class="btn btn-primary btn-lg btn-block">CONTINUE</button>
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer" style="background-color: #FFF">
+          <div class="col-md-12">
+              <a type="button" class="btn" ng-click="cancelVerification()" style="color: #337ab7; padding: 4px 12px; background: silver" data-dismiss="modal">Cancel</a>
+		  </div>	
+      </div>
+  </div>
+  </div>
+</div>
+
+<!-- Forgot Password Modal -->
+  <toaster-container toaster-options="{'position-class': 'toast-bottom-right','close-button':true}"></toaster-container>
+<form id="forgot-password-form">
+    <div class="modal fade" id="forgotModal" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Password Recovery</h4>
+                </div>
+                <div class="modal-body">               
+                    <div class="form-group" style="padding: 30px;">
+                        <input ng-model="recoveryEmail" class="form-control" placeholder="Enter Registered Email *">
+                        <div class="error-div pull-left" ng-if="recoveryError.error"><em>{{ recoveryError.msg}}</em></div>
+                    </div>                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="recoverySubmit()">Submit</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</form>
+	<!-- script references -->
+<!--		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>-->
+<!--                <script src="../bootstrap_login.min.js"></script>-->
+                <script src="assets/js/bootstrap.min.js"></script>
+                <script src="assets/js/bootstrap_login.min.js"></script>
+                <script type="text/javascript">
+                                $(function($) {
+                                // $('#modal-wizard .modal-header').ace_wizard();
+                                // $('#modal-wizard .wizard-actions .btn[data-dismiss=modal]').removeAttr('disabled');
+
+
+
+                                $('a[href^="#"]').on('click', function (event) {
+                                var target = $($(this).attr('href'));
+                                        if (target.length) {
+                                event.preventDefault();
+                                        $('html, body').animate({ scrollTop: target.offset().top }, 500);
+                                }
+                                });
+                                });
+</script>
+	</body>
+</html>

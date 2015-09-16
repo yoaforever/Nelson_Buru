@@ -1,0 +1,13 @@
+[27-May-2015 14:49:37 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 83 bytes) in /home/ericgildev1979/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 292
+[27-May-2015 14:50:33 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 83 bytes) in /home/ericgildev1979/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 292
+[27-May-2015 14:50:42 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 83 bytes) in /home/ericgildev1979/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 292
+[27-May-2015 14:51:58 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 83 bytes) in /home/ericgildev1979/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 292
+[27-May-2015 15:12:48 UTC] PHP Fatal error:  Class 'Select' not found in /home/ericgildev1979/public_html/storage/framework/views/5f2a7964a9a7c84556c896b4e7d41592 on line 138
+[27-May-2015 15:13:23 UTC] PHP Fatal error:  Class 'Select' not found in /home/ericgildev1979/public_html/storage/framework/views/5f2a7964a9a7c84556c896b4e7d41592 on line 138
+[27-May-2015 15:13:59 UTC] PHP Fatal error:  Class 'Select' not found in /home/ericgildev1979/public_html/storage/framework/views/5f2a7964a9a7c84556c896b4e7d41592 on line 138
+[27-May-2015 15:16:33 UTC] PHP Fatal error:  Class 'Select' not found in /home/ericgildev1979/public_html/storage/framework/views/5f2a7964a9a7c84556c896b4e7d41592 on line 138
+[27-May-2015 15:16:36 UTC] PHP Fatal error:  Class 'Select' not found in /home/ericgildev1979/public_html/storage/framework/views/5f2a7964a9a7c84556c896b4e7d41592 on line 138
+[27-May-2015 15:24:54 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 83 bytes) in /home/ericgildev1979/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 292
+[27-May-2015 15:29:47 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 83 bytes) in /home/ericgildev1979/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 292
+[27-May-2015 15:30:55 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 83 bytes) in /home/ericgildev1979/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 292
+[27-May-2015 15:31:09 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 83 bytes) in /home/ericgildev1979/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 292

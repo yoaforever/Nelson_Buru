@@ -1,0 +1,98 @@
+
+<div class="page page-profile" data-ng-controller="EditCompanyProfileCtrl as vm" data-ng-cloak>
+
+    <div class="row">
+
+<div id="panel_profile" class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Company Profile Info</strong></div>
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-body">
+                        <ul class="list-unstyled list-info">
+                            <li>
+                                <span class="icon glyphicon glyphicon-user"></span>
+                                <label>Name</label>
+                                <input type="text" name="Name"
+                                       class="form-control"
+                                       data-ng-model="company_profile.legal_name" />
+                                <span class="error-custom" ></span>
+
+
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-user"></span>
+                                <label>Company Id</label>
+                                <input type="text" name="company_id"
+                                       readonly="true"
+                                       class="form-control"
+                                       data-ng-model="company_profile.id" />
+                                <span class="error-custom" ></span>
+
+
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-user"></span>
+                                <label>User Name</label>
+                                <input type="text" name="Name"
+                                       class="form-control"
+                                       data-ng-model="username" />
+                                <span class="error-custom"></span>
+
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-envelope"></span>
+                                <label>Email</label>
+                                <input type="text" name="Name"
+                                       class="form-control"
+                                       data-ng-model="company_profile.email" />
+                                <span class="error-custom" ></span>
+
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-home"></span>
+                                <label>Address</label>
+                               <input type="text" name="Name"
+                                       class="form-control"
+                                       data-ng-model="company_profile.address" />
+                                <span class="error-custom" ></span>
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-earphone"></span>
+                                <label>Contact</label>
+                                <input type="text" name="Name"
+                                       class="form-control"
+                                       data-ng-model="company_profile.phone" />
+                                
+                            </li>
+                             <li>
+                                <span class="icon glyphicon glyphicon-registration-mark"></span>
+                                <label >OFAC</label>
+                                <input type="text" name="ofac_id_ver"
+                                       readonly="true"
+                                       class="form-control"
+                                       data-ng-if="company.ofac_sdn_name==null"
+                                       value="Verified does not match" />
+                                <input type="text" name="ofac_id_notverif"
+                                       readonly="true"
+                                       class="form-control"
+                                       data-ng-if="company.ofac_sdn_name!=null"
+                                       value="Match found" />
+                                <span class="error-custom" ></span>
+
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="btn-group pull-right">
+                <button data-ng-click="vm.goToDashboard()" class="btn btn-warning">Cancel</button>
+                <button data-ng-click="submit()" class=" btn btn-primary"><span class="fa fa-save"></span> Save</button>
+            </div>
+        </div>
+    </div>
+</div>

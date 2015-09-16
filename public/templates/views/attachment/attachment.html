@@ -1,0 +1,98 @@
+﻿<style>
+    .tableAttachment {
+        border-color: white !important;
+        border-spacing: 0px !important;
+        border: 0px !important;
+    }
+</style>
+<section data-ng-controller="AttachmentAllCtrl as vm" data-ng-cloak>
+    <div id="{{vm.transaction.id}}attachment">
+
+        <div class="modal-body">
+            <div data-ng-show="vm.showLoading" class="progress progress-striped active">
+                <div class="bar" style="width: 100%;">{{vm.loadingMsg}}</div>
+            </div>
+            <div data-ng-show="vm.attachments.length > 0">
+                <table class="tableAttachment">
+                    <tr>
+                        <td><b>Attachment Type</b></td>
+                        <td><b>Description</b></td>
+                        <td><b>Created Date</b></td>
+                        <!--<td>Viewable to All</td>-->
+                        <td>Options</td>
+						<!--<td><b>View</b></td>
+                        <td><b>Delete</b></td>
+                        <td><b>Email</b></td>-->
+                    </tr>
+                    <tr data-ng-repeat="item in vm.attachments">
+						<td width="25%">
+							{{item.attachment_type_description}}
+						</td>
+                        <td width="25%">
+                            {{item.description}}
+                        </td>                        
+                        <td width="25%">
+                           {{ item.created | date:'M/dd/yyyy'}}
+                        </td>
+                        <!--<td>
+                            <div data-ng-if="item.viewableByOtherParty" style="cursor:pointer">  <i data-a-ng-click="vm.makePrivate(item)" title="public document" class="fa fa-eye fa-2x"></i> </div>
+                            <div data-ng-if="!item.viewableByOtherParty" style="cursor:pointer">  <i data-a-ng-click="vm.makePublic(item)" title="private document" class="fa fa-eye-slash fa-2x"></i> </div>
+                        </td>-->
+                        <td>
+							<a target="_blank" href="../uploads/transaction_attachments/{{item.file_name}}" download>
+                                <i title="View" data-ng-class="{'doc-word':(item.file_extension=='.docx' || item.file_extension=='.doc' ),
+                                                           'doc-pdf':item.file_extension=='.pdf' ,
+                                                           'doc-txt':item.file_extension=='.txt' ,
+                                                           'doc-excel':item.file_extension=='.xls',
+                                                           'doc-image':(item.file_extension=='.jpeg' || item.file_extension=='.jpg' || item.file_extension=='.png'),
+                                                           'doc-unknown':(item.file_extension!='.docx' &&
+                                                                          item.file_extension!='.doc' &&
+                                                                          item.file_extension!='.pdf' &&
+                                                                          item.file_extension!='.xls' &&
+                                                                          item.file_extension!='.jpeg' &&
+                                                                          item.file_extension!='.jpg'  &&
+                                                                          item.file_extension!='.png' &&
+                                                                          item.file_extension!='.txt') }"></i></a>
+                              <a target="_blank" data-a-ng-click="vm.removeDocument(item)"><i  title="Remove" class="fa fa-trash-o fa-2x"></i></a> 
+                        
+                              <a target="_blank" data-a-ng-click="vm.sendEmail(item)"><i  title="Send as email" class="fa fa-envelope fa-2x"></i></a>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>          
+        </div>
+        <div style="text-align:left;" class="modal-footer">
+            <form enctype="multipart/form-data">
+                <div class="row">
+                    <div class="row col-md-12">
+                        <div class="label-form">Attachment Type</div>
+                        <span class="ui-select">
+                            <select data-ng-class="{ 'alert-error': !vm.typeIsValid }"
+                                    data-ng-model="vm.selectedattachmenttype"
+                                    data-ng-options="transatype.description  for transatype in transactions_types">
+                                <option value="">-- select attachment type --</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="label-form">Attachment Description</div>
+                        <input type="text"
+                               class="form-control"
+                               data-ng-model="vm.fileDescription" />
+                    </div>
+					<div class="row col-md-12">&nbsp;</div>
+                    <div class="row col-md-12">
+                        <input type="file"
+                               title="Choose File"
+                               name="Attachment"
+                               data-ui-file-upload class="btn-primary"
+                               id="Attachmentfile"
+                               onchange="angular.element(this).scope().vm.fileNameChaged(this)" />
+							<input data-ng-show="false" name="txnId" id="txnId" value="{{vm.transaction.id}}" type="text" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

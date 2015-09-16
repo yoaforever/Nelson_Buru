@@ -1,0 +1,91 @@
+﻿<div class="page" data-ng-controller="inviteBranchCtrl" data-ng-cloak>
+   <ol class="breadcrumb-alt">
+      <li><a href="#/dashboard/home">Home</a></li>
+      <li><a href="#/dashboard/invite-branch">Branches</a></li>
+      <li class="active"><a href="#/dashboard/invite-branch">Invite Branch</a></li>
+   </ol>
+   <toaster-container toaster-options="{'position-class': 'toast-bottom-right','close-button':true}"></toaster-container>
+   <div style="padding:5px; background-color:white;">
+      <div class="panel panel-default">
+         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Invite Branch</strong></div>
+         <div class="panel-body">
+            <div class="row col-md-12">
+               <div class="row">
+                  <form name="form_create_user" id="f_create_userid">
+                     <fieldset>
+                        <div class="divider"></div>
+                        <div class="row col-md-12">
+                           <div class="form-group col-md-4">
+                              <div class="label-form">Branch Name *</div>
+                              <input type="text" name="name" placeholder="" ng-pattern="/^[A-Za-z ]{2,30}$/" 
+                                 class="form-control" data-ng-model="branch.branch_name" required/>
+                              <div class="info-custom">(e.g. ABC Company MIA)</div>
+                              <span class="error-custom" data-ng-show="!form_create_user.name.$pristine && form_create_user.name.$error.required">The Name is required.</span>
+                              <span class="error-custom" data-ng-show=" form_create_user.name.$error.pattern">The format of  Name is invalid.</span>
+                           </div>
+                           <div class="form-group col-md-4">
+                              <div class="label-form">First Name *</div>
+                              <input type="text" name="fristname" placeholder="First Name *"
+                                 ng-pattern="/^[A-Za-z ]{2,30}$/" 
+                                 class="form-control" data-ng-model="branch.firstname" required/>
+                              <div class="info-custom">(e.g. this is an example Reyes)</div>
+                              <span class="error-custom" data-ng-show="!form_create_user.firstname.$pristine && form_create_user.firstname.$error.required">First Name is required.</span>
+                              <span class="error-custom" data-ng-show=" form_create_user.firstname.$error.pattern">The format of First Name is invalid.</span>
+                           </div>
+                           <div class="row col-md-4">
+								<div class="label-form">Choice of selecting which bank account to debit:</div>
+								<select class="form-control" name="branch_permission">
+									<option value="">Select</option>
+									<option value="">HQ</option>
+									<option value="">Branch Acct.</option>
+									<option value="">Both</option>
+								</select>
+								<div class="info-custom">e.g Both(Branch Admin or Manager User at Branch can choose their own company Bank account depending on what is being paid)</div>
+                           </div>
+						   
+                        </div>
+                        <div class="row col-md-12">
+                           <div class="form-group col-md-4">
+                              <div class="label-form">Last Name *</div>
+                              <input type="text" name="lastname" placeholder="Last Name *" ng-pattern="/^[a-z][a-z0-9ü_]{4,25}$/"
+                                 class="form-control" data-ng-model="branch.lastname" requerid />
+                              <div class="info-custom">(e.g. this is an example robert_1)</div>
+                              <span class="error-custom" data-ng-show="!form_create_user.lastname.$pristine && form_create_user.username.$error.required">Username is required.</span>
+                              <span class="error-custom" data-ng-show="form_create_user.lastname.$error.pattern">Invalid format (4 - 25 characters)</span>
+                              <span class="error-custom">{{message}}</span>
+                           </div>
+                           <div class="form-group col-md-4">
+                              <div class="label-form">Email *</div>
+                              <input type="text" name="email"
+                                 class="form-control"
+                                 placeholder="" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/"  required
+                                 data-ng-model="branch.email" />
+                              <div class="info-custom">(e.g. this is an example email@example.com)</div>
+                              <span class="error-custom" data-ng-show="!form_create_user.email.$pristine && form_create_user.email.$error.required">Email is required.</span>
+                              <span class="error-custom" data-ng-show="form_create_user.email.$error.pattern">Email is invalid.This is the format example@email.com </span>
+                              <span  class="error-custom">{{messageEmail}}</span>                                          
+                           </div>
+                           <div class="row col-md-4">
+						   
+								
+                          
+                           </div>
+                        </div>
+						
+                        <div class="row col-md-12">
+                           <div class="col-md-12">
+                              <div class="pull-right">
+                                 <a data-ng-click="cancel()" class="btn btn-warning">Cancel</a>
+                                 <button type="button" class="btn btn-primary"  data-ng-disabled='!form_create_user.$valid' data-ng-click="submit($parent.users)"> <i class="fa fa-save"></i> Submit</button>
+                                 <button data-ng-click="vm.goToUserSettings()" data-ng-show="vm.saved" class="btn btn-info"><span class="fa fa-cogs"></span> User Settings</button>
+                              </div>
+                           </div>
+                        </div>
+                     </fieldset>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

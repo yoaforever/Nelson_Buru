@@ -1,0 +1,89 @@
+﻿<div id="myModal" data-ng-controller="AttachmentAllCtrl as vm">
+   <div class="modal-header">
+      <h3>Upload Attachment for Transaction #{{items.transactions.number}}</h3>
+   </div>
+   <div class="modal-body">
+      <div data-ng-show="items.length > 0">
+         <table class="tableAttachment">
+            <tr>
+               <td><b>Attachment Type</b></td>
+               <td><b>Description</b></td>
+               <td><b>Created Date</b></td>
+               <!--<td>Viewable to All</td>-->
+               <td>Options</td>
+               <!--<td><b>View</b></td>
+                  <td><b>Delete</b></td>
+                  <td><b>Email</b></td>-->
+            </tr>
+            <tr data-ng-repeat="item in items">
+               <td width="25%">
+                  {{item.attachment_type_description}}
+               </td>
+               <td width="25%">
+                  {{item.description}}
+               </td>
+               <td width="25%">
+                  {{ item.created | date:'M/dd/yyyy'}}
+               </td>
+               <!--<td>
+                  <div data-ng-if="item.viewableByOtherParty" style="cursor:pointer">  <i data-a-ng-click="vm.makePrivate(item)" title="public document" class="fa fa-eye fa-2x"></i> </div>
+                  <div data-ng-if="!item.viewableByOtherParty" style="cursor:pointer">  <i data-a-ng-click="vm.makePublic(item)" title="private document" class="fa fa-eye-slash fa-2x"></i> </div>
+                  </td>-->
+               <td>
+                  <a target="_blank" href="../uploads/transaction_attachments/{{item.file_name}}" download>
+                  <i title="Download" data-ng-class="{'doc-word':(item.file_extension=='.docx' || item.file_extension=='.doc' ),
+                     'doc-pdf':item.file_extension=='.pdf' ,
+                     'doc-txt':item.file_extension=='.txt' ,
+                     'doc-excel':item.file_extension=='.xls',
+                     'doc-image':(item.file_extension=='.jpeg' || item.file_extension=='.jpg' || item.file_extension=='.png'),
+                     'doc-unknown':(item.file_extension!='.docx' &&
+                     item.file_extension!='.doc' &&
+                     item.file_extension!='.pdf' &&
+                     item.file_extension!='.xls' &&
+                     item.file_extension!='.jpeg' &&
+                     item.file_extension!='.jpg'  &&
+                     item.file_extension!='.png' &&
+                     item.file_extension!='.txt') }"></i></a>&nbsp;&nbsp;
+                  <a target="_blank" data-a-ng-click="vm.removeDocument(item)"><i  title="Remove" class="fa fa-trash-o fa-2x"></i></a> &nbsp;&nbsp;
+                  <a target="_blank" data-a-ng-click="vm.sendEmail(item)"><i  title="Send as Mail" class="fa fa-envelope fa-2x"></i></a>&nbsp;&nbsp;
+               </td>
+            </tr>
+         </table>
+      </div>
+      <form enctype="multipart/form-data">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="label-form">Attachment Type</div>
+               <span class="ui-select">
+                  <select data-ng-model="vm.selectedattachmenttype"
+                     class="input-inline-form"
+                     data-ng-options="t.description for t in items.transactions_types">
+                     <option value="">-- select attachment type --</option>
+                  </select>
+               </span>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-12">
+               <div class="label-form">Attachment Description</div>
+               <input type="text"
+                  class="form-control"
+                  data-ng-model="vm.fileDescription" />
+               <br />
+               <input type="file"
+                  title="Choose File"
+                  name="Attachment" data-txnId = "{{items.transactions.id}}"
+                  data-ui-file-upload class="btn-primary"
+                  id="Attachmentfile"
+                  onchange="angular.element('#Attachmentfile').scope().vm.fileNameChaged(this)" />
+               <input data-ng-show="false" name="txnId" id="txnId" value="{{items.transactions.id}}" type="text" />
+            </div>
+         </div>
+      </form>
+   </div>
+   <div class="modal-footer">
+      <button class="close" data-ng-click="cancel()">Close</button>
+   </div>
+</div>
+</script>
+</div>

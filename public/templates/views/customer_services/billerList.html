@@ -1,0 +1,61 @@
+﻿<div class="page" data-ng-controller="customerFeesListCtrl as vm" data-ng-cloak>
+    <div style="padding:5px; background-color:white;">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Customer Fees</strong></div>
+            <div class="panel-body">
+                <div class="row col-md-6">
+                    <section class="table-flip-scroll">
+                        <table class="table table-bordered table-striped cf">
+                            <div data-ng-show="vm.isLoading" class="col-sm-6 pull-right"><i class="fa fa-spinner fa-spin fa-3x"></i>Loading ...</div>
+                            <thead class="navbar-inverse">
+                                <tr class="th-font">
+                                    <th>Fee Type</th>
+                                    <th>Fee Amount($)</th>
+									<th>Percentage(%)</th>
+									<th></th>
+									<th>Default</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Transaction Fee</td>
+                                    <td><input type="text" name="txn_fee"  class="form-control" ng-model="txnFees.amount" /></td>
+									
+									<td><input type="text" name="txn_percentage" class="form-control" ng-model="txnFees.percentage" /></td>
+									<td><button data-ng-click="saveTransactionFee(txnFees.amount,1,txnFees.percentage)" class=" btn btn-primary"><span class="fa fa-save"></span> Save</button></td>
+									<td class="text-center"><input name="txn_default" ng-click="makeDefault(isDefault)" type="radio" ng-checked="isDefault == 1" ng-model="isDefault" value="1"></td>
+                                </tr>
+								<tr>
+                                    <td>Overnight Fee</td>
+                                    <td><input type="text" name="overnight_fee" class="form-control" ng-model="overNightFees.amount" /></td>
+									
+									<td><input type="text" name="overnight_percentage" class="form-control" ng-model="overNightFees.percentage" /></td>
+									<td><button data-ng-click="saveOvernightFee(overNightFees.amount,2,overNightFees.percentage)" class=" btn btn-primary"><span class="fa fa-save"></span> Save</button></td>
+									<td class="text-center"><input type="radio" ng-click="makeDefault(isDefault)" ng-checked="isDefault == 2" ng-model="isDefault" value="2"></td>	
+                                </tr> 
+								<tr>   
+                                    <td>Rapid Pay</td>
+                                    <td><input type="text" name="rapid_pay" class="form-control" ng-model="rapidFees.amount" /></td>
+									
+									<td><input type="text" name="rapid_percentage" class="form-control" ng-model="rapidFees.percentage" /></td>
+									<td><button data-ng-click="saveRapidPay(rapidFees.amount,3,rapidFees.percentage)" class=" btn btn-primary"><span class="fa fa-save"></span> Save</button></td>
+									<td class="text-center"><input type="radio" ng-click="makeDefault(isDefault)" ng-checked="isDefault == 3" ng-model="isDefault" value="3"></td>	
+                                </tr>
+								<tr>                               
+                                    <td>Credit Fee</td>
+                                    <td><input type="text" name="txn_fee" class="form-control" ng-model="creditFees.amount" /></td>
+									
+									<td><input type="text" name="txn_fee" class="form-control" ng-model="creditFees.percentage" /></td>
+									<td><button data-ng-click="saveCreditFee(creditFees.amount,4,creditFees.percentage)" class=" btn btn-primary"><span class="fa fa-save"></span> Save</button></td>
+									<td class="text-center"><input type="radio" ng-click="makeDefault(isDefault)" ng-checked="isDefault == 4" ng-model="isDefault" value="4"></td>	
+									
+                                </tr>  								
+                            </tbody>
+
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

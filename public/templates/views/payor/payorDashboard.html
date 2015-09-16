@@ -1,0 +1,458 @@
+{{vm.tabBillerSelected}}
+<div class="row">
+   <div class="col-md-12">
+      <div class="col-md-6 pull-left">
+         <div class="panel panel-default">
+            <div class="panel-heading"><strong><i class="fa fa-filter"></i> Transactions Filter</strong></div>
+            <div class="panel-body">
+               <div class="row">
+                  <div class="col-md-12">
+                     <ul class="nav nav-boxed nav-justified" data-ng-controller="PayorTxtCtrl as vm">
+                        <li  data-ng-click="vm.payorStatus(0)"><a href="javascript:;"><i class="color-gray fa fa-list-alt"></i> All <span data-ng-controller="CountAllPayorTxtCtrl" class="badge">{{count_all_payor_transactions}}</span></a></li>
+                        <!--<li ><a href="javascript:;" data-ng-click="vm.billerStatus(1)" data-ng-controller="TransaStatusCtrl" data-ng-model="TransactionTypesDashb"><i class="color-warning fa fa-flag"></i> Pending <span data-ng-controller="CountPendingBillerTxtCtrl" class="badge badge-warning">{{count_pending_transaction}}</span></a></li>-->
+                        <li ><a href="javascript:;" data-ng-click="vm.payorStatus(1)"><i class="color-warning fa fa-flag"></i> Pending <span data-ng-controller="CountPendingPayorTxtCtrl" class="badge badge-warning">{{count_pending_transaction_transaction}}</span></a></li>
+                        <li><a href="javascript:;"   data-ng-click="vm.payorStatus(2)"><i class="color-info fa fa-folder-open"></i> Verified <span data-ng-controller="CountVerifiedPayorTxtCtrl" class="badge badge-info">{{count_verified_payor_transaction}}</span></a></li>
+                        <li  data-ng-click="vm.payorStatus(3)"><a href="javascript:;"><i class="color-success fa fa-thumbs-up"></i> Approved <span data-ng-controller="CountApprovedPayorTxtCtrl" class="badge badge-success">{{count_approved_payor_transaction}}</span> </a></li>
+                        <li data-ng-controller="PayorTxtCtrl as vm" data-ng-click="vm.payorStatus(4)"><a href="javascript:;"><i class="color-danger fa fa-gavel"></i> Disputed <span data-ng-controller="CountDisputePayorTxtCtrl" class="badge badge-danger">{{count_disputed_payor_transaction}}</span></a></li>
+                        <li><a data-ng-if="!nav1" ui-sref="newTransactionP({id:'P'})"><i class="color-info-alt fa fa-plus-square"></i> New Transaction </a></li>
+                     </ul>
+                  </div>
+                  <div class="row col-md-12 form-group">
+                     <div class="row-space-top"></div>
+                     <div class="col-sm-6">
+                        <input type="text"
+                           data-ng-model="search.$"
+                           data-ng-keyup="vm.search(vm.payorvm, $event)"
+                           placeholder="quick search"
+                           class="form-control">
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="btn-group">
+                           <button data-ng-show="vm.payorvm.filterBy.allCol" data-ng-click="vm.payorvm.filterBy.allCol = ''" class="btn btn-default" type="button"><i class="fa fa-eraser fa-2x"></i></button>
+                           <button title="apply filter" data-ng-click="vm.search(vm.payorvm, $event)" class="btn btn-default"><i class="fa fa-filter fa-2x"></i></button>
+                           <button title="clear filter" data-ng-click="vm.clearFilter(vm.payorvm)" class="btn btn-default"><i class="fa fa-refresh fa-2x"></i></button>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-12" data-ng-controller="PayorTxtCtrl as vm">
+                     <accordion close-others="false" class="ui-accordion ">
+                        <accordion-group is-open="status.isFirstOpen2">
+                           <accordion-heading>
+                              <i data-ng-show="!status.isFirstOpen1" class="fa fa-plus-square-o "></i>
+                              <i data-ng-show="status.isFirstOpen1" class="fa fa-minus-square-o "></i>
+                              Advanced Search
+                           </accordion-heading>
+                           <div class="row">
+                              <div class="col-md-4 form-group">
+                                 <div class="label-form">Transaction #.</div>
+                                 <input type="text" required="true"
+                                    class="form-control"
+                                    data-ng-model="vm.payorvm.filterBy.numberCol"
+                                    placeholder="" />
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="label-form">Related No.</div>
+                                 <input type="text"
+                                    class="form-control"
+                                    data-ng-model="vm.payorvm.filterBy.relatedNbrCol"
+                                    placeholder="" />
+                              </div>
+                              <div class="col-md-4" data-ng-controller="MyBillerCurrentCtrl">
+                                 <div class="label-form">Biller</div>
+                                 <span class="ui-select">
+                                    <select data-ng-model="vm.payorvm.filterBy.billerCol"
+                                       data-ng-options="customer.legal_name for customer in customers">
+                                       <option value="">-- select biller --</option>
+                                    </select>
+                                 </span>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-md-4" data-ng-controller="BizAreaCtrl">
+                                 <div class="label-form">Category</div>
+                                 <span class="ui-select">
+                                    <select data-ng-model="vm.payorvm.filterBy.categoryCol"
+                                       data-ng-options="bizarea.biz_area_description  for bizarea in biz_areass">
+                                       <option value="">-- all categories --</option>
+                                    </select>
+                                 </span>
+                              </div>
+                              <div class="col-md-4" data-ng-controller="TransatypesCtrl">
+                                 <div class="label-form">Type</div>
+                                 <span class="ui-select">
+                                    <select data-ng-model="vm.payorvm.filterBy.typeCol"
+                                       data-ng-options="transatype.description  for transatype in transactions_types">
+                                       <option value="">-- all types --</option>
+                                    </select>
+                                 </span>
+                              </div>
+                              <div class="col-md-4">
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-md-4">
+                                 <div class="label-form">Due date from:</div>
+                                 <div class="input-group ui-datepicker">
+                                    <input type="text"
+                                       show-weeks="false"
+                                       class="form-control"
+                                       datepicker-popup="MM/dd/yyyy"
+                                       data-ng-model="vm.payorvm.filterBy.dueDateFromCol"
+                                       is-open="vm.dueDateFrompayorvmOpened"
+                                       ng-click="vm.open($event, 'from')"
+                                       close-text="Close">
+                                    <span class="input-group-addon" ng-click="vm.open($event, 'frompayorvm')"><i class="fa fa-calendar"></i></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="label-form">Due date to:</div>
+                                 <div class="input-group ui-datepicker">
+                                    <input type="text"
+                                       show-weeks="false"
+                                       class="form-control"
+                                       datepicker-popup="MM/dd/yyyy"
+                                       data-ng-model="vm.payorvm.filterBy.dueDateToCol"
+                                       is-open="vm.dueDateTopayorvmOpened"
+                                       ng-click="vm.open($event, 'to')"
+                                       close-text="Close">
+                                    <span class="input-group-addon" ng-click="vm.open($event, 'topayorvm')"><i class="fa fa-calendar"></i></span>
+                                 </div>
+                              </div>
+                              <div class="col-md-3">
+                                 <div class="row pull-right">
+                                    <!--<div title="{{vm.payorvm.showSeletedBtnTitle}}" data-ng-click="vm.showSelectedTransactions(vm.payorvm)" class="btn btn-default"><i data-ng-class="{'fa fa-check-square-o fa-2x':!vm.payorvm.showingSeleted,'fa fa-list fa-2x':vm.payorvm.showingSeleted}"></i></div>-->
+                                    <div title="apply filter" data-ng-click="vm.search(vm.payorvm)" class="btn btn-default"><i class="fa fa-filter fa-2x "></i></div>
+                                    <div title="clear filter" data-ng-click="vm.clearAdvFilter(vm.payorvm)" class="btn btn-default"><i class="fa fa-refresh fa-2x"></i></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </accordion-group>
+                     </accordion>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-6 pull-right">
+         <div class="panel panel-default">
+            <div class="panel-heading"><strong><i class="fa fa-bar-chart-o"></i> Stats</strong></div>
+            <div class="panel-body">
+               stats 
+               <div class="row">
+                  <div class="col-xsm-6">
+                     <div class="panel mini-box">
+                        <span class="box-icon rounded bg-success">
+                        <i class="fa fa-rocket"></i>
+                        </span>
+                        <div class="box-info">
+                           <p class="size-h4">36 <span class="size-h4">%</span></p>
+                           <p class="text-muted"><span data-i18n="Growth"></span></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xsm-6">
+                     <div class="panel mini-box">
+                        <span class="box-icon rounded bg-info">
+                        <i class="fa fa-briefcase"></i>
+                        </span>
+                        <div class="box-info">
+                           <p class="size-h4">12</p>
+                           <p class="text-muted"><span data-i18n="New clients"></span></p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-xsm-6">
+                     <div class="panel mini-box">
+                        <span class="box-icon rounded bg-warning">
+                        <i class="fa fa-dollar"></i>
+                        </span>
+                        <div class="box-info">
+                           <p class="size-h4">14,234234</p>
+                           <p class="text-muted"><span data-i18n="Profit"></span></p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xsm-6">
+                     <div class="panel mini-box">
+                        <span class="box-icon rounded bg-violet">
+                        <i class="fa fa-shopping-cart"></i>
+                        </span>
+                        <div class="box-info">
+                           <p class="size-h4">313</p>
+                           <p class="text-muted"><span data-i18n="Sales"></span></p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               end stats 
+            </div>
+         </div>
+      </div>
+   </div>
+   Transactions Payor Grid 
+   <div class="col-md-12">
+      <section class="table-flip-scroll" data-ng-controller="PayorTxtCtrl">
+         <table id="payor_table" class="table table-bordered table-striped table-responsive">
+            <thead class="navbar-inverse">
+               <tr class="th-font">
+                  <th>
+                     <i data-ng-show="!txn.detailsVisbile" class="fa fa-plus-square-o "></i>
+                     <i data-ng-show="txn.detailsVisbile" class="fa fa-minus-square-o "></i>
+                  </th>
+                  <th>
+                     <input type="checkbox" name="payorselectall" data-ng-model="vm.payorvm.selectAllTransactions" data-a-ng-click="vm.payorSelectUnSelectAll()">
+                  </th>
+                  <th>Biller</th>
+                  <th>Category</th>
+                  <th>Type</th>
+                  <th>Number</th>
+                  <th>Due Date</th>
+                  <th class="numeric">Amount</th>
+                  <th>Related No.</th>
+                  <th>Status</th>
+                  <th>Payor Ref #</th>
+                  <th>Actions</th>
+               </tr>
+            </thead>
+            <tbody data-ng-repeat="txn in filteredTodos | filter:search:strict">
+               <tr data-ng-class="{moseOverTr:txn.mouseOver}" data-ng-click="vm.setTxnMouseOverTrue(vm.payorvm, txn)" data-ng-dblclick="vm.toggleDetail(vm.payorvm, txn)">
+                  <td style="cursor:pointer;" data-ng-click="vm.toggleDetail(vm.payorvm, txn)">
+                     <i data-ng-show="!txn.detailsVisbile" class="fa fa-plus-square-o "></i>
+                     <i data-ng-show="txn.detailsVisbile" class="fa fa-minus-square-o "></i>
+                  </td>
+                  <!--                                                            <td>
+                     <input type="checkbox" name="selected" data-ng-model="txn.selected" data-a-ng-click="vm.payorRefreshTransactionSelection(txn)">
+                     </td>
+                     
+                     <td>{{txn.biller_legalName}}</td>
+                     <td>{{txn.bizArea_bizAreaDescription}}</td>
+                     <td>
+                     {{txn.transactionType_description}}
+                     <a data-ng-show="txn.transactionType_id == 1" href="../../documents/bol.pdf" download="{{txn.number}}"><i class="fa fa-floppy-o"></i></a>
+                     <a data-ng-show="txn.transactionType_id == 2" href="../../documents/invoice.pdf" download="{{txn.number}}"><i class="fa fa-floppy-o "></i></a>
+                     </td>
+                     <td>{{txn.number}}</td>
+                     <td>{{txn.dueDate|date:'M/dd/yyyy'}}</td>
+                     <td>{{txn.amount|currency}}</td>
+                     <td>{{txn.relatedNumber}}</td>
+                     <td><span data-ng-class="{badge:true,'badge-success':txn.transactionStatus_id === 3,'badge-warning':txn.transactionStatus_id === 1,'badge-info':txn.transactionStatus_id === 2,'badge-danger':txn.transactionStatus_id === 4}">{{txn.transactionStatus_description}}</span></td>
+                     <td>{{txn.payorRefNumber}}</td>-->
+                  <td>
+                     <input type="checkbox" name="selected" data-ng-model="txn.selected" data-a-ng-click="vm.billerRefreshTransactionSelection(txn)">
+                  </td>
+                  <td style="display: none">{{txn.biller_id}}</td>
+                  <td style="display: none" data-ng-controller="BillerDashbCtrl">{{BillerDashb}}</td>
+				  <td>{{txn.legal_name}}</td>
+                  <td style="display: none" >{{txn.biz_area_id}}</td>
+                  <td style="display: none" data-ng-controller="BizAreaDasbCtrl">{{BizAreadashb.biz_area_description}}</td>
+				  <td>{{txn.biz_area_description}}</td>
+                  <td style="display: none">{{txn.biller_id}}</td>
+                  <td style="display: none" >{{txn.transactions_types_id}}</td>
+                  <td style="display: none" data-ng-controller="TransatypesDashbCtrl">
+                     {{TransactionTypesDashb.description}}
+                     <a data-ng-show="txn.transactions_types_id == 1" href="../../documents/bol.pdf" download="{{txn.number}}"><i class="fa fa-floppy-o"></i></a>
+                     <a data-ng-show="txn.transactions_types_id == 2" href="../../documents/invoice.pdf" download="{{txn.number}}"><i class="fa fa-floppy-o"></i></a>
+                  </td>
+				  <td>
+                     {{txn.type_desc}}
+                     <a data-ng-show="txn.transactions_types_id == 1" href="../../documents/bol.pdf" download><i class="fa fa-floppy-o"></i></a>
+                     <a data-ng-show="txn.transactions_types_id == 2" href="../../documents/invoice.pdf" download><i class="fa fa-floppy-o "></i></a>
+                  </td>
+                  <td><span ng-if="txn.number!=''">{{txn.number}}</span><span ng-if="txn.number==''">-</span></td>
+                  <td><span ng-if="txn.due_date!= '0000-00-00'">{{txn.due_date | date:'yyyy/MM/dd'}}</span><span ng-if="txn.due_date== '0000-00-00'">-</span></td>
+                  <td>{{txn.amount|currency}}</td>
+                  <td><span ng-if="txn.relatednumber!=''">{{txn.relatednumber}}</span><span ng-if="txn.relatednumber==''">-</span></td>
+                  <td data-ng-controller="TransactionStatusCtrl">
+                     <span data-ng-class="{badge:true,'badge-success':txn.transactions_status_id == 3}" ng-show="txn.disputedrefnumber != null && txn.transactions_status_id == 3">Approved w/Disp</span>
+                     <span data-ng-class="{badge:true,'badge-warning':txn.transactions_status_id == 1}" ng-show="txn.transactions_status_id == 1">{{transaction_status[txn.transactions_status_id -1].description}}</span>
+                     <span data-ng-class="{badge:true,'badge-info':txn.transactions_status_id == 2}" ng-show="txn.transactions_status_id == 2">{{transaction_status[txn.transactions_status_id -1].description}}</span>
+                     <span data-ng-class="{badge:true,'badge-danger':txn.transactions_status_id == 4}" ng-show="txn.transactions_status_id == 4">{{transaction_status[txn.transactions_status_id -1].description}}</span>
+                     <span data-ng-class="{badge:true,'badge-success':txn.transactions_status_id == 3}" ng-if="txn.disputedrefnumber == null && txn.transactions_status_id == 3" ng-show="txn.transactions_status_id == 3">{{transaction_status[txn.transactions_status_id -1].description}}</span>   
+                     <span data-ng-class="{badge:true,'badge-yellow':txn.transactions_status_id == 5}" ng-show="txn.transactions_status_id == 5">{{transaction_status[txn.transactions_status_id -1].description}}</span>
+                     <span data-ng-class="{badge:true,'badge-warning':txn.transactions_status_id == 6}" ng-show="txn.transactions_status_id == 6">{{transaction_status[txn.transactions_status_id -1].description}}</span>
+                     <span data-ng-class="{badge:true,'badge-danger':txn.transactions_status_id == 7}" ng-show="txn.transactions_status_id == 7">{{transaction_status[txn.transactions_status_id -1].description}}</span>
+					 <span data-ng-class="{badge:true,'badge-warning':txn.transactions_status_id == 8}" ng-show="txn.transactions_status_id == 8">{{transaction_status[txn.transactions_status_id -1].description}}</span>
+                  </td>
+                  <td><span ng-if="txn.payorrefnumber != ''">{{txn.payorrefnumber}}</span><span ng-if="txn.payorrefnumber == ''">-</span></td>
+                  <td>
+                     <div class="btn-group" dropdown is-open="status.isopen1">
+                        <button type="button" class="btn btn-default dropdown-toggle"> Action <span class="caret"></span> </button>
+                        <ul class="dropdown-menu" role="menu">
+                           <li data-ng-controller="AttachmentAllCtrl as vm">
+                              <a data-ng-click="vm.loadAttachment(txn)">
+                              <i class="doc-attachment-add "></i>
+                              Add Attachment
+                              </a>
+                           </li>
+                           <li data-ng-show="txn.transactions_status_id == 1">
+                              <a data-ng-click="vm.goToDispute(txn)">
+                              <i class="fa fa-gavel"></i>
+                              Dispute
+                              </a>
+                           </li>
+                           <li data-ng-show="txn.transactions_status_id == 2">
+                              <a data-ng-click="vm.goToPayment(txn)">
+                              <i class="fa fa-credit-card"></i>
+                              Approve
+                              </a>
+                           </li>
+                           <li data-ng-show="txn.transactions_status_id == 4">
+                              <a class=" btn-line-default" data-ng-click="vm.goToPayment(txn)">
+                                 <i class="fa fa-star-half-o"></i>
+                                 Approve Partial Payment
+                                 <div>{{(txn.amount - txn.disputedAmount)   | currency}}</div>
+                              </a>
+                           </li>
+                        </ul>
+                     </div>
+                                         <div data-ng-if="txn.isAttachmentLoad">
+                        <script type="text/ng-template" id="attachment.html">
+                           <div id="myModal" data-ng-controller="AttachmentAllCtrl as vm">
+                           <div class="modal-header">
+                           <h3>Upload Attachment for Transaction #{{vm.transaction.number}} <i class="fa fa-paperclip "></i></h3>
+                           </div>
+                           <div class="modal-body">{{items.data}}
+                           
+                           <div data-ng-show="vm.attachments.length > 0">
+							<table class="tableAttachment">
+                    <tr>
+                        <td><b>Attachment Type</b></td>
+                        <td><b>Description</b></td>
+                        <td><b>Created Date</b></td>
+                        <!--<td>Viewable to All</td>-->
+                        <td>Options</td>
+						<!--<td><b>View</b></td>
+                        <td><b>Delete</b></td>
+                        <td><b>Email</b></td>-->
+                    </tr>
+                    <tr data-ng-repeat="item in vm.attachments">
+						<td width="25%">
+							{{item.attachment_type_description}}
+						</td>
+                        <td width="25%">
+                            {{item.description}}
+                        </td>                        
+                        <td width="25%">
+                           {{ item.created | date:'M/dd/yyyy'}}
+                        </td>
+                        <!--<td>
+                            <div data-ng-if="item.viewableByOtherParty" style="cursor:pointer">  <i data-a-ng-click="vm.makePrivate(item)" title="public document" class="fa fa-eye fa-2x"></i> </div>
+                            <div data-ng-if="!item.viewableByOtherParty" style="cursor:pointer">  <i data-a-ng-click="vm.makePublic(item)" title="private document" class="fa fa-eye-slash fa-2x"></i> </div>
+                        </td>-->
+                        <td>
+
+                            
+							<a target="_blank" href="../{{item.path}}/{{item.file_name}}">
+                                <i title="download" data-ng-class="{'doc-word':(item.file_extension=='.docx' || item.file_extension=='.doc' ),
+                                                           'doc-pdf':item.file_extension=='.pdf' ,
+                                                           'doc-txt':item.file_extension=='.txt' ,
+                                                           'doc-excel':item.file_extension=='.xls',
+                                                           'doc-image':(item.file_extension=='.jpeg' || item.file_extension=='.jpg' || item.file_extension=='.png'),
+                                                           'doc-unknown':(item.file_extension!='.docx' &&
+                                                                          item.file_extension!='.doc' &&
+                                                                          item.file_extension!='.pdf' &&
+                                                                          item.file_extension!='.xls' &&
+                                                                          item.file_extension!='.jpeg' &&
+                                                                          item.file_extension!='.jpg'  &&
+                                                                          item.file_extension!='.png' &&
+                                                                          item.file_extension!='.txt') }"></i></a>
+                              <a target="_blank" data-a-ng-click="vm.removeDocument(item)"><i  title="private document" class="fa fa-trash-o fa-2x"></i></a> 
+                        
+                              <a target="_blank" data-a-ng-click="vm.sendEmail(vm.transaction,1)"><i  title="send as email" class="fa fa-envelope fa-2x"></i></a>
+                        </td>
+
+                    </tr>
+                </table>
+                           </div>
+                           
+                           <form enctype="multipart/form-data">
+                           <progressbar data-ng-show="vm.showLoading" class="progressbar-sm progress-striped active" value="100">{{vm.loadingMsg}}</progressbar>
+                           <div class="row">
+                           <div class="col-md-12">
+                           <div class="label-form">Attachment Type</div>
+                           <span class="ui-select">
+                           <select data-ng-model="vm.selectedattachmenttype"
+                           class="input-inline-form"
+                           data-ng-options="t.description for t in vm.attachmenttypes">
+                           <option value="">-- select attachment type --</option>
+                           </select>
+                           </span>
+                           </div>
+                           </div>
+                           <div class="row">
+                           <div class="col-md-12">
+                           <div class="label-form">Attachment Description</div>
+                           <input type="text"
+                           class="form-control"
+                           data-ng-model="vm.fileDescription" />
+                           <br />
+                           <input type="file"
+                           title="Choose File"
+                           name="Attachment"
+                           data-ui-file-upload class="btn-primary"
+                           id="{{vm.transaction.id}}Attachmentfile"
+                           onchange="angular.element(this).scope().vm.fileNameChaged(this)" />
+                           <input data-ng-show="false" name="txnId" value="{{vm.transaction.id}}" type="text" />
+                           </div>
+                           </div>
+                           </form>
+                           </div>
+                           <div class="modal-footer">
+                           <button class="close" data-ng-click="vm.cancel()">Close</button>
+                           </div>
+                           </div>
+                        </script>
+                     </div>
+                  </td>
+               </tr>
+               <tr data-ng-show="txn.detailsVisbile">
+                  <td colspan="13">
+                     <div data-ng-if="txn.detailsVisbile">
+                        <ng-include src="'/templates/views/transaction/transactionTmpltP.html'"></ng-include>
+                     </div>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+         <div class="navbar-inverse ">
+            <div class="totalAmountCss th-font"><b>Total Amount selected : {{vm.payorvm.totalSelectedAmount| currency}} </b></div>
+         </div>
+         <footer class="table-footer">
+            <div class="row">
+               <div class="col-md-6 page-num-info">
+                  <div data-ng-controller="PayorTxtCtrl" data-ng-show="isLoading" class="col-sm-6"><i class="fa fa-spinner fa-spin fa-2x"></i>Loading ...</div>
+               </div>
+               <div class="col-md-6 text-right pagination-container">
+                  <pagination class="pagination-sm"
+                     total-items="filteredItems" 
+                     ng-model="currentPage"
+                     data-current-page="currentPage"
+                     items-per-page="entryLimit"  
+                     boundary-links="true"></pagination>
+               </div>
+            </div>
+         </footer>
+      </section>
+   </div>
+   <div class="row col-md-12">
+      <div class="col-md-6 pull-left">
+         <div class="panel-heading"><strong><i class="fa fa-clock-o"></i> Actions</strong></div>
+         <div class="col-md-12 pull-right">
+            <button class="btn btn-dark" data-ng-click="vm.setSelectedToVerified(vm.payorvm)"><span class=" fa fa-folder-open"></span> Verify </button>
+            <button class="btn btn-dark" data-ng-click="vm.setSelectedToVerifiedAndApproved(vm.payorvm)"><span class=" fa fa-folder-open "></span><span class="fa fa-thumbs-up"></span> Verify &amp; Approve</button>
+            <button class="btn btn-dark" data-ng-click="vm.setSelectedToApproved(vm.payorvm)"><span class=" fa fa-thumbs-up"></span> Approve</button>
+            <button class="btn btn-dark" data-ng-click="vm.setSelectedToDispute(vm.payorvm)"><span class=" fa fa-gavel"></span> Dispute</button>
+         </div>
+      </div>
+      <div class="col-md-6 pull-right">
+      </div>
+   </div>
+   </section>
+</div>
+<br /><br />
+<!--The below line created by Iblesoft-->
+<div class="col-md-12 pull-right" data-ng-controller="cumulativePrintpreviewPayor"><button class="btn btn-primary" ng-click="open(lg)">Print / Print Preview</button></div>
+<br />
+</div>

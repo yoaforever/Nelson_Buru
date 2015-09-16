@@ -1,0 +1,93 @@
+﻿<div class="page" data-ng-controller="CSUserEditCtrl" data-ng-cloak>
+    <div style="padding:5px; background-color:white;">
+  <toaster-container toaster-options="{'position-class': 'toast-bottom-right','close-button':true}"></toaster-container>
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> User Detail</strong></div>
+            <div class="panel-body">
+                <div class="row col-md-12">
+
+                    <div class="row">
+
+                        <form name="form_edit_user" class="form-validation" novalidate data-ng-submit="submitForm()">
+                            <fieldset>
+
+                                <div class="divider"></div>
+                                <div class="row col-md-12">
+                                    <div class="form-group col-md-4">
+
+                                        <div class="label-form">Name</div>
+                                        <input type="text"
+                                               class="form-control"
+                                               name="name" placeholder="Name *" ng-pattern="/^[A-Za-z ]{2,30}$/" 
+                                               data-ng-model="vm.user.name" required/>
+                                        <span class="text-danger" data-ng-show="!form_edit_user.name.$pristine && form_edit_user.name.$error.required">The Name is required.</span>
+                                        <span class="text-danger" data-ng-show=" form_edit_user.name.$error.pattern">The format of  Name is invalid.</span>
+
+                                    </div>
+                                    <div class="form-group col-md-4">
+
+                                        <div class="label-form">Last Name</div>
+                                        <input type="text"
+                                               class="form-control" name="lastname" placeholder="Last Name *"
+                                               ng-pattern="/^[A-Za-z ]{2,30}$/"
+                                               data-ng-model="vm.user.lastname" required/>
+                                        <span class="text-danger" data-ng-show="!form_edit_user.lastname.$pristine && form_edit_user.lastname.$error.required">Last Name is required.</span>
+                                        <span class="text-danger" data-ng-show=" form_edit_user.lastname.$error.pattern">The format of Last Name is invalid.</span>
+
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <div class="label-form">Email</div>
+                                        <input type="text" name="email"
+                                               class="form-control"
+                                               ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/"  required
+                                               data-ng-model="vm.user.email" />
+                                        <span class="text-danger" data-ng-show="!form_edit_user.email.$pristine && form_edit_user.email.$error.required">Email is required.</span>
+                                        <span class="text-danger" data-ng-show=" form_edit_user.email.$error.pattern">Email is invalid.This is the format example@email.com </span>
+                                        <span  class="text-danger">{{messageEmail}}</span> 
+                                    </div>
+                                </div>
+                                <div class="row col-md-12">
+                                    <div class="form-group col-md-4">
+                                        <div class="label-form">User Name</div>
+                                        <input type="text" name="username" 
+                                               class="form-control"
+                                               data-ng-class="" ng-pattern="/^[a-zA-Z0-9_]{4,25}$/"
+                                               data-ng-model="vm.user.username"/>
+                                       <span class="text-danger" data-ng-show="!form_edit_user.username.$pristine && form_edit_user.username.$error.required">Username is required.</span>
+                                        <span class="text-danger" data-ng-show="form_edit_user.username.$error.pattern">Invalid format (6 - 25 characters)</span>
+                                        <span class="text-danger">{{message}}</span>
+
+                                    </div>
+                                    <div class="form-group col-md-4">
+
+                                        <div class="label-form">Role</div>
+										<select name="role" data-ng-model="vm.user.role_id" class="form-control" required>
+											<option value="">Select</option>
+											<option value="3">User</option>
+											<option value="8">Admin</option>
+										</select>
+										<span class="error-custom" data-ng-show="!form_create_user.role.$pristine && form_create_user.role.$error.required">Role is required.</span>
+
+                                    </div>
+                                    <div class="row col-md-4">
+                                        <div class="col-md-6">
+                                            <div class="label-form">Active</div>
+                                            <label class="switch"><input type="checkbox" data-ng-model="vm.user.active" checked><i></i></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="divider"></div>
+                                <div class="col-md-12">
+                                    <div class="btn-group pull-right">
+                                        <button data-ng-click="cancel()" class="btn btn-warning">Cancel</button>
+                                        <button type="button" class="btn btn-primary" data-ng-click="submit($parent.users)" data-ng-disabled='!form_edit_user.$valid'> <i class="fa fa-save"></i>Save</button>
+
+                                    </div>
+                                </div>
+                                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

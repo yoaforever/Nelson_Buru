@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="myApp">
+    <head>
+        <title>PayAnyBiz Angular-Laravel</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css"> <!-- load bootstrap via cdn -->
+      	<link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="./bower_components/weather-icons/css/weather-icons.min.css">
+        <link rel="stylesheet" href="./css/main.css">
+        
+    </head>
+    <body  id="app" class="app" data-custom-page="" data-ng-controller="AppController"  data-off-canvas-nav=""  data-ng-class=" {'layout-boxed': admin.layout === 'boxed' } ">
+
+    <section data-ng-include="'templates/views/header.html' " data-ng-controller="HeaderCtrl" id="header" class="header-container" data-ng-class=" {'header-fixed': admin.fixedHeader} "  data-ng-intro-options="introOptions" data-ng-intro-method="startIntro" data-ng-intro-autostart="false"></section>
+
+    <div class="main-container">
+        <aside data-ng-include="'templates/views/nav.html' " id="nav-container" class="nav-container ng-scope nav-horizontal" data-ng-class=" {'nav-fixed': admin.fixedSidebar, 'nav-horizontal': admin.menu === 'horizontal', 'nav-vertical': admin.menu === 'vertical'}"></aside>
+
+        <section data-ng-view="" id="content" class="content-container animate-fade-up"></section>
+    </div>
+        
+        <script src="./bower_components/angular/angular.js"></script>
+        <script src="./bower_components/angular-resource/angular-resource.js"></script> <!-- load our service -->
+        <script src="./bower_components/angular-route/angular-route.js"></script>
+        <script src="./bower_components/ui.bootstrap/src/datepicker/datepicker.js"></script>
+        <script src="./bower_components/angular-sanitize/angular-sanitize.js"></script>
+       <!-- <script src="./bower_components/angular-animate/angular-animate.js"></script>
+        <script src="./bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="./bower_components/ui.bootstrap/src/datepicker/datepicker.js"></script>
+        <script src="./bower_components/angular-sanitize/angular-sanitize.js"></script>-->
+        <script src="./scripts/app.js"></script>
+       <!--<script src="./scripts/mainCtrl.js"></script>-->
+       <script src="./scripts/myApp.localization.js"></script>
+       <script src="./scripts/mainControllers.js"></script>
+      
+       <!--geographical-->
+       <script src="./scripts/geographical/countrys.js"></script>
+       <script src="./scripts/geographical/states.js"></script>
+       <script src="./scripts/geographical/citys.js"></script>
+       
+       <script src="./scripts/depend/transatypes.js"></script>
+       <script src="./scripts/depend/bizareas.js"></script>
+       
+       
+       <!--Externals Controllers-->
+       <script src="./scripts/controllers/formConstraintsCtrl.js"></script>
+       <script src="./scripts/controllers/invoiceCtrl.js"></script>
+       <script src="./scripts/controllers/signinCtrl.js"></script>
+       <script src="./scripts/controllers/signupCtrl.js"></script>
+       <script src="./scripts/controllers/wizardFormCtrl.js"></script>
+       
+       
+       
+       <!--Views-->
+      <!-- <script src="./templates/views/test.js"></script>-->
+    <!--  <script src="./templates/views/admin/admin.js"></script>-->
+      <script src="./templates/views/attachment/attachment.js"></script>
+      <script src="./templates/views/biller/biller.js"></script>
+      <script src="./templates/views/biller/billerList.js"></script>
+      <script src="./templates/views/biller/billerTmplt.js"></script>
+      <script src="./templates/views/biller/mybiller.js"></script>
+      <script src="./templates/views/chatMessage/chat.js"></script>
+      <script src="./templates/views/createInvoice/createInvoice.js"></script>
+      <script src="./templates/views/latestInvoices/latestInvoices.js"></script>
+     <!-- <script src="./templates/views/layout/appCtrl.js"></script>-->
+      <script src="./templates/views/pages/lock-screen.js"></script>
+      <script src="./templates/views/pages/profile.js"></script>
+      <script src="./templates/views/payanybiztemplate/payanybiztemplate.js"></script>
+      <script src="./templates/views/payanybiztemplate/payanybiztemplate.js"></script>
+      <script src="./templates/views/payor/payor.js"></script>
+      <script src="./templates/views/payor/mypayor.js"></script>
+      <script src="./templates/views/payor/payorList.js"></script>
+      <script src="./templates/views/payor/payorTmplt.js"></script>
+      <script src="./templates/views/tasks/tasks.js"></script>
+      <script src="./templates/views/transaction/batchdispute.js"></script>
+      <script src="./templates/views/transaction/dispute.js"></script>
+     <!-- <script src="./templates/views/transaction/transaction.js"></script>-->
+      <script src="./templates/views/transaction/mytransaction.js"></script>
+      <script src="./templates/views/transaction/transactionListCtrl.js"></script>
+      <script src="./templates/views/transaction/transactionTmplt.js"></script>
+      <script src="./templates/views/user/myApp.directives.js"></script>
+      <script src="./templates/views/user/newUser.js"></script>
+      <script src="./templates/views/user/user.js"></script>
+      <script src="./templates/views/user/myuser.js"></script>
+      <script src="./templates/views/user/userSettings.js"></script>
+      <script src="./templates/views/user/userTmplt.js"></script>
+      <script src="./templates/views/dashboardCtrl.js"></script>
+      
+    <!--  
+    <script src="./templates/views/tasks/tasks.js"></script>
+    <script src="./templates/views/chatMessage/chat.js"></script>
+    <script src="./templates/views/biller/billerTmplt.js"></script>
+    <script src="./templates/views/biller/biller.js"></script>
+
+    <script src="./templates/views/test.js"></script>
+
+    <script src="./templates/views/biller/billerList.js"></script>
+    <script src="./templates/views/payor/payorTmplt.js"></script>
+    <script src="./templates/views/payor/payor.js"></script>
+    <script src="./templates/views/payor/payorList.js"></script>
+    <script src="./templates/views/pages/profile.js"></script>
+    <script src="./templates/views/pages/lock-screen.js"></script>
+    <script src="./templates/views/user/userSettings.js"></script>
+    <script src="./templates/views/user/newUser.js"></script>
+    <script src="./templates/views/user/user.js"></script>
+    <script src="./templates/views/user/userTmplt.js"></script>
+    <script src="./templates/views/payment/payment.js"></script>
+    <script src="./templates/views/transaction/batchdispute.js"></script>
+    <script src="./templates/views/transaction/dispute.js"></script>
+    <script src="./templates/views/transaction/transactionTmplt.js"></script>
+    <script src="./templates/views/transaction/transaction.js"></script>
+    <script src="./templates/views/transaction/transactionListCtrl.js"></script>
+    <script src="./templates/views/attachment/attachment.js"></script>
+    <script src="./templates/views/dashboardCtrl1.js"></script>-->
+      
+      
+      <!--Directives-->
+      <script src="scripts/directives/gaugeChart.directives.js"></script>
+    <script src="scripts/directives/flotChart.directives.js"></script>
+    <script src="scripts/directives/flotChartRealtime.directives.js"></script>
+    <script src="scripts/directives/sparkline.directives.js"></script>
+    <script src="scripts/directives/morrisChart.directives.js"></script>
+    <script src="scripts/directives/form.directives.js"></script>
+    <script src="scripts/directives/validateEquals.directives.js"></script>
+    <script src="scripts/directives/ui.directives.js"></script>
+    <script src="scripts/directives/nav.directives.js"></script>
+    <script src="scripts/directives/myApp.directives.js"></script>
+    
+    <!--extras-->
+     <script src="scripts/extra/spin.js"></script>
+    <script src=" scripts/extra/q.js"></script>
+     <script src="scripts/extra/vendor.js"></script>
+    <script src="scripts/extra/ui.js"></script>
+    <script src="scripts/extra/demo.js"></script>
+    
+    <!--Services-->
+    <script src="scripts/services/batchdisputeService.js"></script>
+    <script src="scripts/services/batchApproveService.js"></script>
+    <script src="scripts/services/tasksService.js"></script>
+    <!-- <script src="scripts/services/datacontext.js"></script>-->
+     <script src="scripts/services/mydatacontext.js"></script>
+   <!-- <script src="scripts/services/entityManagerFactory.js"></script>-->
+    <script src="scripts/services/model.js"></script>
+    
+    <script src="scripts/pagination.js"></script>
+    
+    <!--Common-->
+    <script src="scripts/common/signalRSvc.js"></script>
+     <script src="scripts/common/common.js"></script>
+    <script src="scripts/common/logger.js"></script>
+    <script src="scripts/common/bootstrap/bootstrap.dialog.js"></script>
+    <script src="scripts/common/myResource.js"></script>
+    <script src="scripts/common/notification.js"></script>
+    <script src="scripts/common/validator.js"></script>
+    </body>
+</html>

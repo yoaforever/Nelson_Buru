@@ -1,0 +1,58 @@
+﻿<div class="page" data-ng-controller="AllCustomersCtrl as vm" data-ng-cloak>
+    <ol class="breadcrumb-alt">
+        <li><a href="#/dashboard/home">Home</a></li>       
+        <li class="active"><a href="#/dashboard/user">Report List</a></li>
+    </ol>
+    <div style="padding:5px; background-color:white;">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Report</strong></div>
+            <div class="panel-body">
+                <div class="row col-md-12">
+
+
+
+                    <section class="table-flip-scroll">
+                        <table class="table table-bordered table-striped cf">
+                            <div data-ng-show="vm.isLoading" class="col-sm-6 pull-right"><i class="fa fa-spinner fa-spin fa-3x"></i>Loading ...</div>
+                            <thead class="navbar-inverse">
+                                <tr class="th-font">
+                                    <th style="text-align: center">Company Name</th>
+                                    <th style="text-align: center">Failed Date</th> 
+
+                                    <th style="text-align: center">Time</th>
+                                    <th style="text-align: center">Reason</th>
+                                    
+
+
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="cust in customers">
+                                <tr data-ng-dblclick="vm.toggleDetail(user)">
+                                    <!--                                    <td style="cursor:pointer;" data-ng-click="vm.toggleDetail(user)" id="tddsh">
+                                                                            <i data-ng-show="!user.detailsVisbile" class="fa fa-plus-square-o "></i>
+                                                                            <i data-ng-show="user.detailsVisbile" class="fa fa-minus-square-o "></i>
+                                                                        </td>                                  -->
+                                    <td style="text-align: center">{{cust.legal_name}}</td>
+                                    <td style="text-align: center">{{cust.created_at|date:'M/dd/yyyy'}}</td>
+                                    <td style="text-align: center">{{cust.updated_at|date:'hh:mm:ss'}}</td>
+                                    <td style="text-align: center"></td>
+                                    
+
+
+                                </tr>
+                                <!--                                <tr data-ng-show="user.detailsVisbile">
+                                                                    <td colspan="8">
+                                                                        <div data-ng-if="user.detailsVisbile">
+                                                                            <ng-include src="'templates/views/user/userTmplt.html'"></ng-include>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>-->
+
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

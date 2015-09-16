@@ -1,0 +1,156 @@
+<div class="page page-dashboard" data-ng-controller="DashboardCtrl">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-body" data-ng-controller="flotChartCtrl">
+                    <div data-flot-chart
+                         data-data="donutChart2.data"
+                         data-options="donutChart2.options"
+                         style="width: 100%; height: 230px;"
+                         ></div>
+                </div>
+            </div>            
+        </div>
+        <div class="col-md-6" data-ng-controller="AllCustomersCtrl">
+            <!-- stats -->
+            <div class="row">
+                <div class="col-xsm-6">
+                    <div class="panel mini-box">
+                        <span class="box-icon rounded bg-success">
+                            <i class="fa fa-male"></i>
+                        </span>
+                        <div class="box-info">
+                            <p class="size-h2">{{count_billers}}</p>
+                            <p class="text-muted"><span data-i18n="Billers"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xsm-6">
+                    <div class="panel mini-box">
+                        <span class="box-icon rounded bg-info">
+                            <i class="fa fa-male"></i>
+                        </span>
+                        <div class="box-info">
+                            <p class="size-h2">{{count_payors}}</p>
+                            <p class="text-muted"><span data-i18n="Payors"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xsm-6">
+                    <div class="panel mini-box">
+                        <span class="box-icon rounded bg-warning">
+                            <i class="fa fa-users"></i>
+                        </span>
+                        <div class="box-info">
+                            <p class="size-h2">{{count_users}}</p>
+                            <p class="text-muted"><span data-i18n="Users"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xsm-6">
+                    <div class="panel mini-box" >
+                        <span class="box-icon rounded bg-danger">
+                            <i class="fa fa-institution"></i>
+                        </span>
+                        <div class="box-info">
+                            <p class="size-h2">{{count_customers}}</p>
+                            <p class="text-muted"><span data-i18n="Clients"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end stats -->            
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Transactions Chart</strong></div>
+        <div class="panel-body" data-ng-controller="flotChartCtrl">
+            <div data-flot-chart
+                 data-data="line1.data"
+                 data-options="line1.options"
+                 style="width: 100%; height: 300px;"
+                 ></div>
+        </div>
+    </div>
+
+
+    <div class="panel panel-default" data-ng-controller="AllCustomersCtrl">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Transactions Status</strong></div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Project</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Progress</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><span class="color-success"><i class="fa fa-level-up"></i></span> TWLT</td>
+                    <td><span class="label label-warning">Pending</span></td>
+                    <td>{{count_pending}}</td>
+                    <td><progressbar class="progressbar-xs no-margin" value="count_pending" type="warning"></progressbar>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span class="color-success"><i class="fa fa-level-up"></i></span> A16Z</td>
+                    <td><span class="label label-info">Verified</span></td>
+                    <td>{{count_verified}}</td>
+                    <td><progressbar class="progressbar-xs no-margin" value="count_verified" type="info"></progressbar></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><span class="color-warning"><i class="fa fa-level-down"></i></span> DARK</td>
+                    <td><span class="label label-success">Approve</span></td>
+                    <td>{{count_approve}}</td>
+                    <td><progressbar class="progressbar-xs no-margin" value="count_approve" type="success"></progressbar></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><span class="color-info"><i class="fa fa-level-up"></i></span> Q300</td>
+                    <td><span class="label label-danger">Dispute</span></td>
+                    <td>{{count_dispute}}</td>
+                    <td><progressbar class="progressbar-xs no-margin" value="count_dispute" type="danger"></progressbar></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><span class="color-danger"><i class="fa fa-level-down"></i></span> RVNG</td>
+                    <td><span class="label label-danger">Canceled</span></td>
+                    <td>{{count_pause}}</td>
+                    <td><progressbar class="progressbar-xs no-margin" value="count_pause" type="danger"></progressbar></td></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><span class="color-info"><i class="fa fa-level-down"></i></span> FDSA</td>
+                    <td><span class="label label-warning">Paused</span></td>
+                    <td>{{count_canceled}}</td>
+                    <td><progressbar class="progressbar-xs no-margin" value="count_canceled" type="warning"></progressbar></td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+<!--     <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Line and Area Chart</h3>
+        </div>
+        <div class="panel-body" data-ng-controller="morrisChartCtrl">
+            <div morris-chart
+                 data-data="combo1.data"
+                 data-type="combo1.type"
+                 data-options="combo1.options"
+                 ></div>
+        </div>
+    </div> -->
+
+</div>
+  

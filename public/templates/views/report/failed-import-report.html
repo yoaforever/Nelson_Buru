@@ -1,0 +1,78 @@
+
+<div class="page page-profile" data-ng-controller="ReportCtrl as vm" data-ng-cloak>
+    <form name="form_repor">
+    <div class="row">
+
+        <div id="panel_profile" class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>ACH Reconciliation Report</strong></div>
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-body">
+                        <ul class="list-unstyled list-info">
+                            <li class="col-md-8" data-ng-controller="AllCustomersCtrl">
+                                <button class="btn btn-primary col-md-3"> Company Name</button>
+                                <span class="ui-select col-md-8">
+                                    <select  name="mycurrentcustomer" data-ng-model="transactions.mycurrentcustomer"
+                                            class="text-small"
+                                            data-ng-options="customer.legal_name for customer in customers" required>
+                                        <option value="">-- select company --</option>
+                                    </select>
+                                </span>
+                                <input type="hidden" class="col-md-2">
+                            </li>
+                            <li class="col-md-8 " >
+                                <button class="btn btn-primary col-md-3" style="margin-right: 10px">Failed Date</button>
+                                <div class="input-group ui-datepicker col-md-4">
+                                    <input type="text"
+                                           show-weeks="false"
+                                           class="form-control col-md-2"
+                                           datepicker-popup="MM/dd/yyyy"
+                                           max-date="'{{vm.transactions.arrival_date|date:'MM/dd/yyyy'}}'"
+                                           ng-model="vm.transactions.departure_date"
+                                           data-ng-disabled="vm.isTransactionApproved || vm.transaction.userId != main.userId"
+                                           is-open="vm.departureDateOpened"
+                                           ng-click="vm.open($event, 'departureDateOpened')"
+                                           close-text="Close">
+                                    <span class="input-group-addon" ng-click="vm.open($event, 'departureDateOpened')"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <input type="hidden" class="col-md-5">
+                            </li>
+                            <li class="col-md-8" >
+                                <button class="btn btn-primary col-md-3">Select Time</button>
+
+                                    <div class="col-md-4">
+                                        <input type="time"
+                                               name="time"
+                                               class="form-control"
+                                               required />
+                                    </div>
+                                <input type="hidden" class="col-md-5">
+                            </li></br>
+                            <li class="col-md-8" data-ng-controller="ReportCtrl">
+                                <button class="btn btn-primary col-md-3">Reason</button>
+                                <span class="ui-select col-md-8">
+                                    <select name="reason_failed" data-ng-model="transactions.description"
+                                            class="text-small"
+                                            data-ng-options="fail.description for fail in failed" required>
+                                        <option value="">-- select reason --</option>
+                                    </select>
+                                </span>
+                                <input type="hidden" class="col-md-2">
+                            </li>
+                            
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="btn-group pull-right">
+                <button data-ng-click="vm.goToDashboard()" class="btn btn-warning">Cancel</button>
+                <a data-ng-href="#/dashboard/list-failed-import-report"  data-ng-disabled='' class=" btn btn-primary"><span class="fa fa-save"></span> Report</a>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>

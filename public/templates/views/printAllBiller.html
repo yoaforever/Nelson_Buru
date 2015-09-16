@@ -1,0 +1,159 @@
+<script type="text/javascript">
+function printDiv(divName) {
+    var divToPrint = document.getElementById(divName);
+    newWin= window.open();
+    newWin.document.write(divToPrint.innerHTML);
+    newWin.location.reload();
+    newWin.focus();
+    newWin.print();
+    newWin.close();
+}
+</script>
+<div id="printableArea">
+<style>
+@media print {
+	h4{ font-size:10px}
+table thead{-webkit-print-color-adjust: exact; background:#2a86bc; font-weight:bold }
+.bg{ background:#2a86bc !important; color:#fff !important}
+#content {display:none;}
+#buttons {display:none;}
+.top-header{display:none;}
+.modal {width:125%;padding:0px;}
+.modal.in .modal-dialog{border:solid 3px;overflow:visible;}
+.modal-content {border:none;padding:1px !important;font-size:10px;}
+body{font-size:10px;font-family: "Lato","Helvetica Neue",Arial,sans-serif;}
+}
+body{font-size:14px;font-family: "Lato","Helvetica Neue",Arial,sans-serif;}
+table thead{-webkit-print-color-adjust: exact; font-weight:bold}
+.modal-content {padding:50px;}
+.clr { clear: both }
+.clearfix:after {content: "";display: table;clear: both;}
+a {color: #0087C3;text-decoration: none;}
+header {padding: 10px 0;margin-bottom: 20px;/*border-bottom: 1px solid #AAAAAA;*/}
+thead {background: #2a86bc;color: #fff}
+#logo {float: left;margin-top: 8px;}
+#logo img { height: 70px; }
+#company {float: right;text-align: right;}
+#details { margin-bottom:20px;}
+#client {padding-left: 6px;float: left; margin-top:3%;}
+#client .to { color: #000; }
+h4{ margin:0; padding:0; font-weight:normal;}
+h2.name {font-size: 1.4em;font-weight: normal;margin: 0;}
+#invoice {float: right;text-align: right;margin-left: 15px; margin-top:3%;}
+#invoice h1 {color: #0087C3;font-size: 2.4em;line-height: 1em;font-weight: normal;margin:4px 0 10px 0;}
+#invoice .date {font-size: 1.1em;color: #777777;}
+table {width: 100%;border-collapse: collapse;border-spacing: 0;}
+table th, table td { padding: 6px;/* text-align: center; *//*	border-bottom: 1px solid #FFFFFF; border:1px solid #000; */}
+table th {white-space: nowrap;}
+table td { /* text-align: right; */ }
+table td h3 {color: #57B223;font-size: 1.2em;font-weight: normal;margin: 0 0 0.2em 0;}
+table .no {color: #FFFFFF;font-size: 1.6em;background: #57B223;}
+table .desc { text-align: left; }
+table .unit { background: #DDDDDD; }
+table .qty { }
+table .total {background: #57B223;color: #FFFFFF;}
+table td.unit, table td.qty, table td.total { font-size: 1.2em; }
+table tbody tr:last-child td { /* border: none;*/ }
+table tfoot td {padding: 10px 20px;background: #FFFFFF;border-bottom: none;font-size: 1.2em;white-space: nowrap;border-top: 1px solid #AAAAAA;}
+table tfoot tr:first-child td { border-top: none; }
+table tfoot tr:last-child td {color: #57B223;font-size: 1.4em;border-top: 1px solid #57B223;}
+table tfoot tr td:first-child { border: none; }
+#thanks {margin-top:3%; overflow:hidden; margin-bottom:9%;}
+#notices {padding-left: 6px;border-left: 6px solid #0087C3;}
+#notices .notice { font-size: 1.2em; }
+footer { border-top:2px solid #2a86bc; padding:6px 0; }
+.left {float: left;width:37%}
+.foot-table table tr td{ padding:0}
+.foot-table table table td { padding:5px }
+.sign-lft{ float:left; width:58%; text-align:right;margin-right: 2%;}
+.sign-rgt{ float:left; width:40%; text-align:left; margin-top:2%}
+.tel span{ font-weight:bold}
+
+</style>
+<header class="clearfix">
+  <div class="left" ng-controller="BillerName">
+    <div id="logo" ng-controller="BillerName"> <img  width="253px" ng-src="{{imageUrl}}"></div>
+    <div class="clr"></div>
+    <div id="client">
+      <div class="to" style="text-transform:uppercase; font-weight:bold">{{legal_name}}</div>
+      <h4 class="name">{{customer_address}}</h4>
+      <div class="tel"> <span>Ph: </span>{{customer_phone}} | <span>Fax: </span>{{customer_fax}}</div>
+    </div>
+  </div>
+  <!--<div id="invoice" ng-controller="BillerName">
+    <div class="date">Date : {{date | date:'yyyy/MM/dd'}}</div>
+  </div>
+  <div id="company">
+    <h2 class="name">Company Name</h2>
+    <div>455 Foggy Heights, AZ 85004, US</div>
+    <div>(602) 519-0450</div>
+    <div><a href="mailto:company@example.com">company@example.com</a></div>
+  </div>
+  </div>-->
+</header>
+<main>
+  <div id="details" class="clearfix">
+  <table border="2" cellspacing="0" cellpadding="0" bordercolor="#2a86bc">
+    <thead style="background:#2a86bc; color:#fff;" class="bg">
+      <tr>
+        <th width="15%" style="background:#2a86bc">Payor</th>
+        <th width="5%" style="background:#2a86bc">Category</th>
+        <th width="10%" style="background:#2a86bc">Type</th>
+        <th width="11%" style="background:#2a86bc">Number</th>
+        <th width="15%" style="background:#2a86bc">Due date</th>
+        <th width="9%" style="background:#2a86bc">Amount</th>
+        <th width="10%" style="background:#2a86bc">Related No.</th>
+        <th width="11%" style="background:#2a86bc">Payor Ref #</th>
+      </tr> 
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in items.data">
+		<td valign="top">
+			<p>{{item.legal_name}}</p>
+		</td>
+        <td valign="top">
+			<p>{{item.biz_area_description}}</p>
+		</td>
+        <td valign="top">
+			<p>{{item.description}}</p>
+		</td>
+        <td valign="top">
+			<p>{{item.number}}</p>
+		</td>
+		<td valign="top">
+			<p>{{item.departure_date}}</p>
+		</td>
+		<td valign="top">
+			<p>{{item.amount}}</p>
+		</td>
+		<td valign="top">
+			<p>{{item.relatednumber}}</p>
+		</td>
+		<td valign="top">
+			<p>{{item.payorrefnumber}}</p>
+		</td>
+	  </tr>
+	  
+    </tbody>
+  </table>
+  <!--<div id="thanks">
+  </div>
+  	<div class="sign-lft">Signed</div>
+    <div class="sign-rgt"><p style=" border-bottom:2px solid #000;"></p></div>
+ </div>
+ </main>
+<footer>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ornare mi eget tempus posuere. Nulla a imperdiet odio. Vestibulum tristique fringilla hendrerit. Integer rhoncus,
+nulla quis consequat finibus, urna felis porta libero, semper vehicula nunc eros ac tortor. Vestibulum gravida tortor sit amet dui lobortis ornare. Praesent ultrices ultricies tortor facilisis
+facilisis. Sed ut ante non lectus rutrum accumsan. Nunc posuere porttitor purus eu dignissim. Nulla varius mi vitae ligula elementum posuere. Phasellus in vestibulum libero. Etiam
+fringilla arcu ex, sed eleifend nunc bibendum in. Cras volutpat elit et mauris pellentesque laoreet.
+ </footer>-->
+ </div>
+ <div id="buttons" ng-controller="cumulativePrint">
+<button class="btn btn-primary" ng-click="print('printableArea')">Print</button>
+<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
+
+
+

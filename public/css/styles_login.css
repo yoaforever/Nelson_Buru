@@ -1,0 +1,56 @@
+.modal-footer {   border-top: 0px; }
+
+/*#content_modal_login{
+    width: 70%;
+     height: 100%;
+}
+
+*/@media (min-width: 768px) {
+    .modal-dialog {
+        width: 25%;
+        margin: 10% auto;
+    }
+}/*
+
+*/@media (max-width: 768px) {
+    .modal-dialog {
+        width: 100%;
+        margin: 10% auto;
+    }
+}/*
+@media (max-width: 480px) {
+   .modal-dialog {
+        width: 100%;
+        margin: 10% auto;
+    }
+        #content_modal_login{
+    width: 100%;
+     height: 100%;
+}
+}
+@media (min-width: 1024px) { 
+ .modal-dialog {
+        width: 70%;
+        margin: 10% auto;
+    }
+}
+@media (min-width: 1200px) {
+    .modal-dialog {
+        width: 80%;
+        height: 100%;
+        margin: 10% auto;
+    }
+}
+
+*/#content_modal_login .form-control.input-lg{
+    height: 100%;
+    padding: 5px 5px;
+    font-size: 15px;
+}/*
+
+*/#content_modal_login a.btn-lg, #content_modal_login button.btn-lg{
+    height: 100%;
+    padding: 5px 5px;
+}/*
+
+*/img { width: 100%};

@@ -1,0 +1,171 @@
+﻿<div class="page" data-ng-controller="ReportCtrl as vm" data-ng-cloak>
+    <ol class="breadcrumb-alt">
+        <li><a href="#/dashboard/home">Home</a></li>       
+        <li class="active"><a href="#/dashboard/user">Report List</a></li>
+    </ol>
+    <div style="padding:5px; background-color:white;">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Report</strong></div>
+            <div class="panel-body">
+                <div class="row col-md-12">
+
+
+
+                    <section class="table-flip-scroll">
+                        <table class="table table-bordered table-striped cf">
+                            <div data-ng-show="vm.isLoading" class="col-sm-6 pull-right"><i class="fa fa-spinner fa-spin fa-3x"></i>Loading ...</div>
+                            <thead class="navbar-inverse">
+                                <tr class="th-font">
+                                    <th style="text-align: center" colspan="2">  </th>
+                                    <th style="text-align: center" colspan="2">Transaction</th>
+                                    <th style="text-align: center"  colspan="2">Payment</th>
+
+                                    <th style="text-align: center" colspan="2">Amount</th>
+                                    <th style="text-align: center" colspan="1">ACH-Batch</th>
+                                </tr>
+                                <tr class="th-font">
+                                    <th style="text-align: center">Payor</th>
+                                    <th style="text-align: center">Payee</th> 
+
+                                    <th style="text-align: center">Type</th>
+                                    <th style="text-align: center">Number</th>
+
+
+                                    <th style="text-align: center">Category</th>
+                                    <th style="text-align: center">Type</th>
+
+
+                                    <th style="text-align: center">Debit</th>
+                                    <th style="text-align: center">Credit</th>
+
+
+
+                                    <th style="text-align: center"> Batch Id</th>
+                                    
+
+
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="r in report">
+                                <tr data-ng-dblclick="vm.toggleDetail(user)">
+                                    <!--                                    <td style="cursor:pointer;" data-ng-click="vm.toggleDetail(user)" id="tddsh">
+                                                                            <i data-ng-show="!user.detailsVisbile" class="fa fa-plus-square-o "></i>
+                                                                            <i data-ng-show="user.detailsVisbile" class="fa fa-minus-square-o "></i>
+                                                                        </td>                                  -->
+                                    <td style="text-align: center">{{r.payor_name}}</td>
+                                    <td style="text-align: center">{{r.payee_name}}</td>
+                                    <td style="text-align: center">{{r.type_txn}}</td>
+                                    <td style="text-align: center">{{r.txn_number}}</td>
+                                    <td style="text-align: center">{{r.category}}</td>
+                                    <td style="text-align: center">{{r.type_pay}}</td>
+                                    <td style="text-align: center">${{r.amount_debit}}.00</td>
+                                    <td style="text-align: center">${{r.amount_credit}}.00</td>
+                                    <td style="text-align: center">{{r.payor_number}}</td>
+                                    
+
+
+                                </tr>
+                                <!--                                <tr data-ng-show="user.detailsVisbile">
+                                                                    <td colspan="8">
+                                                                        <div data-ng-if="user.detailsVisbile">
+                                                                            <ng-include src="'templates/views/user/userTmplt.html'"></ng-include>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>-->
+
+                            </tbody>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                                 <td></td>
+                                <td></td>
+                                 <td></td>
+                                <td style="text-align: center"><strong>Subtotal</strong></td>
+                                <td style="text-align: center"><strong>57030.00</strong></td>
+                                <td style="text-align: center"><strong>$0.00</strong></td>
+                                 <td></td>
+                                 <td></td>
+                            </tr>
+                        </table>
+                    </section>
+                    </br>
+                     <section class="table-flip-scroll">
+                        <table class="table table-bordered table-striped cf">
+                            <div data-ng-show="vm.isLoading" class="col-sm-6 pull-right"><i class="fa fa-spinner fa-spin fa-3x"></i>Loading ...</div>
+                            <thead class="navbar-inverse">
+                                <tr class="th-font">
+                                    <th style="text-align: center" colspan="2">  </th>
+                                    <th style="text-align: center" colspan="2">Transaction</th>
+                                    <th style="text-align: center"  colspan="1">Payment</th>
+
+                                    <th style="text-align: center" colspan="2">Amount</th>
+                                    <th style="text-align: center" colspan="1">ACH-Batch</th>
+                                </tr>
+                                <tr class="th-font">
+                                    <th style="text-align: center">Payor</th>
+                                    <th style="text-align: center">Payee</th> 
+
+                                    <th style="text-align: center">Type</th>
+                                    <th style="text-align: center">Number</th>
+
+
+                                    <th style="text-align: center">Type</th>
+
+
+                                    <th style="text-align: center">Debit</th>
+                                    <th style="text-align: center">Credit</th>
+
+
+
+                                    <th style="text-align: center"> Batch Id</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="r in report">
+                                <tr data-ng-dblclick="vm.toggleDetail(user)">
+                                    <!--                                    <td style="cursor:pointer;" data-ng-click="vm.toggleDetail(user)" id="tddsh">
+                                                                            <i data-ng-show="!user.detailsVisbile" class="fa fa-plus-square-o "></i>
+                                                                            <i data-ng-show="user.detailsVisbile" class="fa fa-minus-square-o "></i>
+                                                                        </td>                                  -->
+                                    <td style="text-align: center">{{r.payor_name}}</td>
+                                    <td style="text-align: center">PayAnyBiz</td>
+                                    <td style="text-align: center">PAB TRX FEE</td>
+                                    <td style="text-align: center">{{r.txn_number}}</td>
+                                    <td style="text-align: center">{{r.type_pay}}</td>
+                                    <td style="text-align: center">$2.00</td>
+                                    <td style="text-align: center">${{r.amount_credit}}.00</td>
+                                    <td style="text-align: center">{{r.payor_number}}</td>
+                                    
+
+
+                                </tr>
+                                <!--                                <tr data-ng-show="user.detailsVisbile">
+                                                                    <td colspan="8">
+                                                                        <div data-ng-if="user.detailsVisbile">
+                                                                            <ng-include src="'templates/views/user/userTmplt.html'"></ng-include>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>-->
+
+                            </tbody>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                                 <td></td>
+                                <td></td>
+                                <td style="text-align: center"><strong>Subtotal</strong></td>
+                                <td style="text-align: center"><strong>34.00</strong></td>
+                                <td style="text-align: center"><strong>$0.00</strong></td>
+                                 <td></td>
+                                 <td></td>
+                            </tr>
+                        </table>
+                    </section>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

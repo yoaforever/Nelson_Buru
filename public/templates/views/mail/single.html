@@ -1,0 +1,127 @@
+<div class="page">
+    <div class="row">
+        <div class="col-sm-3">
+            <ng-include src="'/templates/views/mail/leftbar.html'"></ng-include>
+        </div>
+        <div class="col-sm-9">
+            <section class="panel panel-default mail-container" ng-controller="MailDetailsCtrl">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> View Mail</strong></div>
+                <div class="panel-body">
+                    <div class="mail-header row">
+                        <div class="col-md-8">
+                            <h3>{{subject}}</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="pull-right">
+                                <a ng-click="isReplyFormOpen = 1;isFarward =0;mail.subject=subject" class="btn btn-sm btn-primary">Reply <i class="fa fa-mail-reply"></i></a>
+                                <!--<a href="javascript:;" class="btn btn-sm btn-default"><i class="fa fa-print"></i></a>-->
+                                <a ng-controller="MailDeleteCtrl" ng-click="deleteMail()" class="btn btn-sm btn-default"><i class="fa fa-trash-o"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mail-info">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <!--<strong>Jane Swift</strong> (jane@swift.com)<br />-->
+                                <strong>To: </strong><span ng-repeat="toAddress in toDetails">{{toAddress}};</span><br />
+								<strong ng-show="showCc == 1">Cc: </strong><span ng-repeat="ccAddress in ccDetails">{{ccAddress}};</span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="pull-right">
+                                    2/11/14 2:11 PM
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mail-content" ng-bind-html="EmailDetails">
+                        {{EmailDetails}}
+                    </div> 
+                    <div class="mail-attachments">
+                        <ul class="list-unstyled list-inline list-attachs" ng-repeat="attachment in attachments">
+                            <li><a href="api/downloadAttachment/{{msgId}}/{{msgNumber}}/{{attachment.partNum}}">{{attachment.name}}</li>
+                        </ul>
+                    </div>
+                    <div class="mail-actions">
+                        <a ng-click="isReplyFormOpen = 1;isFarward =0;mail.subject=subject" class="btn btn-sm btn-primary">Reply <i class="fa fa-mail-reply"></i></a>
+                        <a ng-click="isFarward = 1;isReplyFormOpen=0;mail.subject=subject" class="btn btn-sm btn-default">Forward <i class="fa fa-mail-forward"></i></a>
+                    </div>
+					<br />
+					<div ng-show="isReplyFormOpen" id="replyForm">
+					<h3>Replay</h3><Br />
+					<form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="mail_to" class="col-xs-1">To:</label>
+                            <div class="col-xs-10">
+								<div auto-complete url="/api/search" model="data.tags"></div>
+                            </div>
+                        </div>
+						<div class="form-group"><label class="col-xs-2"><a href="javascript:void(0);" ng-click="showCC = !showCC">Add CC</a> |&nbsp;<a href="javascript:void(0);" ng-click="showBCC = !showBCC">Add BCC</a></label><br /></div>
+                        <div class="form-group" ng-show="showCC">
+                            <label for="mail_cc" class="col-xs-1">CC:</label>
+                            <div class="col-xs-10">
+                                <div auto-complete url="/api/search" model="data.cc"></div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="showBCC">
+                            <label for="mail_bcc" class="col-xs-1">BCC:</label>
+                            <div class="col-xs-10">
+                                <div auto-complete url="/api/search" model="data.bcc"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mail_subject" class="col-xs-1">Subject:</label>
+                            <div class="col-xs-10">
+                                <input type="text" id="mail_subject" ng-model="mail.subject" class="form-control">
+                            </div>
+                        </div>
+                        <div text-angular ng-model="mail.mailContent" class="ui-editor"></div>
+                    
+                    <div class="mail-actions">
+                        <div class="btn btn-sm btn-primary" ng-click="ReplayMail();">Send</div>
+                        <!--<div class="btn btn-sm btn-default">Draft</div>
+						<div class="btn btn-sm btn-default">Discard</div>-->
+                    </div>
+					</form>
+				</div>
+				<div ng-show="isFarward" id="replyForm">
+					<h3>Farward</h3><Br />
+					<form class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <label for="mail_to" class="col-xs-1">To:</label>
+                            <div class="col-xs-10">
+								<div auto-complete url="/api/search" model="data.tags"></div>
+                            </div>
+                        </div>
+						<div class="form-group"><label class="col-xs-2"><a href="javascript:void(0);" ng-click="showCC = !showCC">Add CC</a> |&nbsp;<a href="javascript:void(0);" ng-click="showBCC = !showBCC">Add BCC</a></label><br /></div>
+                        <div class="form-group" ng-show="showCC">
+                            <label for="mail_cc" class="col-xs-1">CC:</label>
+                            <div class="col-xs-10">
+                                <div auto-complete url="/api/search" model="data.cc"></div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="showBCC">
+                            <label for="mail_bcc" class="col-xs-1">BCC:</label>
+                            <div class="col-xs-10">
+                                <div auto-complete url="/api/search" model="data.bcc"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mail_subject" class="col-xs-1">Subject:</label>
+                            <div class="col-xs-10">
+                                <input type="text" id="mail_subject" ng-model="mail.subject" class="form-control">
+                            </div>
+                        </div>
+                        <div text-angular ng-model="mail.mailContent" class="ui-editor"> </div>
+                    
+                    <div class="mail-actions">
+                        <div class="btn btn-sm btn-primary" ng-click="FarwardMail();">Send</div>
+                        <!--<div class="btn btn-sm btn-default">Draft</div>
+						<div class="btn btn-sm btn-default">Discard</div>-->
+                    </div>
+					</form>
+				</div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

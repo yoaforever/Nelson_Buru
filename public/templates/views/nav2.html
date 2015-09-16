@@ -1,0 +1,49 @@
+<div class="nav-wrapper ng-scope">
+    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><ul id="nav" class="nav ng-scope"    style="overflow: hidden; width: auto; height: 100%;">
+            <li>
+                <a ui-sref="home"> <i class="fa fa-dashboard"></i><span data-i18n="Dashboard">Dashboard</span> </a>
+            </li>
+            <li>
+                <a href=""><i class="fa fa-credit-card"></i><span data-i18n="Transactions">Transactions</span></a>
+                <ul>
+
+                    <!--                <li><a href="#/newTransaction/B">New Transaction</a></li>-->
+                    <li><a ui-sref="newTransaction({id:'B'})">New Transaction</a></li>
+                     <li><a ui-sref="newTransactionP({id:'P'})">New Transaction (Payor)</a></li>
+                    <li><a ui-sref="transactionList({id:'1'})">Pending Transaction(s)</a></li>
+                    <li><a ui-sref="transactionList({id:'2'})">Verified Transaction(s)</a></li>
+                    <li><a ui-sref="transactionList({id:'3'})">Approved Transaction(s)</a></li>
+                    <li><a ui-sref="transactionList({id:'4'})">Disputed Transaction(s)</a></li>
+                    <li><a href="#1">Approved with dispute</a></li>
+                    <li><a href="#1">Return Transaction(s)</a></li>
+                    <li><a href="#1">Canceled Transaction(s)</a></li>
+                    <li><a  href="javascript:popup('templates/views/angular-file-upload/examples/simple/index.html','1200','400')">Import Transactions</a></li>
+
+                </ul>
+                <i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i></li>
+
+
+            <li>
+                <a href=""><i class="fa fa-file-text"></i><span data-i18n="Reports">Reports</span></a>
+                <ul>
+                    <li class="active"><a href="#">Payor Paid Report</a></li>
+                    <li class="active"><a href="#">Biller Collected Report</a></li>
+                    <li class="active"><a ui-sref="ach-report">ACH Report</a></li>
+                    <li class="active"><a href="#">Merchant Report</a></li>
+                    <li class="active"><a href="#">Credit Management Report</a></li>
+                    <li class="active"><a href="#">Dispute </a></li>
+                    <li class="active"><a href="#">Saved Custom Reports</a></li>
+                </ul>
+                <i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i></li>
+            <li>
+                <a href=""><i class="fa fa-bank"></i><span data-i18n="Company Profile">Company Profile</span></a>
+                <ul>
+                    <li><a ui-sref="company-profile">My Profile</a></li>
+                     <li><a ui-sref="ftps-settings">FTP Settings</a></li>
+                      <li><a ui-sref="secure-paymentForm">Banking Info</a></li>
+                    <!--<li class="active"><a href="#">Payor Profile</a></li>-->
+                </ul>
+                <i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i>
+            </li>
+        </ul><div class="slimScrollBar" style="width: 7px; position: absolute; top: 24px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 73px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+</div>

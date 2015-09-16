@@ -1,0 +1,131 @@
+
+<div class="page page-profile"  data-ng-cloak>
+    <form name="form_credit_memo">
+        <div class="row">
+
+            <div id="panel_profile" class="panel panel-default">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Credit Memo</strong></div>
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-body">
+                            <ul class="list-unstyled list-info col-md-10">
+                                <li class="col-md-12 " >
+                                    <button class="btn btn-back-message-list col-md-3"> Credit Memo ID</button>
+
+                                    <div class= "col-md-3">
+                                        <input type="text"
+                                               name="first_name"
+                                               class="form-control"
+                                               required />
+                                    </div>
+                                </li>
+                                <li class="col-md-12" >
+                                    <button class="btn btn-back-message-list col-md-3">Select Transaction and Customer</button>
+                                    <span class="col-md-3" data-ng-controller="creditMemoCtrl" >
+                                        <select class=" form-control" name="city" ng-model="customers.name"  ng-options="customer.legal_name for customer in customers track by customer.id" required>
+                                            <option value="">-- CHOOSE CUSTOMER--</option>
+                                        </select>
+
+                                    </span>
+                                    <span class="col-md-3" data-ng-controller="creditMemoCtrl">
+                                        <select class=" form-control" name="city" ng-model="txns.id"  ng-options="txn.id for txn in txns track by txn.id" required>
+                                            <option value="">-- CHOOSE TRANSACTION--</option>
+                                        </select>
+
+                                    </span>
+                                </li>                                                                                 
+                                <li class="col-md-12" >
+                                    <button class="btn btn-back-message-list col-md-3">Modified By</button>
+
+                                    <div class="col-md-3">
+                                        <input type="tel"
+                                               name="zip_postal"
+                                               class="form-control"
+                                               required />
+                                    </div>
+                                </li>
+                                <li class="col-md-12" >
+                                    <button class="btn btn-back-message-list col-md-3">Reason</button>
+
+                                    <div class="col-md-9 checkbox">
+
+                                        <label>
+                                            <input type="checkbox"> Over-charged
+                                        </label>
+
+
+                                        <label>
+                                            <input type="checkbox"> Over-Paid
+                                        </label>
+
+
+                                        <label>
+                                            <input type="checkbox"> From Dispute
+                                        </label>
+
+
+                                        <label>
+                                            <input type="checkbox"> Approved by Admin
+                                        </label>
+
+                                    </div>
+                                    <div class="btn btn-back-message-list col-md-3"></div>
+
+                                    <div class="col-md-9 checkbox">
+
+                                        <label class="pull-left">
+                                            <input type="checkbox"> Other
+                                        </label>    
+                                        <div class="col-md-4">
+                                            <input  type="tel"
+                                                    name="zip_postal"
+                                                    class="form-control"
+                                                    required />
+
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-md-12" >
+                                    <div class="btn btn-back-message-list col-md-3"></div>
+                                    <button class="btn btn-back-message-list col-md-3">Credit Amount</button>
+
+                                    <div class="col-md-3">
+                                        <input type="tel"
+                                               name="zip_postal"
+                                               class="form-control"
+                                               required />
+                                    </div>
+                                    <div class=" col-md-3"></div>                                   
+                                </li>
+                                <li class="col-md-12" >
+                                    <div class="btn btn-back-message-list col-md-3"></div>
+
+                                    <button class="btn btn-back-message-list col-md-3">	Description</button>
+
+                                    <div class="col-md-3">
+                                        <input type="tel"
+                                               name="zip_postal"
+                                               class="form-control"
+                                               required />
+                                    </div>
+                                    <div class="btn btn-back-message-list col-md-3"></div>
+                                </li>
+                                <li class="col-md-12" >
+                                    <div class="btn btn-back-message-list col-md-3"></div>
+
+                                    <div class="btn-group col-md-3">
+                                        <button data-ng-click="cancel()" class="btn btn-warning">Reset</button>
+                                        <button  style="margin-left: 5px"  class=" btn btn-primary"><span class="fa"></span>Submit</button>
+                                    </div>
+                                    <div class="btn btn-back-message-list col-md-3"></div>
+                                </li>
+
+                            </ul>               
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

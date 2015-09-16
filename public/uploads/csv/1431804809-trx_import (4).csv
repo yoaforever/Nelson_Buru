@@ -1,0 +1,2 @@
+Amount,Payor,Biller,Type,Category,Invoice_Number,Related_No.,Due_Date,Arrival_Date,Departure_Date,Payor_Ref,Status
+55,4,77,2,2,55,55,5/16/2015,5/20/2015,5/15/2015,REF-55,2

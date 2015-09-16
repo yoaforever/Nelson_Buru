@@ -1,0 +1,323 @@
+﻿<div class="page" data-ng-controller="MyNewBillerCtrl" data-ng-cloak>
+    <ol class="breadcrumb-alt">
+        <li><a href="#/dashboard/home">Home</a></li>
+        <li><a href="#/dashboard/billerList">Biller List</a></li>
+        <li class="active"><a href="">New Biller</a></li>
+    </ol>
+    <toaster-container toaster-options="{'position-class': 'toast-bottom-right','close-button':true}"></toaster-container>
+    <form name="form_create_biller" style="padding:5px; background-color:white;">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> New Biller</strong></div>
+            <div class="panel-body">
+                <div class="row col-md-12">
+                    <div class="col-md-12 pull-left" >
+                        <div class="panel panel-info">
+                            <div class="panel-heading"><strong><i class="fa fa-cube"></i> Add New Biller </strong></div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pull-left"><h4> Company Info.</h4></div>
+                                        <hr class="intro-divider">
+
+                                        <div class="row col-md-12">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="label-form">Company Name *</div>
+                                                    <input type="text"
+                                                           id="v_companyname"
+                                                           data-ng-model="new .legal_name"
+                                                           class="form-control" ng-pattern="/^[A-Za-z0-9 ]{2,30}$/"  required>
+                                                    <div class="info-custom">(e.g. this is an example Disney Corp)</div>
+                                                    <span class="error-custom" data-ng-show="!form_create_biller.legal_name.$pristine && form_create_biller.legal_name.$error.required">Company Name is required.</span>
+                                                    <span class="error-custom" data-ng-show="form_create_biller.legal_name.$error.pattern">Invalid format (3 - 30 characters)</span>
+                                                    <span class="error-custom" >{{message}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="label-form">DBA</div>
+                                                    <input type="text" name="dba"
+                                                           id="v_dba"
+                                                           class="form-control"
+                                                           data-ng-model="new.dba" ng-pattern="/^[A-Za-z0-9 ]{2,20}$/" >
+                                                    <div class="info-custom">(e.g. this is an example dba)</div>
+                                                    <span  class="error-custom" data-ng-show="form_create_biller.dba.$error.pattern">Invalid format (2 - 20 characters)</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="label-form">TIN *</div>
+                                                    <input type="tel" name="tin" placeholder=""
+                                                           id="v_tin" ng-pattern="/^[0-9]{2}-?[0-9]{7}$/" 
+                                                           data-ng-model="new.tin" 
+                                                           class="form-control" required>
+                                                    <div class="info-custom">(e.g. this is an example 12-1234567)</div>
+                                                    <span class="error-custom" data-ng-show="!form_create_biller.tin.$pristine && form_create_biller.tin.$error.required">TIN is required.</span>
+                                                    <span class="error-custom" data-ng-show="form_create_biller.tin.$error.pattern">The format is invalid.This is the format ##-#######</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="label-form">E-Mail *</div>
+                                                    <input type="email" name="email"
+                                                           id="v_email"
+                                                           data-ng-model="new.email"
+                                                           class="form-control" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" placeholder="" required>
+                                                    <div class="info-custom">(e.g. this is an example email@example.com)</div>
+                                                    <span class="error-custom" data-ng-show="!form_create_biller.email.$pristine && form_create_biller.email.$error.required">Email is required.</span>
+                                                    <span class="error-custom" data-ng-show=" form_create_biller.email.$error.pattern">Email is invalid.This is the format example@email.com </span>
+                                                    <span class="error-custom" >{{messageEmail}}</span>  
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="label-form">Phone *</div>
+                                                    <input type="tel" placeholder=""
+                                                           id="v_phone" name="phone"
+                                                           data-ng-model="new.phone" 
+                                                           class="form-control" ng-pattern="/^[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}$/" required>
+                                                    <div class="info-custom">(e.g. this is an example 786-120-3356)</div>
+                                                    <span class="error-custom" data-ng-show="form_create_biller.phone.$dirty && form_create_biller.phone.$error.required">Phone is required.</span>
+                                                    <span class="error-custom" data-ng-show=" form_create_biller.phone.$error.pattern">The format is invalid.This is a format ###-###-####</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="label-form">Fax</div>
+                                                    <input type="tel" name="fax"
+                                                           data-ng-model="new.fax"
+                                                           id="v_fax" placeholder="" 
+                                                           ng-pattern="/^[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}$/" class="form-control">
+                                                    <div class="info-custom">(e.g. this is an example 786-120-3356)</div>
+                                                    <span class="error-custom" data-ng-show=" form_create_biller.fax.$error.pattern">The format is invalid.This is a format ###-###-####</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row col-md-12">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="label-form">Address</div>
+                                                    <input type="text"
+                                                           id="v_address" placeholder=""
+                                                           data-ng-model="new .address"
+                                                           class="form-control">
+                                                    <div class="info-custom">(e.g. this is an example 9275 SW 36ST)</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <div class="label-form">Zip Code *</div>
+                                                    <input type="tel" id="zip_postal" name="zip_postal"
+                                                           class="form-control" ng-pattern="/^[0-9]{3,5}$/"
+                                                           data-ng-model="new.zip_postal"
+                                                           placeholder="" required>
+                                                    <div class="info-custom">(Select before state and city.This is an example 33165)</div>
+                                                    <span class="error-custom" data-ng-show="form_create_biller.zip_postal.$dirty && form_create_biller.zip_postal.$error.required">Zip Code is required.</span>
+                                                    <span class="error-custom" data-ng-show=" form_create_biller.zip_postal.$error.pattern">The format is invalid.This is a format #####</span>
+                                                </div>
+                                                <script type="text/javascript">
+                                                        $(document).ready(function () {
+
+                                                            $('#zip_postal').keyup(function () {
+                                                                $('#city').empty();
+                                                                $.getJSON('/cities', {Action: 'giveMeCities', id_state: $('#zip_postal').val()}, function (data) {
+                                                                    for (i = 0; i < data.length; i++) {
+                                                                        $('#city').append(new Option(data[i].name, data[i].id));
+                                                                    }
+                                                                });
+                                                            });
+                                                        });</script>
+
+                                                <script type="text/javascript">
+                                                        $(document).ready(function () {
+
+                                                            $('#zip_postal').keyup(function () {
+                                                                $('#state').empty();
+                                                                $.getJSON('/states', {Action: 'giveMeStates', id_state: $('#zip_postal').val()}, function (data) {
+                                                                    for (i = 0; i < data.length; i++) {
+                                                                        $('#state').append(new Option(data[i].name, data[i].id));
+                                                                    }
+                                                                });
+                                                            });
+                                                        });</script>
+                                            </div>
+                                            <div class="col-md-2" data-ng-controller="StateCtrl">
+                                                <div class="form-group">
+                                                    <div class="label-form">State *</div>
+                                                    <span class="ui-select">
+                                                        <select name="state" id="state" data-ng-model="new.myState"
+                                                                class="text-small"
+                                                                data-ng-options="state.name for state in states track by state.id" required>
+                                                            <option value="">-- choose State --</option>
+                                                        </select>        
+                                                    </span>
+                                                    <span class="error-custom" data-ng-show="form_create_biller.state.$dirty && form_create_biller.state.$error.required">State is required.</span>
+                                                </div>
+                                                <script type="text/javascript">
+                                                                $(document).ready(function(){
+
+                                                        $('#state').change(function(){
+                                                        $('#city').empty();
+                                                                $.getJSON('/cities_state', {Action:'giveMeCities', id_state:$('#state option:selected').val()}, function(data){
+                                                                for (i = 0; i < data.length; i++){
+                                                                $('#city').append(new Option(data[i].name, data[i].id));
+                                                                }
+                                                                });
+                                                        });
+                                                        });</script>
+                                            </div>
+                                            <div class="col-md-2" data-ng-controller="CityCtrl">
+                                                <div class="form-group" >
+                                                    <div class="label-form">City *</div>
+                                                    <span class="ui-select" >
+                                                        <select name="city" id="city" ng-model="new.myCity"   class="text-small" ng-options="city.name for city in citys track by city.id" required>
+                                                            <option value="">-- choose city --</option>
+                                                        </select>
+
+                                                    </span>
+                                                    <span class="error-custom" data-ng-show="form_create_biller.city.$dirty && form_create_biller.city.$error.required">City is required.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2" data-ng-controller="CountryCtrl">
+                                                <div class="form-group" >
+                                                    <div class="label-form">Country *</div>
+                                                    <span class="ui-select" >
+                                                        <select name="country" ng-model="new.myCountry"  class="text-small" ng-options="country.name for country in countrys track by country.id" required>
+                                                            <option value="">-- choose country --</option>
+                                                        </select>
+                                                    </span>
+                                                    <span class="error-custom" data-ng-show="form_create_biller.country.$dirty && form_create_biller.country.$error.required">Country is required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-space"></div>
+
+                                    <div class="pull-left"><h4> Bank Info.</h4></div>
+                                    <hr class="intro-divider">
+                                    <div class="row col-md-12">
+                                        <div class="col-md-6 text-center">
+                                            <div class="label-form">
+                                                <p>Debit Account</p>
+                                            </div>
+                                            <hr class="intro-divider">
+                                        </div>
+                                        <div class="col-md-6 text-center">
+                                            <div class="label-form">
+                                                <p>Credit Account</p>
+                                            </div>
+                                            <hr class="intro-divider">
+                                        </div>
+                                    </div>
+                                    <div class="row col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="label-form">Bank Name *</div>
+                                                <input type="text"
+                                                       class="form-control"  data-ng-model="new.dBankName"
+                                                       id="v_bank" name="dBankName" ng-pattern="/^[A-Za-z0-9 ]{2,30}$/" 
+                                                       placeholder="" required>
+                                                <div class="info-custom">(e.g. this is an example Wells Fargo)</div>
+                                                <span class="error-custom" data-ng-show="form_create_biller.dBankName.$dirty && form_create_biller.dBankName.$error.required">Bank Name is required.</span>
+                                                <span class="error-custom" data-ng-show=" form_create_biller.dBankName.$error.pattern">Invalid format (2 - 30 characters)</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="label-form">Bank Name *</div>
+                                                <input type="text"
+                                                       id="v_bank" data-ng-model="new.cBankName"
+                                                       class="form-control" ng-pattern="/^[A-Za-z0-9 ]{2,30}$/" 
+                                                       placeholder="" name="cBankName" required>
+                                                <div class="info-custom">(e.g. this is an example Wells Fargo)</div>
+                                                <span class="error-custom" data-ng-show="form_create_biller.cBankName.$dirty && form_create_biller.cBankName.$error.required">Bank Name is required.</span>
+                                                <span class="error-custom" data-ng-show=" form_create_biller.cBankName.$error.pattern">Invalid format (2 - 30 characters)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="label-form">Account Number *</div>
+                                                <input type="text"
+                                                       id="v_accountNumber" name="dAccountNumber"
+                                                       class="form-control" data-ng-model="new.dAccountNumber"
+                                                       placeholder="" ng-pattern="/^[0-9]{4,17}$/" required>
+                                                <div class="info-custom">(e.g. this is an example 456789)</div>
+                                                <span class="error-custom" data-ng-show="form_create_biller.dAccountNumber.$dirty && form_create_biller.dAccountNumber.$error.required">Account Number is required.</span>
+                                                <span class="error-custom" data-ng-show=" form_create_biller.dAccountNumber.$error.pattern">Invalid format (9 - 17 digits)</span>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="label-form">Account Number *</div>
+                                                <input type="text"
+                                                       id="v_accountNumber" name="cAccountNumber"
+                                                       class="form-control" data-ng-model="new.cAccountNumber"
+                                                       placeholder="" ng-pattern="/^[0-9]{4,17}$/"  required>
+                                                <div class="info-custom">(e.g. this is an example 456789)</div>
+                                                <span class="error-custom" data-ng-show="form_create_biller.cAccountNumber.$dirty && form_create_biller.cAccountNumber.$error.required">Account Number is required.</span>
+                                                <span class="error-custom" data-ng-show=" form_create_biller.cAccountNumber.$error.pattern">Invalid format (9 - 17 digits)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="label-form">Routing Number *</div>
+                                                <input type="text"
+                                                       id="v_routingNumber" name="dRoutingNumber"
+                                                       class="form-control" data-ng-model="new.dRoutingNumber"
+                                                       placeholder="" ng-pattern="/^[0-9]{9}$/" required>
+                                                <div class="info-custom">(e.g. this is an example 456789123)</div>
+                                                <span class="error-custom" data-ng-show="form_create_biller.dRoutingNumber.$dirty && form_create_biller.dRoutingNumber.$error.required">Routing Number is required.</span>
+                                                <span class="error-custom" data-ng-show=" form_create_biller.dRoutingNumber.$error.pattern">Invalid format (9 digits)</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="label-form">Routing Number *</div>
+                                                <input type="text"
+                                                       id="v_routingNumber" name="cRoutingNumber"
+                                                       class="form-control" data-ng-model="new.cRoutingNumber"
+                                                       placeholder="" ng-pattern="/^[0-9]{9}$/" required>
+                                                <div class="info-custom">(e.g. this is an example 456789145)</div>
+                                                <span class="error-custom" data-ng-show="form_create_biller.cRoutingNumber.$dirty && form_create_biller.cRoutingNumber.$error.required">Routing Number is required.</span>
+                                                <span class="error-custom" data-ng-show=" form_create_biller.cRoutingNumber.$error.pattern">Invalid format (9 digits)</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="checkbox">
+                                            <span class="info-custom">Same Account number for Debit &amp; Credit</span>
+                                        </div>
+                                    </div>
+                                    <hr class="intro-divider">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" >
+                    <div class="col-md-6">
+                        <input type="hidden" name="Name"
+                               class="form-control"
+                               data-ng-model="new.customer_current" />
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                            <a data-ng-click="cancel()" class="btn btn-warning">Cancel</a>
+                            <button type="button" class="btn btn-primary"  data-ng-click="submit()"> <i class="fa fa-save"></i> Save</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,112 @@
+﻿<div class="page" data-ng-controller="InviteBillerCtrl" data-ng-cloak>
+    <ol class="breadcrumb-alt">
+        <li><a href="#/dashboard">Home</a></li>
+        <li><a href="#/dashboard/payorList">Biller List</a></li>
+        <li class="active"><a href="">Invite Biller</a></li>
+    </ol>
+    <form name="form_invite_biller" style="padding:5px; background-color:white;">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Invite Biller</strong></div>
+            <div class="panel-body">
+                <div class="row col-md-12">
+                    <div class="pull-left"><h4> Company Info.</h4></div>
+                    <hr class="intro-divider">
+
+                    <div class="row col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="label-form">Company Name</div>
+                                <input type="text"
+                                       id="v_companyname" name="legal_name"
+                                       data-ng-model="new.legal_name"
+                                       class="form-control" placeholder="Company Name *" ng-pattern="/^[A-Za-z0-9 ]{2,30}$/"    required>
+                                <span class="error-custom" data-ng-show="!form_invite_biller.legal_name.$pristine && form_invite_biller.legal_name.$error.required">Company Name is required.</span>
+                                <span class="error-custom" data-ng-show="form_invite_biller.legal_name.$error.pattern">Invalid format (3 - 30 characters)</span>
+                                <span class="error-custom" >{{message}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="label-form">E-Mail</div>
+                                <input type="email" name="email"
+                                       id="v_email" placeholder="Email *"
+                                       data-ng-model="new.email"
+                                       class="form-control" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/"  required>
+                                <span class="error-custom" data-ng-show="!form_invite_biller.email.$pristine && form_invite_biller.email.$error.required">Email is required.</span>
+                                <span class="error-custom" data-ng-show=" form_invite_biller.email.$error.pattern">Email is invalid.This is the format example@email.com </span>
+                                <span class="error-custom" >{{messageEmail}}</span>  
+                            </div>
+                        </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="label-form">Phone</div>
+                            <input type="tel" placeholder="786-341-2170 *" 
+                                   id="v_phone" name="phone"
+                                   data-ng-model="new.phone"
+                                   class="form-control" ng-pattern="/^[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}$/"   required>
+                            <span class="error-custom" data-ng-show="form_invite_biller.phone.$dirty && form_invite_biller.phone.$error.required">Phone is required.</span>
+                            <span class="error-custom" data-ng-show="  form_invite_biller.phone.$error.pattern">The format is invalid.This is a format ###-###-####</span>
+                        </div>
+                    </div>
+                    </div>
+                    
+
+                
+                <div class="row col-md-12">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="label-form">TIN</div>
+                            <input type="tel" placeholder="11-1234567"
+                                   id="v_tin" name="tin"
+                                   data-ng-model="new.tin" ng-pattern="/^[0-9]{2}-?[0-9]{7}$/" 
+                                   class="form-control">
+                            <span class="error-custom" data-ng-show="form_invite_biller.tin.$error.pattern">The format is invalid.This is the format ##-#########</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="label-form">DBA</div>
+                            <input type="text"
+                                   id="v_dba" name="dba"
+                                   class="form-control" ng-pattern="/^[A-Za-z ]{2,20}$/" 
+                                   data-ng-model="new.dba"
+                                   placeholder="DBA">
+                            <span  class="error-custom" data-ng-show="form_invite_biller.dba.$error.pattern">Invalid format (2 - 20 characters)</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="label-form">Fax</div>
+                            <input type="text" placeholder="305-323-4455"
+                                   data-ng-model="new.fax"
+                                   id="v_fax" name="fax" ng-pattern="/^[0-9]{3}[-. ]?[0-9]{3}[-. ]?[0-9]{4}$/"    
+                                   class="form-control">
+                            <span class="error-custom" data-ng-show="form_invite_biller.fax.$error.pattern">Invalid format.This is the format ###-###-####</span>
+                        </div>
+                    </div>
+                </div>
+               
+
+                <div class="row-space"></div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="hidden" name="Name"
+                               class="form-control"
+                               data-ng-model="new.customer_current" />
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                            <a data-ng-click="cancel()" class="btn btn-warning">Cancel</a>
+                            <button type="button" class="btn btn-primary" data-ng-click="submit()" data-ng-disabled='!form_invite_biller.$valid'> <i class="fa fa-save"></i>{{settings.actions}}</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+                </div>
+        </div>
+    </form>
+</div>

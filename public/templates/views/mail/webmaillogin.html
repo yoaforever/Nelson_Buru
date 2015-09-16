@@ -1,0 +1,82 @@
+
+<div class="page">
+    <div class="row">
+        <div class="col-sm-3">
+            
+
+            <section class="panel panel-default mail-categories" style="display:none;">
+                <div class="panel-heading">Label</div>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="javascript:;">
+                        Work <i class="fa fa-circle color-danger pull-right"></i>
+                    </a></li>
+                    <li class="list-group-item"><a href="javascript:;">
+                        Friends <i class="fa fa-circle color-info pull-right"></i>
+                    </a></li>
+                    <li class="list-group-item"><a href="javascript:;">
+                        Family <i class="fa fa-circle color-primary pull-right"></i>
+                    </a></li>
+                    <li class="list-group-item"><a href="javascript:;">
+                        Private <i class="fa fa-circle color-warning pull-right"></i>
+                    </a></li>
+                    <li class="list-group-item"><a href="javascript:;">
+                        Classmates <i class="fa fa-circle color-success pull-right"></i>
+                    </a></li>
+                </ul>
+            </section>
+        </div>
+        <div class="col-sm-12" ng-controller="loginCtrl">
+            <section class="panel panel-default mail-container">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Webmail Login</strong></div>
+                <div class="mail-options">
+                <!--------------------login----------------->
+                    
+        <div style="margin-top:-5%;">
+            <div class="intro-message">
+                <div style="height:50px;margin-top: 10%; text-align:center; margin-bottom:15px">
+                    <img src="assets/images/pabLogo.png">
+                   
+                </div>
+                <!--<hr class="intro-divider">-->
+                <span id="message" class="input-round label label-danger"></span>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <form ng-submit="loginSubmit()" class="ng-pristine ng-valid">
+                            <fieldset>
+                                <!-- ngIf: error -->
+                                <div class="form-group forminp">
+                                    <!--<span class="glyphicon glyphicon-envelope"></span>-->
+                                    <input type="text" id="userName" class="form-control input-lg input-round text-center" placeholder="xxx@payanybiz.com" ng-model="loginData.username" required>
+                                </div>
+                                <div class="form-group forminp">
+                                   <!-- <span class="glyphicon glyphicon-lock"></span>-->
+                                    <input type="password" id="password" class="form-control input-lg input-round text-center" placeholder="Password" ng-model="loginData.password"  required>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-round btn-block text-center">Log in</button>
+                                </div>
+								<div class="form-group">
+                                    <div ng-show="loading == 1">Please Wait..</div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <!--<div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <p class="text-center input-round"><a href="javascript:void(0);" onclick="$('#forgotModal').modal('show');">Forgot your password?</a></p>
+                        <p class="text-center input-round  text-muted "><span><span><a class="form-popup-link mfp-hide" href="javascript:void(0)" ng-click="showRegistration()">Don't have an account yet? Sign up</a></span></span></p>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    
+    
+    <!-----------------login---------------------->
+                </div>
+                
+            </section>
+        </div>
+    </div>
+</div>

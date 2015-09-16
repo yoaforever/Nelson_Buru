@@ -1,0 +1,897 @@
+﻿<div class="page" data-ng-controller="MyNewUserCtrl" data-ng-cloak>
+    <ol class="breadcrumb-alt">
+        <li><a href="#/dashboard/home">Home</a></li>
+        <li><a href="#/dashboard/user">User List</a></li>
+        <li class="active"><a href="">New User</a></li>
+    </ol>
+  <toaster-container toaster-options="{'position-class': 'toast-bottom-right','close-button':true}"></toaster-container>
+    <div style="padding:5px; background-color:white;">
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>{{$parent.settings.pageTitle}}</strong></div>
+            <div class="panel-body">
+                <div class="row col-md-12">
+                    <p data-ng-show="$parent.settings.success" class="alert alert-success">{{$parent.settings.success}}</p>
+                    <div class="row">
+
+                        <form name="form_create_user" id="f_create_userid">
+                            <fieldset>
+
+                                <div class="divider"></div>
+                                <div class="row col-md-12">
+                                    <div class="form-group col-md-4">
+
+                                        <div class="label-form">Name *</div>
+                                        <input type="text" name="name" placeholder="" ng-pattern="/^[A-Za-z ]{2,30}$/" 
+                                               class="form-control" data-ng-model="new.name" required/>
+                                        <div class="info-custom">(e.g. this is an example Michael)</div>
+                                        <span class="error-custom" data-ng-show="!form_create_user.name.$pristine && form_create_user.name.$error.required">The Name is required.</span>
+                                        <span class="error-custom" data-ng-show=" form_create_user.name.$error.pattern">The format of  Name is invalid.</span>
+
+                                    </div>
+                                    <div class="form-group col-md-4">
+
+                                        <div class="label-form">Last Name *</div>
+                                        <input type="text" name="lastname" placeholder=""
+                                               ng-pattern="/^[A-Za-z ]{2,30}$/" 
+                                               class="form-control" data-ng-model="new.lastname" required/>
+                                        <div class="info-custom">(e.g. this is an example Reyes)</div>
+                                        <span class="error-custom" data-ng-show="!form_create_user.lastname.$pristine && form_create_user.lastname.$error.required">Last Name is required.</span>
+                                        <span class="error-custom" data-ng-show=" form_create_user.lastname.$error.pattern">The format of Last Name is invalid.</span>
+
+
+                                    </div>
+                                    <div class="row col-md-4">
+                                        <div class="col-md-8" style="margin-left: 50px;">
+                                            <div class="label-form">Active</div>
+                                            <label class="switch"><input type="checkbox" data-ng-model="new.active" checked><i></i></label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row col-md-12">
+                                    <div class="form-group col-md-4">                                           
+                                        <div class="label-form">User Name *</div>
+                                        <input type="text" name="username" placeholder="User Name *" ng-pattern="/^[a-z][a-z0-9ü_]{4,25}$/"
+                                               class="form-control" data-ng-model="new.username" requerid/>
+                                        <div class="info-custom">(e.g. this is an example robert_1)</div>
+                                        <span class="error-custom" data-ng-show="!form_create_user.username.$pristine && form_create_user.username.$error.required">Username is required.</span>
+                                        <span class="error-custom" data-ng-show="form_create_user.username.$error.pattern">Invalid format (4 - 25 characters)</span>
+                                        <span class="error-custom">{{message}}</span>
+
+                                    </div>
+                                    <div class="form-group col-md-4">                                           
+                                        <div class="label-form">Email *</div>
+                                        <input type="text" name="email"
+                                               class="form-control"
+                                               placeholder="" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/"  required
+                                               data-ng-model="new.email" />
+                                        <div class="info-custom">(e.g. this is an example email@example.com)</div>
+                                        <span class="error-custom" data-ng-show="!form_create_user.email.$pristine && form_create_user.email.$error.required">Email is required.</span>
+                                        <span class="error-custom" data-ng-show=" form_create_user.email.$error.pattern">Email is invalid.This is the format example@email.com </span>
+                                        <span  class="error-custom">{{messageEmail}}</span>                                          
+                                    </div>
+                                    <div class="row col-md-4">
+                                        <div class="col-md-8" style="margin-left: 50px;">
+                                            <div class="label-form">Send Internal Messages</div>
+                                            <label class="switch"><input type="checkbox" data-ng-model="vm.user.sendInternalMsg" checked><i></i></label>
+                                        </div>
+                                    </div>
+                                </div>                                   
+
+                                <div class="row col-md-12">
+                                    <div class="col-md-4" >
+                                        <span >
+                                            <span class="ui-select" style="margin: 0px;">
+                                                <select id="{{myRolSelect.id}}"
+                                                    ng-model="myRolSelect"
+                                                    ng-options="role.name  for role in roles">
+                                                    <option value="">-- select Roles --</option>
+                                                </select>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-4" >
+                                        <input type="hidden" name="Name"
+                                               class="form-control"
+                                               data-ng-model="new.customer_current" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="pull-right">
+                                            <a data-ng-click="cancel()" class="btn btn-warning">Cancel</a>
+                                            <button type="button" class="btn btn-primary"  data-ng-disabled='!form_create_user.$valid' data-ng-click="submit($parent.users)"> <i class="fa fa-save"></i>{{$parent.settings.action}}</button>
+                                            <button data-ng-click="vm.goToUserSettings()" data-ng-show="vm.saved" class="btn btn-info"><span class="fa fa-cogs"></span> User Settings</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row col-md-12" data-ng-show="role_id!=0">
+                                    <div class="label-form">
+                                       Permissions of Roll
+                                    </div>
+                                    <section class="table-flip-scroll">
+                                        <table class="table table-bordered table-striped cf">
+                                            <thead class="navbar-inverse">
+                                                <tr class="th-font">
+                                                    <th>Active</th>
+                                                    <th>Permission</th>
+                                                    <th>Active</th>
+                                                    <th>Permission</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="rol_base" data-ng-show="myRolSelect.id==2">
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_dasb" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">View Dashboard</div>
+                                                        <span class="info-blue-custom">(Permission to view the dashboard)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">View Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to view transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_report" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> View and Schedule Reports</div>
+                                                        <span class="info-blue-custom">(Permission to view and schedule Reports)</span>
+                                                    </td>                                          
+                                                </tr>                   
+                                            </tbody>
+                                            
+                                            <tbody id="rol_user"  data-ng-show="myRolSelect.id==3">
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_dasb" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">View Dashboard</div>
+                                                        <span class="info-blue-custom">(Permission to view the dashboard)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">View Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to view transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_report" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> View and Schedule Reports</div>
+                                                        <span class="info-blue-custom">(View and Schedule Reports)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_air_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form"> Air</div>
+                                                        <span class="info-blue-custom">(Permission to View Air Transactions)</span>
+                                                    </td>
+                                                </tr> 
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_biz_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Biz to Biz</div>
+                                                        <span class="info-blue-custom">(Permission to View Biz to Biz Transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_ocean_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Ocean</div>
+                                                        <span class="info-blue-custom">(Permission to View Ocean Transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_rail_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Rail</div>
+                                                        <span class="info-blue-custom">(Permission to View Rail Transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_trucking_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Trucking</div>
+                                                        <span class="info-blue-custom">(Permission to View Trucking Transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="add_edit_att" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> Add and Edit Attachments</div>
+                                                        <span class="info-blue-custom">(Permission to add and edit attachments)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="disp_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form"> Dispute Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to dispute transactions)</span>
+                                                    </td>
+                                                </tr> 
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="reply_disp" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Reply to Dispute</div>
+                                                        <span class="info-blue-custom">(Permission to reply to a dispute)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="ver_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Verify Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to Verify transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="app_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> Approve Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to Approve transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="creat_edit_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form"> Create and Edit Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to create and edit transactions)</span>
+                                                    </td>
+                                                </tr> 
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="upld_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Upload Group of Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to upload Group of transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="cancel_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Cancel Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to cancel transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="res_canc_txn_pend" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> Reset Cancelled Transactions to Pending</div>
+                                                        <span class="info-blue-custom">(Permission to reset transaction status from cancelled to pending)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="creat_edit_freight" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Create and Edit Freight Corrections</div>
+                                                        <span class="info-blue-custom">(Permission to create and edit freight corrections)</span>
+                                                    </td>
+                                                </tr> 
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="updt_prof" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Update Profile</div>
+                                                        <span class="info-blue-custom">(Permission to update your profile)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="mang_notification" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Manage Notifications</div>
+                                                        <span class="info-blue-custom">(Permission to manage your Notifications)</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                              <tbody id="rol_admin" data-ng-show="myRolSelect.id==6">
+                                                  <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_dashb" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">View Dashboard</div>
+                                                        <span class="info-blue-custom">(Permission to view the dashboard)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">View Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to view transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_biz_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Biz to Biz</div>
+                                                        <span class="info-blue-custom">(Permission to View Biz to Biz Transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_ocean_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Ocean</div>
+                                                        <span class="info-blue-custom">(Permission to View Ocean Transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_rail_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Rail</div>
+                                                        <span class="info-blue-custom">(Permission to View Rail Transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_trucking_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Trucking</div>
+                                                        <span class="info-blue-custom">(Permission to View Trucking Transactions)</span>
+                                                    </td>
+                                                </tr>                                                                                         
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_air_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Air</div>
+                                                        <span class="info-blue-custom">(Permission to View Air Transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="creat_edit_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form"> Create and Edit Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to create and edit transactions)</span>
+                                                    </td>
+                                                </tr> 
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="upld_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Upload Group of Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to upload Group of transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="cancel_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Cancel Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to cancel transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="res_canc_txn_pend" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> Reset Cancelled Transactions to Pending</div>
+                                                        <span class="info-blue-custom">(Permission to reset transaction status from cancelled to pending)</span>
+                                                    </td>
+                                                   <td>
+                                                        <input type="checkbox" data-ng-model="comp_prof" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Company Profile</div>
+                                                        <span class="info-blue-custom">(Permission to create, edit, and manage Company account , no bank)</span>
+                                                    </td>
+                                                </tr> 
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="updt_prof" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Update Profile</div>
+                                                        <span class="info-blue-custom">(Permission to update your profile)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="mang_notification" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Manage Notifications</div>
+                                                        <span class="info-blue-custom">(Permission to manage your Notifications)</span>
+                                                    </td>
+                                                </tr>
+                                             
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="add_edit_att" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> Add and Edit Attachments</div>
+                                                        <span class="info-blue-custom">(Permission to add and edit attachments)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="disp_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form"> Dispute Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to dispute transactions)</span>
+                                                    </td>
+                                                </tr> 
+                                     
+                                            </tbody>
+                                             <tbody id="rol_admin" data-ng-show="myRolSelect.id==7">
+                                                  <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_dashb" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">View Dashboard</div>
+                                                        <span class="info-blue-custom">(Permission to view the dashboard)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">View Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to view transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_biz_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Biz to Biz</div>
+                                                        <span class="info-blue-custom">(Permission to View Biz to Biz Transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_ocean_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Ocean</div>
+                                                        <span class="info-blue-custom">(Permission to View Ocean Transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_rail_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Rail</div>
+                                                        <span class="info-blue-custom">(Permission to View Rail Transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_trucking_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Trucking</div>
+                                                        <span class="info-blue-custom">(Permission to View Trucking Transactions)</span>
+                                                    </td>
+                                                </tr>                                                                                         
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_air_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Air</div>
+                                                        <span class="info-blue-custom">(Permission to View Air Transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="creat_edit_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form"> Create and Edit Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to create and edit transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                  <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="reply_disp" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Reply to Dispute</div>
+                                                        <span class="info-blue-custom">(Permission to reply to a dispute)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="ver_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Verify Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to Verify transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="app_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> Approve Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to Approve transactions)</span>
+                                                    </td>
+                                                     <td>
+                                                        <input type="checkbox" data-ng-model="disp_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form"> Dispute Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to dispute transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="upld_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Upload Group of Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to upload Group of transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="cancel_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Cancel Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to cancel transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="res_canc_txn_pend" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> Reset Cancelled Transactions to Pending</div>
+                                                        <span class="info-blue-custom">(Permission to reset transaction status from cancelled to pending)</span>
+                                                    </td>
+                                                   <td>
+                                                        <input type="checkbox" data-ng-model="comp_prof" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Company Profile</div>
+                                                        <span class="info-blue-custom">(Permission to create, edit, and manage Company account , no bank)</span>
+                                                    </td>
+                                                </tr> 
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="updt_prof" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Update Profile</div>
+                                                        <span class="info-blue-custom">(Permission to update your profile)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="mang_notification" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Manage Notifications</div>
+                                                        <span class="info-blue-custom">(Permission to manage your Notifications)</span>
+                                                    </td>
+                                                </tr>
+                                             
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="add_edit_att" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> Add and Edit Attachments</div>
+                                                        <span class="info-blue-custom">(Permission to add and edit attachments)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="disp_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form"> Dispute Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to dispute transactions)</span>
+                                                    </td>
+                                                </tr> 
+                                     
+                                            </tbody>
+                                            <tbody id="rol_admin" data-ng-show="myRolSelect.id==5">
+                                                  <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_dashb" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">View Dashboard</div>
+                                                        <span class="info-blue-custom">(Permission to view the dashboard)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">View Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to view transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_report" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> View and Schedule Reports</div>
+                                                        <span class="info-blue-custom">(Permission to view and schedule Reports)</span>
+                                                    </td> 
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_air_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form"> Air</div>
+                                                        <span class="info-blue-custom">(Permission to View Air Transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_biz_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Biz to Biz</div>
+                                                        <span class="info-blue-custom">(Permission to View Biz to Biz Transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_ocean_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Ocean</div>
+                                                        <span class="info-blue-custom">(Permission to View Ocean Transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_rail_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Rail</div>
+                                                        <span class="info-blue-custom">(Permission to View Rail Transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_trucking_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Trucking</div>
+                                                        <span class="info-blue-custom">(Permission to View Trucking Transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="add_edit_att" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> Add and Edit Attachments</div>
+                                                        <span class="info-blue-custom">(Permission to add and edit attachments)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="disp_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form"> Dispute Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to dispute transactions)</span>
+                                                    </td>
+                                                </tr> 
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="reply_disp" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Reply to Dispute</div>
+                                                        <span class="info-blue-custom">(Permission to reply to a dispute)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="ver_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Verify Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to Verify transactions)</span>
+                                                    </td>
+                                                </tr> 
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="app_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> Approve Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to Approve transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="creat_edit_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form"> Create and Edit Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to create and edit transactions)</span>
+                                                    </td>
+                                                </tr> 
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="upld_txn" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Upload Group of Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to upload Group of transactions)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="cancel_txn" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Cancel Transactions</div>
+                                                        <span class="info-blue-custom">(Permission to cancel transactions)</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="res_canc_txn_pend" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form"> Reset Cancelled Transactions to Pending</div>
+                                                        <span class="info-blue-custom">(Permission to reset transaction status from cancelled to pending)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="creat_edit_freght" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Create and Edit Freight Corrections</div>
+                                                        <span class="info-blue-custom">(Permission to create and edit freight corrections)</span>
+                                                    </td>
+                                                </tr> 
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="updt_prof" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Update Profile</div>
+                                                        <span class="info-blue-custom">(Permission to update your profile)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="mang_notification" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Manage Notifications</div>
+                                                        <span class="info-blue-custom">(Permission to manage your Notifications)</span>
+                                                    </td>
+                                                </tr>                                                                                                                   
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="mang_user_roll" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Manage User Roll</div>
+                                                        <span class="info-blue-custom">(Permission to manage user roll)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="mang_user_permission" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Manage User Permissions</div>
+                                                        <span class="info-blue-custom">(Permission to manage user permissions)</span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="view_notification" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">View Notifications</div>
+                                                        <span class="info-blue-custom">(Permission to view User Notifications)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="branch_setup" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Branch Setup</div>
+                                                        <span class="info-blue-custom">(Permission to manage branches)</span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="request_link" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Request Link</div>
+                                                        <span class="info-blue-custom">(Permission to request a Link to a Biller)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="appy_link" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Apply for Credit</div>
+                                                        <span class="info-blue-custom">(Permission to apply for PayAnyBiz credit)</span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="biller_setup" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Biller Setup</div>
+                                                        <span class="info-blue-custom">(Permission to create, edit, and manage Biller Link)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="payor_setup" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Payor Setup</div>
+                                                        <span class="info-blue-custom">(Permission to create, edit, and manage Payor Link)</span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="account_notification" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Account Notifications</div>
+                                                        <span class="info-blue-custom">(Permission to manage Notifications your account receives)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="comp_prof" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Company Profile</div>
+                                                        <span class="info-blue-custom">(Permission to create, edit, and manage Company account , no bank)</span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="user_mang" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">User Management</div>
+                                                        <span class="info-blue-custom">(Permission to create, edit, and manage account users)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="creat_edit_user" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Create and Edit Users</div>
+                                                        <span class="info-blue-custom">(Permission to create and edit users)</span>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="mang_user_notification" checked>
+                                                    </td>
+                                                    <td>
+                                                        <div class="label-form">Manage User Notifications</div>
+                                                        <span class="info-blue-custom">(Permission to manage user Notifications)</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" data-ng-model="admin_account" checked>
+                                                    </td>
+                                                     <td>
+                                                        <div class="label-form">Administer Account</div>
+                                                        <span class="info-blue-custom">(Permission to perform any account action)</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                </div>
+                            </fieldset>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

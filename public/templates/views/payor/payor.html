@@ -1,0 +1,237 @@
+﻿<div class="page" data-ng-controller="MyNewPayorCtrl" data-ng-cloak>
+    <ol class="breadcrumb-alt">
+        <li><a href="#/dashboard">Home</a></li>
+        <li><a href="#/dashboard/payorList">payor List</a></li>
+        <li class="active"><a href="">New payor</a></li>
+    </ol>
+    <div style="padding:5px; background-color:white;">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> New Payor</strong></div>
+            <div class="panel-body">
+                <div class="row col-md-12">
+
+
+                    <div class="pull-left"><h4> Company Info.</h4></div>
+                    <hr class="intro-divider">
+
+                    <div class="row col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="label-form">Company Name</div>
+                                <input type="text"
+                                       id="v_companyname"
+                                       data-ng-model="new.legal_name"
+                                       class="form-control" required placeholder="Company Name">      
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="label-form">DBA</div>
+                                <input type="text"
+                                       id="v_dba"
+                                       class="form-control"
+                                       data-ng-model="new.dba"
+                                       placeholder="DBA">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="label-form">TIN</div>
+                                <input type="tel" placeholder="11-123456789"
+                                       id="v_tin"
+                                       data-ng-model="new.tin" title="The format is invalid.This is a format ##-#########"
+                                       class="form-control">
+                               
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="label-form">E-Mail</div>
+                                <input type="email"
+                                       id="v_email"
+                                       data-ng-model="new.email"
+                                       class="form-control" title="Invalid email address. Use this format mail@example.com" placeholder="mail@example.com" required>
+                              
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="label-form">Phone</div>
+                                <input type="tel" placeholder="786-341-2170" 
+                                       id="v_phone"
+                                       data-ng-model="new.phone"
+                                       class="form-control" title="The format is invalid.This is a format ###-###-####"  >
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="label-form">Fax</div>
+                                <input type="text" placeholder="305-323-4455"
+                                       data-ng-model="new.fax"
+                                       id="v_fax" title="The format is invalid.This is a format ###-###-####" 
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="label-form">Address</div>
+                                <input type="text" placeholder="9275 SW 36ST"
+                                       id="v_address"
+                                       data-ng-model="new.address"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="label-form">City</div>
+                                <span class="ui-select">
+                                    <select data-ng-model="new.myCity"
+                                            class="text-small"
+                                            data-ng-options="city.name for city in citys" required>
+                                        <option value="">-- choose city --</option>
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="label-form">Zip Code</div>
+                                <input type="tel"
+                                       class="form-control" title="The format is invalid.This is a format #####" 
+                                       data-ng-model="new.zip_postal" 
+                                       id="v_zipcode">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="label-form">State</div>
+                                <span class="ui-select">
+                                    <select required data-ng-model="new.myState"
+                                            class="text-small"
+                                            data-ng-options="state.name for state in states">
+                                        <option value="">-- choose state --</option>
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-2" data-ng-controller="CountryCtrl">
+                            <div class="form-group" >
+                                <div class="label-form">Country</div>
+                                <span class="ui-select" >
+                                    <select ng-model="new.myCountry"  class="text-small" ng-options="country.name for country in countrys track by country.id" required>
+                                        <option value="">-- choose country --</option>
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row-space"></div>
+
+                    <div class="pull-left"><h4> Bank Info.</h4></div>
+                    <hr class="intro-divider">
+                    <div class="row col-md-12">
+                        <div class="col-md-6 text-center">
+                            <div class="label-form">
+                                <p>Debit Account</p>
+                            </div>
+                            <hr class="intro-divider">
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <div class="label-form">
+                                <p>Credit Account</p>
+                            </div>
+                            <hr class="intro-divider">
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <input type="text"
+                                       class="form-control"  data-ng-model="new.dBankName"
+                                       id="v_bank"
+                                       placeholder="Bank Name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <input type="text"
+                                       id="v_bank" data-ng-model="new.cBankName"
+                                       class="form-control"
+                                       placeholder="Bank Name" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <input type="text"
+                                       id="v_accountNumber"
+                                       class="form-control" data-ng-model="new.dAccountNumber"
+                                       placeholder="Account Number" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <input type="text"
+                                       id="v_accountNumber"
+                                       class="form-control" data-ng-model="new.cAccountNumber"
+                                       placeholder="Account Number" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <input type="text"
+                                       id="v_routingNumber"
+                                       class="form-control" data-ng-model="new.dRoutingNumber"
+                                       placeholder="Routing Number" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <input type="text"
+                                       id="v_routingNumber"
+                                       class="form-control" data-ng-model="new.cRoutingNumber"
+                                       placeholder="Routing Number" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="checkbox">
+                            <span class="info-custom">Same Account number for Debit &amp; Credit</span>
+
+                        </div>
+                    </div>
+                    <hr class="intro-divider">
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="pull-right">
+                                <a data-ng-click="vm.goToDashboard()" class="btn btn-warning">Cancel</a>
+                                <button type="button" class="btn btn-primary" data-ng-click="submit()"> <i class="fa fa-save"></i>{{$parent.settings.action}}</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

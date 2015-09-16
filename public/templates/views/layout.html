@@ -1,0 +1,23 @@
+
+
+<!--<div  id="app" class="app" data-custom-page="" data-ng-controller="AppController"  data-off-canvas-nav=""  data-ng-class=" {'layout-boxed': admin.layout === 'boxed' } ">-->
+<div id="app" class="app" data-custom-page="" data-off-canvas-nav=""  data-ng-class="{'layout-boxed': admin.layout === 'boxed' }" data-ng-controller="AppController">
+    <section data-ng-include="'templates/views/header.html'" data-ng-controller="HeaderCtrl" id="header" class="header-container" data-ng-class=" {'header-fixed': admin.fixedHeader} "  data-ng-intro-options="introOptions" data-ng-intro-method="startIntro" data-ng-intro-autostart="false"></section>
+
+    <div class="main-container">
+        <aside data-ng-if="nav || nav3 || nav4" data-ng-include="'templates/views/nav.html'" id="nav-container" class="nav-container ng-scope nav-horizontal" data-ng-class=" {'nav-fixed': admin.fixedSidebar, 'nav-horizontal': admin.menu === 'horizontal', 'nav-vertical': admin.menu === 'vertical'}"></aside>
+       
+    
+        
+         <aside data-ng-if="nav1" data-ng-include="'templates/views/nav1.html'" id="nav-container" class="nav-container ng-scope nav-horizontal" data-ng-class=" {'nav-fixed': admin.fixedSidebar, 'nav-horizontal': admin.menu === 'horizontal', 'nav-vertical': admin.menu === 'vertical'}"></aside>
+       
+ 
+        
+         <aside data-ng-if="nav2"  data-ng-include="'templates/views/nav2.html'" id="nav-container" class="nav-container ng-scope nav-horizontal" data-ng-class=" {'nav-fixed': admin.fixedSidebar, 'nav-horizontal': admin.menu === 'horizontal', 'nav-vertical': admin.menu === 'vertical'}"></aside>
+         
+         
+          <aside data-ng-if="customer_service"  data-ng-include="'templates/views/nav_cservices.html'" id="nav-container" class="nav-container ng-scope nav-horizontal" data-ng-class=" {'nav-fixed': admin.fixedSidebar, 'nav-horizontal': admin.menu === 'horizontal', 'nav-vertical': admin.menu === 'vertical'}"></aside>
+       
+        <section id="content" class=" animate-fade-up" ui-view></section>
+    </div>
+</div> 

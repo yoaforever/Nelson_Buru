@@ -1,0 +1,7 @@
+CompanyName/ContactName,Address,Address2,City,State,PostalCode,Phone,EMail,Payee,Date,CheckNumber,Amount,RoutingNumber,AccountNumber,batch_id,Notes,Memo
+"Payor Test Sedanos","9245 SW 56 ST",,Miami,FL,33154,305-963-2030,yoaforever1@gmail.com,Sedanos,11/30/-0001,,2.00,123456789,12222,150513-2,,
+"Payor Test Sedanos","9245 SW 56 ST",,Miami,FL,33154,305-963-2030,yoaforever1@gmail.com,Sedanos,11/30/-0001,,2.00,123456789,12222,150513-2,,
+"Ult Company",,,Miami,FL,12345,786-718-4010,yoa@gmail.com,Sedanos,11/30/-0001,,2.00,123456755,123,150513-2,,
+"Ult Company",,,Miami,FL,12345,786-718-4010,yoa@gmail.com,Sedanos,11/30/-0001,,2.00,123456755,123,150513-2,,
+Sedanos,"97 Ave 24st Coral Way",,,FL,33165,786-456-1230,dataminerconsulting@yahoo.com,"Sedanos Biller Company",11/30/-0001,,2.00,123456789,2147483647,150513-2,,
+Sedanos,"97 Ave 24st Coral Way",,,FL,33165,786-456-1230,dataminerconsulting@yahoo.com,"Sedanos Biller Company",11/30/-0001,,2.00,123456789,2147483647,150513-2,,

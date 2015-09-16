@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="myCountry">
+    <head >
+        <title>TODO about my country</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css"> <!-- load bootstrap via cdn -->
+	<link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="./bower_components/weather-icons/css/weather-icons.min.css">
+        <link rel="stylesheet" href="./css/main.css">
+    </head>
+    <body>
+        <div ng-include="'templates/views/mycountries/navc.html'"></div>
+        <div class="container">
+            <div ng-view></div>
+        </div>
+        
+          <script src="./bower_components/angular/angular.js"></script>
+        <script src="./bower_components/angular-resource/angular-resource.js"></script> <!-- load our service -->
+        <script src="./bower_components/angular-route/angular-route.js"></script>
+        <script src="./scripts/countrys.js"></script>
+    </body>
+</html>

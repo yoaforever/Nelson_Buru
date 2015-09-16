@@ -1,0 +1,12 @@
+Amount,Payor,Biller,Type,Category,Invoice_Number,Related_No.,Due_Date,Arrival_Date,Departure_Date
+25,Payor Test Sedanos,Sedanos Biller Company,INVOICE,AIR,21982398,21902398,5/15/2015,5/1/2015,5/5/2015
+25,Payor Test Sedanos,Sedanos Biller Company,INVOICE,AIR,219823,2190298,5/15/2015,5/1/2015,5/5/2015
+25,Payor Test Sedanos,Sedanos Biller Company,INVOICE,AIR,282398,1021902398,5/15/2015,5/1/2015,5/5/2015
+25,Payor Test Sedanos,Sedanos Biller Company,INVOICE,AIR,3209234,1221902398,5/15/2015,5/1/2015,5/5/2015
+25,Payor Test Sedanos,Sedanos Biller Company,INVOICE,AIR,21989823,1321902398,5/15/2015,5/1/2015,5/5/2015
+25,Payor Test Sedanos,Sedanos Biller Company,INVOICE,AIR,23230,1421902398,5/15/2015,5/1/2015,5/5/2015
+25,Payor Test Sedanos,Sedanos Biller Company,INVOICE,AIR,1212223,1521902398,5/15/2015,5/1/2015,5/5/2015
+25,Payor Test Sedanos,Sedanos Biller Company,INVOICE,AIR,2323,1621902398,5/15/2015,5/1/2015,5/5/2015
+25,Payor Test Sedanos,Sedanos Biller Company,INVOICE,AIR,5352324,1721902398,5/15/2015,5/1/2015,5/5/2015
+25,Payor Test Sedanos,Sedanos Biller Company,INVOICE,AIR,232323,1821902398,5/15/2015,5/1/2015,5/5/2015
+25,Payor Test Sedanos,Sedanos Biller Company,INVOICE,AIR,43535,1921902398,5/15/2015,5/1/2015,5/5/2015

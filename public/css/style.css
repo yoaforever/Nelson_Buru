@@ -1,0 +1,550 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+@font-face {
+    font-family: 'halflings-regular';
+    src: url('../fonts/glyphicons-halflings-regular.eot');
+    src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/glyphicons-halflings-regular.woff') format('woff'),
+        url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+        url('../fonts/glyphicons-halflings-regular.svg#ChelseaMarketRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+header, section, footer, aside, nav, article, figure, figcaption,
+hgroup{
+    display: block;
+}
+
+#grapper{
+    width: 100%;
+    height: auto;
+}
+
+#header{
+    background-image: url(../img/bg_header_and_body.jpg);
+    height: 7%;
+
+}
+
+#memu_p, #buttoms_auth{
+    height: 100%;
+
+}
+#menu_header{
+/*    background-image: url(../img/bg_header_and_body.jpg);*/
+    top: 22px;
+    height: 100%;
+    font-family:"halflings-regular";
+    text-transform: uppercase;
+}
+#menu_header li{
+    margin-bottom: 20px;
+    margin-top: 5px;
+    display: inline-block;
+    list-style: none;
+    /*padding: 5px;*/
+    font: bold 13px verdana, sans-serif;
+    color: #999999;
+}
+
+#menu_header li a{
+  text-decoration: none;  
+}
+
+#menu_header li a:link{
+    color:#999999;
+}
+
+#menu_header li a:visited{
+    color:#999999;
+}
+
+#menu_header li a:focus{
+    color:#999999;
+}
+
+#menu_header li a:hover{
+    color: #337ab7;
+}
+
+#menu_header li a:active{
+    color:#337ab7 !important;
+}
+
+#menu_p .col-lg-5{
+    padding-left: 0px !important;
+}
+
+#logo_id img{
+    float: right;
+    margin-top: 6px;
+    margin-bottom: 5px;
+}
+
+#btn_sign_up {
+    background-color: rgb(113, 146, 62);
+    margin-bottom: 20px;
+    margin-top: 20px;
+    top: 22px;
+    width: 45%;
+/*    height: 60%;*/
+    z-index: 17;
+    padding: 5px;
+    color: #fff;
+    font: bold 13px verdana, sans-serif;
+    float: left;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+#btn_login{
+    background-color: rgb(34, 96, 196);
+    top: 22px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 1px;
+    width: 45%;
+/*    height: 60%;*/
+    z-index: 18; 
+    padding: 5px;
+    color: #fff;
+    font: bold 13px verdana, sans-serif;
+    float: left;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#first_body{
+    background-image: url(../img/bg_header_and_body.jpg);
+    width:100%; 
+    height: 20%;
+}
+
+#first_body img{
+    height: 20% !important;
+    width: 60%;
+    float: right;
+}
+
+#text_right_cell p{
+    font: 14px verdana, sans-serif;
+    color: #999999;
+    float: left;
+    margin-top:5px;
+    margin-right:10px;
+    padding: 0px;
+}
+
+#text_right_cell .col-lg-7{
+    padding: 0px;  
+}
+
+#second_body{
+    height: 20%;
+}
+/*image resposive*/
+img { width: 100%};
+
+#team{
+    background-image: url(../img/bg_header_and_body.jpg); 
+    width: 100%;
+    height: 20%;
+}
+
+#footer{
+    background-image: url(../img/bg_footer.jpg);
+    height: 13%;
+    clear: both;
+    text-align: center;
+    padding: 0px;
+    border-top: 2px solid #999999;
+}
+
+#mag_team{
+    text-align: center;
+    padding-top: 10px;
+}
+
+#team_a{
+    float: right;
+    padding-right: 15%;
+}
+
+#team_b{
+    float: left;
+    padding-left:  15%;
+}
+
+#team_b img{
+    padding-left:  20%;
+    padding-right:   20%;
+}
+
+#team_a img{
+    padding-left:  20%;
+    padding-right:   20%;
+}
+
+.team_a_h3, .team_b_h3{
+    margin-top: 0px;
+    text-align: center;
+}
+
+
+#menu_footer li{
+    /*   margin-bottom: 30px;*/
+    /*    margin-top: 25px;*/
+    display: block;
+    list-style: none;
+    padding: 3px;
+    font: bold 12px verdana, sans-serif;
+    color: #FFF;
+    text-align: left;
+    margin-right: 38px;
+}
+
+#footer .col-md-3{
+    padding: 0px;
+}
+
+#menu_footer{
+    float: right;
+     margin: 15px 0px 20px 0px;
+}
+
+#contact_footer p{
+    display: block;
+    list-style: none;
+    padding: 5px;
+    font: bold 12px verdana, sans-serif;
+    color: #FFF;
+    text-align: left;
+    margin-left:20px;
+}
+
+#contact_footer {
+    margin: 15px 0px 20px 0px;
+}
+
+#footer_specials
+{
+/*    float: right;*/
+}
+
+#footer_specials p{
+    display: block;
+    list-style: none;
+    font: bold 12px verdana, sans-serif;
+    color: #FFF;
+    text-align: left;
+    /*margin: 27px 0px;*/
+      margin: 15px 0px 20px 0px;
+}
+#footer_specials p input{
+    text-align: left;
+    padding: 5px;
+    font: bold 12px verdana, sans-serif;
+    display: block;
+    margin: 10px 0px;
+}
+
+#footer_icon p span{
+    display: inline-block;
+    list-style: none;
+    padding: 10px;
+    font: bold 12px verdana, sans-serif;
+    color: #FFF;
+    text-align: left;
+    margin: 15px 0px 20px 0px;
+}
+
+#img_fac, #img_twi{
+    width: 25%;
+    height: 20%;   
+    margin: 30px 0px;
+}
+
+
+/*register*/
+#register_id{
+    background-color:#f5f5f5;
+   padding: 5px 15px;
+    top: 22px;
+    height: 100%;
+    font-family:"halflings-regular";
+    text-transform: uppercase;
+}
+
+#register_id li{
+    margin-bottom: 16px;
+    margin-top: 16px;
+    margin-left: 50px;
+    display: inline-block;
+    list-style: none;
+/*    padding: 5px 130px;*/
+    font: bold 20px verdana, sans-serif;
+    color: #ddd;
+    text-align: center;
+}
+
+#register_id li a{
+    color: #ddd;
+}
+
+#user_mode_id{
+    display: block;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#user_mode_id button{
+    float: right
+}
+
+
+
+
+.Shape_1_copy_2 {
+    background-color: rgb(60, 60, 60);
+    position: absolute;
+    left: 0px;
+    top: 3137px;
+    width: 1600px;
+    height: 219px;
+    z-index: 3;
+}
+
+
+/*font header*/
+.Home_____About_Us_____Our_Services_____Credit_A {
+    font-size: 14px;
+    font-family: "HelveticaNeueLTStd";
+    color: rgb(34, 96, 196);
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: left;
+    position: absolute;
+    left: 557.937px;
+    top: 31.22px;
+    width: 422px;
+    height: 10px;
+    z-index: 48;
+}
+
+
+
+
+
+
+.Forgot_your_email_or_password_ {
+    font-size: 14px;
+    font-family: "Helvetica";
+    color: rgb(96, 96, 96);
+    line-height: 1.2;
+    text-align: left;
+    position: absolute;
+    left: 681.937px;
+    top: 474.25px;
+    width: 238px;
+    height: 13px;
+    z-index: 19;
+}
+.sign_up {
+    font-size: 14px;
+    font-family: "Helvetica";
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: center;
+    -moz-transform: matrix( 1.31187705624027,0,0,1.31187705624027,0,0);
+    -webkit-transform: matrix( 1.31187705624027,0,0,1.31187705624027,0,0);
+    -ms-transform: matrix( 1.31187705624027,0,0,1.31187705624027,0,0);
+    position: absolute;
+    left: 754.946px;
+    top: 620.782px;
+    width: 55px;
+    height: 9.936px;
+    z-index: 18;
+}
+.Rounded_Rectangle_1_copy_4 {
+    border-width: 1px;
+    border-color: rgb(204, 204, 204);
+    border-style: solid;
+    border-radius: 3px;
+    background-color: rgb(113, 146, 62);
+    position: absolute;
+    left: 629px;
+    top: 605px;
+    width: 339px;
+    height: 43px;
+    z-index: 17;
+}
+.login {
+    font-size: 14px;
+    font-family: "Helvetica";
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: left;
+    -moz-transform: matrix( 1.31187705624027,0,0,1.31187705624027,0,0);
+    -webkit-transform: matrix( 1.31187705624027,0,0,1.31187705624027,0,0);
+    -ms-transform: matrix( 1.31187705624027,0,0,1.31187705624027,0,0);
+    position: absolute;
+    left: 778.151px;
+    top: 527.782px;
+    width: 40.572px;
+    height: 9.936px;
+    z-index: 16;
+}
+.Password {
+    font-size: 14px;
+    font-family: "Helvetica";
+    color: rgb(80, 80, 80);
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: left;
+    position: absolute;
+    left: 646.937px;
+    top: 414.25px;
+    width: 89px;
+    height: 10px;
+    z-index: 15;
+}
+.Rounded_Rectangle_1_copy_3 {
+    border-width: 1px;
+    border-color: rgb(204, 204, 204);
+    border-style: solid;
+    border-radius: 3px;
+    background-color: rgb(34, 96, 196);
+    position: absolute;
+    left: 629px;
+    top: 512px;
+    width: 339px;
+    height: 43px;
+    z-index: 14;
+}
+.Rounded_Rectangle_1_copy_2 {
+    border-width: 1px;
+    border-color: rgb(204, 204, 204);
+    border-style: solid;
+    border-radius: 3px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    left: 629px;
+    top: 398px;
+    width: 339px;
+    height: 43px;
+    z-index: 13;
+}
+.Email {
+    font-size: 14px;
+    font-family: "Helvetica";
+    color: rgb(80, 80, 80);
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: left;
+    position: absolute;
+    left: 646.937px;
+    top: 354.25px;
+    width: 47px;
+    height: 10px;
+    z-index: 12;
+}
+.Rounded_Rectangle_1_copy {
+    border-width: 1px;
+    border-color: rgb(204, 204, 204);
+    border-style: solid;
+    border-radius: 3px;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    left: 629px;
+    top: 338px;
+    width: 339px;
+    height: 43px;
+    z-index: 11;
+}
+.Shape_2 {
+    background-color: rgb(188, 188, 188);
+    position: absolute;
+    left: 593px;
+    top: 580px;
+    width: 412px;
+    height: 1px;
+    z-index: 10;
+}
+.Rounded_Rectangle_1 {
+    border-radius: 3px;
+    background-image: -moz-linear-gradient( 90deg, rgb(242,242,242) 0%, rgb(255,255,255) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(242,242,242) 0%, rgb(255,255,255) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(242,242,242) 0%, rgb(255,255,255) 100%);
+    position: absolute;
+    left: 570px;
+    top: 276px;
+    width: 459px;
+    height: 407px;
+    z-index: 9;
+}
+.Rounded_Rectangle_1_s_Drop_Shadow {
+    background-image: url("Rounded Rectangle 1's Drop Shadow.png");
+    opacity: 0.251;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 1600px;
+    height: 1090px;
+    z-index: 8;
+}
+
+
+/*sign up del loguin*/
+.Rounded_Rectangle_1_copy_4 {
+    border-width: 1px;
+    border-color: rgb(204, 204, 204);
+    border-style: solid;
+    border-radius: 3px;
+    background-color: rgb(113, 146, 62);
+    position: absolute;
+    left: 629px;
+    top: 605px;
+    width: 339px;
+    height: 43px;
+    z-index: 17;
+}
+
+
+
+/*footer en el login con texto de about..*/
+.About_us___Contact_Us___Fees___Privacy___Legal_ {
+    font-size: 12px;
+    font-family: "Helvetica";
+    color: rgb(150, 150, 150);
+    line-height: 1.2;
+    text-align: center;
+    position: absolute;
+    left: 505.849px;
+    top: 741.992px;
+    width: 482px;
+    height: 41px;
+    z-index: 22;
+}
+
+
+/*baground de atras del login*/
+.Rectangle_4 {
+    background-color: rgb(226, 226, 226);
+    position: absolute;
+    left: -3px;
+    top: 77px;
+    width: 1604px;
+    height: 720px;
+    z-index: 6;
+}
+
+
+/*responsive menu*/
+ 

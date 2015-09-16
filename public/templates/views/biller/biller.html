@@ -1,0 +1,126 @@
+﻿<div class="page" data-ng-controller="MyNewBillerCtrl" data-ng-cloak>
+    <ol class="breadcrumb-alt">
+        <li><a href="#/dashboard/home">Home</a></li>
+        <li><a href="#/dashboard/billerList">Biller List</a></li>
+        <li class="active"><a href="">New Biller</a></li>
+    </ol>
+    <toaster-container toaster-options="{'position-class': 'toast-bottom-right','close-button':true}"></toaster-container>
+    <form name="form_create_biller" style="padding:5px; background-color:white;">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> New Biller</strong></div>
+            <div class="panel-body">
+                <div class="row col-md-12">
+
+                    <div class="col-md-12 pull-left" data-ng-controller="ConnectBillerCtrl" data-ng-if="!isBillerCreate">
+                        <div class="panel panel-info">
+                            <div class="panel-heading"><strong><i class="fa fa-filter"></i> Search </strong></div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pull-left"><h4>Find if its already registered</h4></div>
+                                        <hr class="intro-divider">
+                                        <div class="row col-md-12">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="label-form">Find by Company Name</div>
+                                                    <input type="text"
+                                                           id="v_companyname"
+                                                           data-ng-model="legal_name"
+                                                           class="form-control">            
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="label-form">Find by Email</div>
+                                                    <input type="text"
+                                                           id="v_dba"
+                                                           class="form-control"
+                                                           data-ng-model="email"
+                                                           placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="label-form">Find by Phone</div>
+                                                    <input type="text"
+                                                           id="v_tin"
+                                                           data-ng-model="phone"
+                                                           class="form-control">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-4"></div>
+                                            <div class="col-md-12">
+                                                <div >
+                                                    <section class="table-flip-scroll">
+                                                        <table  class="table table-bordered table-striped cf">                                                            
+                                                            <thead class="navbar-inverse">
+                                                                <tr class="th-font">
+                                                                    <th>Company Name</th>
+                                                                    <th>E-Mail</th>
+                                                                    <th>Phone</th>
+                                                                    <th>Tin </th>
+                                                                    <th>Address </th>
+                                                                    <th>Zip Code</th>
+                                                                    <th>Active </th>
+                                                                    <th>Connect </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody data-ng-repeat="biller in customers| filter:legal_name | filter:email| filter:phone">
+                                                                <tr data-ng-if="legal_name != null || email != null || phone != null">
+                                                                    <td>{{biller.legal_name}}</td>
+                                                                    <td>{{biller.email}}</td>
+                                                                    <td>{{biller.phone}}</td>
+                                                                    <td>{{biller.tin}}</td>
+                                                                    <td>{{biller.address}}</td>
+                                                                    <td>{{biller.zip_postal}}</td>
+
+                                                                    <td class="text-center">
+                                                                        <i data-ng-show="biller.active" class="fa fa-check-square-o"></i>
+                                                                        <i data-ng-show="!biller.active" class="fa fa-square-o"></i>
+                                                                    </td>
+                                                                    <td class="text-center">
+                                                                        <input type="radio" data-ng-model="billers.billers_id" name="billers_id" value="{{biller.id}}"  data-ng-click="checkStuff()"/>
+<!--                                                                        <span>{{billers}}</span>-->
+                                                                    </td>
+                                                                </tr>                            
+                                                            </tbody>
+                                                        </table>
+                                                    </section>
+                                                    <div  class="col-md-3" data-ng-if="isChecked">
+                                                        <input type="hidden"
+                                                           id="v_current"
+                                                           data-ng-model="billers.customer_current"
+                                                           class="form-control">
+                                                        <input type="hidden"
+                                                           id="v_current"
+                                                           data-ng-model="billers.id_connect"
+                                                           class="form-control">
+                                                        <button  data-ng-click="submit()" class="btn btn-default"><i class="fa fa-cube fa-2x"></i>Connect</button>
+                                                    </div>
+                                                    <div data-ng-if="!isChecked" class="col-md-3">
+                                                        <div class="col-md-12">
+                                                            If not found the company. 
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <a title="Add new biller" href="#/dashboard/addBiller" class="btn btn-default"><i class="fa fa-cube fa-2x"></i>Add New Biller</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </form>
+</div>

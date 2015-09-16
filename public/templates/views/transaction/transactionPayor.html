@@ -1,0 +1,343 @@
+﻿<!--[if !IE]><!-->
+<!--<style>
+    #input-budget {
+        background-color: #ffffff;
+        border: 0px solid;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+        -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+        -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+        transition: border linear 0.2s, box-shadow linear 0.2s;
+        border-style: none;
+        display: inline-block;
+        padding: 2px;
+        margin-bottom: 0px;
+        font-size: 14px;
+        line-height: 20px;
+        color: #555;
+        border: 0px solid;
+        vertical-align: middle;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+    }
+</style>-->
+
+<div class="page" data-ng-controller="MyNewTrxnPCtrl as vm" data-ng-cloak>
+    <ol class="breadcrumb-alt">
+        <li><a href="#/dashboard/home">Home</a></li> 
+        <li class="active"><a href="">New  Transaction</a></li>
+    </ol>
+<toaster-container toaster-options="{'position-class': 'toast-bottom-right','close-button':true}"></toaster-container>
+    <div id="{{transactions.id}}" style="padding:5px; background-color:white;">
+        <div class="panel panel-default">
+            <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> <span>{{$parent.settings.pageTitle}}</span> <!--<span data-ng-show="!vm.isbillercurrent"> New Payor Transaction</span>--> </div>
+            <div class="panel-body">
+
+                <form name="form_create_payor_transaction">
+
+                    <div class="row col-md-12">
+
+                        <div class="row">
+                            <!--Biller--> <!--OR-->  <!--Payor-->
+                            <div class="col-md-4" data-ng-controller="DashboardCtrl">
+                                <div class="label-form">Payor</div>
+                                <input type="text"
+                                       data-ng-model="mycurrentcustomer.legal_name"
+                                       data-ng-readonly="true"
+                                       id="txneditcustomerbiller"
+                                       class="form-control" />
+                                <div class="info-custom">creator of the data</div>
+                            </div>
+                            
+                            <!--Amount-->
+                            <div class="col-md-4">
+                                <div class="label-form">Amount</div>
+
+                                <input type="text"
+                                       name="txneditamount"
+                                       data-ng-click="vm.inputCurrency(vm.transaction.amount)"
+                                       data-ng-required="true"
+									    data-ng-change = "autoSave()"
+                                      ng-pattern="/^[0-9]+([.][0-9]{0,2})?$/"  
+                                       data-ng-model="transactions.amount"
+                                       class="form-control"
+                                       data-ng-class="{ 'alert-error': !vm.validator.validateObject.amountIsValid }"
+                                       id="txneditamount" />
+                                <div class="info-custom">amount being invoiced</div>
+                                <!--<span class="error-custom" data-ng-show="!form_create_payor_transaction.txneditamount.$pristine && form_create_payor_transaction.txneditamount.$error.required">Amount is required.</span>-->
+                                <span class="error-custom" data-ng-show=" form_create_payor_transaction.txneditamount.$error.pattern">Amount is invalid.Only number and two digits after of(.)</span>
+                                <span class="error-custom" data-ng-show="txneditamount">{{txneditamount}}</span>
+                            </div>
+                            <!--Departure Date -->
+                            <div class="col-md-4">
+                                <div class="label-form">Departure Date</div>
+                                <div class="input-group ui-datepicker">
+                                    <input type="text"
+                                           show-weeks="false"
+                                           class="form-control"
+										    data-ng-change = "autoSave()"
+                                           datepicker-popup="MM/dd/yyyy"
+                                           max-date="{{vm.transactions.arrival_date}}"
+                                           ng-model="transactions.departure_date"
+                                           data-ng-disabled="vm.isTransactionApproved || vm.transaction.userId != main.userId"
+                                           is-open="vm.departureDateOpened"
+                                           ng-click="vm.open($event, 'departureDateOpened')"
+                                           close-text="Close">
+                                    <span class="input-group-addon" ng-click="vm.open($event, 'departureDateOpened')"><i class="fa fa-calendar"></i></span>
+                                </div>
+
+                                <div class="info-custom">date shipment leaves</div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-4"  data-ng-controller="MyBillerCurrentCtrl">
+                                <div class="label-form">Biller</div>
+                                <span class="ui-select">
+                                    <select name="mybillerselect"   data-ng-change = "autoSave()" data-ng-model="transactions.mybillerselect" class="text-small">
+                                        <option value="">Select</option>
+										<option ng-repeat="customer in customers" ng-selected="transactions.mycurrentcustomer == customer.id" ng-attr-value="{{customer.id}}">{{customer.legal_name}}</option>
+                                    </select>
+                                </span>
+
+                                <div class="info-custom">creator of the data</div>
+                                <!--<span class="error-custom" data-ng-show="!form_create_payor_transaction.mybillerselect.$pristine && form_create_biller_transaction.mybillerselect.$error.required">The Biller Name is required.</span>-->
+                                <span class="error-custom" data-ng-show="mybillerselect">{{mybillerselect}}</span>
+                            </div>
+                             
+                            <!--Due Date-->
+                            <div class="col-md-4">
+                                <div class="label-form">Due Date</div>
+                                <div class="input-group ui-datepicker">
+                                    <input name="due_date" type="text"
+                                           show-weeks="false"
+                                           class="form-control"
+										    data-ng-change = "autoSave()"
+                                           datepicker-popup="{{format}}"
+                                           data-ng-model="transactions.due_date"
+                                           data-ng-disabled="vm.isTransactionApproved || vm.transaction.userId != main.userId"
+                                           is-open="vm.dueDateOpened"
+                                           ng-click="vm.open($event, 'dueDateOpened')"
+                                            close-text="Close" required>
+                                    <span class="input-group-addon" ng-click="vm.open($event, 'dueDateOpened')"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <div class="info-custom">date payment is due</div>
+                                <!--<span class="error-custom" data-ng-show="!form_create_payor_transaction.due_date.$pristine && form_create_payor_transaction.due_date.$error.required">The Due Date is required.</span>-->
+                                 <span class="error-custom" data-ng-show="due_date">{{due_date}}</span>
+                            </div>
+                            <!--Arrival Date-->
+                            <div class="col-md-4">
+                                <div class="label-form">Arrival Date</div>
+                                <div class="input-group ui-datepicker">
+                                    <!--min-date="'04/21/2015'"-->
+                                    <!--min-date="'{{vm.transactions.departure_date | date:'MM/dd/yyyy'}}'"-->
+                                    <!--min-date="'{{vm.transactions.departure_date | date:'MM/dd/yyyy' }}'"-->
+                                    <input type="text"
+                                           show-weeks="false"
+                                           class="form-control" 
+                                           datepicker-popup="{{format}}"
+										    data-ng-change = "autoSave()"
+                                           min-date="{{vm.transactions.departure_date}}"
+                                           data-ng-model="transactions.arrival_date"
+                                           data-ng-disabled="vm.isTransactionApproved || vm.transaction.userId != main.userId"
+                                           is-open="vm.arrivalDateOpened"
+                                           ng-click="vm.open($event, 'arrivalDateOpened')"
+                                           close-text="Close">
+                                    <span class="input-group-addon" ng-click="vm.open($event, 'arrivalDateOpened')"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <div class="info-custom">date shipment arrives destination</div>
+
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <!-- Transaction Type -->
+                            <div class="col-md-4" data-ng-controller="TransatypesCtrl">
+                                <div class="label-form">Type</div>
+                                <span >
+                                    <span class="ui-select">
+                                        <select name="myTransatype"  data-ng-change = "autoSave()" ng-model="transactions.myTransatype">
+                                        <option value="">Select</option>
+										<option ng-repeat="transatype in transactions_types" ng-selected="transactions.myTransatype == transatype.id" ng-attr-value="{{transatype.id}}">{{transatype.description}}</option>	
+                                        </select>
+                                    </span>
+                                </span>
+
+                                <div class="info-custom">type of document instrument</div>
+                                <!--<span class="error-custom" data-ng-show="!form_create_payor_transaction.myTransatype.$pristine && form_create_payor_transaction.myTransatype.$error.required">The Type is required.</span>-->
+                                <span class="error-custom" data-ng-show="myTransatype">{{myTransatype}}</span>
+                            </div>
+
+                            <!-- Transaction Category -->
+                            <div class="col-md-4" data-ng-controller="BizAreaCtrl">
+                                <div class="label-form">Category</div>
+                                <span >
+                                    <span class="ui-select">
+                                        <select name="myArea"  data-ng-change = "autoSave()" ng-model="transactions.myArea">
+                                        <option value="">Select</option>
+										<option ng-repeat="bizarea in biz_areass" ng-selected="transactions.myArea == bizarea.id" ng-attr-value="{{bizarea.id}}">{{bizarea.biz_area_description}}</option>	
+                                        </select>
+                                    </span>
+                                </span>
+                                <div class="info-custom">what industry</div>
+                                <!--<span class="error-custom" data-ng-show="!form_create_payor_transaction.myArea.$pristine && form_create_payor_transaction.myArea.$error.required">The Category is required.</span>-->
+                                 <span class="error-custom" data-ng-show="myArea">{{myArea}}</span>
+                            </div>
+                            <!--Payor Ref #-->
+                            <div class="col-md-4">
+                                <div class="label-form">Payor Ref Number</div>
+                                <input data-ng-readonly="isTransactionApproved || isbillercurrent"
+                                       type="text" name="payorRefNumber"
+									   data-ng-change = "autoSave()"
+                                       data-ng-class="{ 'alert-error': !vm.validator.validateObject.payorRefIsValid }"
+                                       data-ng-model="transactions.payorrefnumber"
+                                       class="form-control"/>
+                                <div class="info-custom">payor internal numbering system</div>
+<!--                                <span class="error-custom" data-ng-show="!form_create_payor_transaction.payorRefNumber.$pristine && form_create_payor_transaction.payorRefNumber.$error.required">Payor Ref Number is required.</span>
+                                <span class="error-custom" data-ng-show="payorRefNumber">{{payorRefNumber}}</span>-->
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+                            <!--Transaction Number-->
+                            <div class="col-md-4">
+                                <div class="label-form">Number</div>
+                                <input type="text" name="number"
+                                       data-ng-model="transactions.number"
+                                       id="txneditnumber"
+									   data-ng-change = "autoSave()"
+                                       data-ng-class="{ 'alert-error': !vm.validator.validateObject.numberIsValid }"
+                                       class="form-control" required/>
+                                <div class="info-custom">{{transactions.myTransatype.description}} number</div>
+                                <!--<span class="error-custom" data-ng-show="!form_create_payor_transaction.number.$pristine && form_create_payor_transaction.number.$error.required"> Number is required.</span>-->
+                                <span class="error-custom" data-ng-show="number">{{number}}</span>
+                            </div>
+                            <!--Related Number-->
+                            <div class="col-md-4">
+                                <div class="label-form">Related No.</div>
+                                <input type="text" name="relatednumber"
+                                       data-ng-model="transactions.relatednumber"
+                                       data-ng-class="{ 'alert-error': !vm.validator.validateObject.relatedNumberIsValid }"
+                                       class="form-control"
+									   data-ng-change = "autoSave()"
+                                       id="txneditrelatednumber" />
+                                <div class="info-custom">text info test</div>
+                               <!--<span class="error-custom" data-ng-show="!form_create_payor_transaction.relatednumber.$pristine && form_create_payor_transaction.relatednumber.$error.required"> Related Number is required.</span>-->
+                                 <span class="error-custom" data-ng-show="relatednumber">{{relatednumber}}</span>
+                            </div>
+
+                            <!--Description-->
+                            <div class="col-md-4">
+                                <div><b>Description</b></div>
+                                <textarea data-ng-readonly="isTransactionApproved"
+                                          rows="5" cols="100" maxlength="1000"
+                                          data-ng-trim="false"
+										  data-ng-change = "autoSave()"
+                                          name="Description" data-ng-model="transactions.description" class="form-control" ></textarea>
+                                <div style="margin-top: -2px; margin-left: 3px; color: #005580; font-size: 11px !important; font-style: italic; ">(max 1000 characters) <span>{{1000 - transactions.description.length}} left</span></div>
+                            </div>
+                        </div>                    
+                        <div class="row">
+
+                            <div class="col-md-6" data-ng-if="vm.isSaved">
+
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Documents Attachment(s)</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <ng-include src="'/templates/views/attachment/attachment.html'"></ng-include>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Transaction Budget Details</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Container Number</th>
+                                                    <th class="span2">Budget Numbers</th>
+                                                    <th>Amount</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="relnbr in vm.relatednumbers">
+                                                    <td>
+                                                        <input type="text" id="input-budget" data-ng-model="relnbr.number" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="input-budget" data-ng-model="relnbr.container" />
+                                                    </td>
+                                                    <td style="text-align: right;">
+                                                        <input type="text" id="input-budget" data-pab-currency-input="" data-ng-model="relnbr.amount" />
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn" style="cursor:pointer;" data-a-ng-click="vm.removeRelatedNumber(relnbr)" title="remove"><i class="fa fa-trash-o"></i></div>
+                                                    </td>
+                                                </tr>
+                                                <tr data-ng-show="vm.relatedNumberTotalAmount > 0">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><div><b>Total: {{vm.getRelatedNumberTotalAmount() | currency}}</b></div></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input value="" class="input-inline-form" type="text" placeholder="Container Number" data-ng-model="vm.relatedNumber.number" />
+                                                    </td>
+                                                    <td>
+                                                        <input value="" class="input-inline-form" type="text" placeholder="Budget Number" data-ng-model="vm.relatedNumber.container" />
+
+                                                    </td>
+                                                    <td>
+                                                        <input value="" class="input-inline-form" type="text" data-pab-currency-input="" data-ng-click="vm.inputCurrency(vm.relatedNumber.amount)" placeholder="amount" data-ng-model="vm.relatedNumber.amount" />
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn" data-ng-show="vm.transaction.transactionStatusId != 3" data-ng-click="vm.addRelatedNumber()">add</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                        </div>
+                        <progressbar data-ng-show="vm.showLoading" class="progressbar-sm progress-striped" value="100" type="info">{{vm.loadingMsg}}</progressbar>
+                        <!--Alert verifier-->
+                        <div class="row">
+                            <div class="col-md-6" >
+                                <input type="hidden" name="Name"
+                                       class="form-control"
+                                       data-ng-model="transactions.customer_current" />
+                                <p data-ng-show="$parent.settings.success" class="alert alert-success">{{$parent.settings.success}}</p> 
+                            </div>
+                           
+                            <div class="col-md-6">
+                                <div class="pull-right">
+                                    <a data-ng-click="cancel()" class="btn btn-warning">Cancel</a>
+                                    <button type="button" class="btn btn-primary" data-ng-click="submit($parent.trasactions)"> <i class="fa fa-save"></i> {{$parent.settings.action}}</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

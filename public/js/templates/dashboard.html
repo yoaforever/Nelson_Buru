@@ -1,0 +1,21 @@
+<h1>Main Dashboard <a class="btn btn-primary pull-right" href="#/logout">Logout</a></h1>
+<div class="col-md-3 well">
+	<a class="btn btn-primary" ui-sref=".add">Create New Post</a>
+</div>
+<div class="col-md-9">
+	<table class="table table-striped">
+		<tr>
+			<th></th>
+			<th>id</th>
+			<th>title</th>
+		</tr>
+		<tr ng-repeat="post in posts">
+		    <td><a ui-sref=".edit({id: {{post.id}}})" class="btn btn-success btn-xs">edit</a></td>
+		    
+		    <td>{{post.id}}</td>
+		    <td>{{post.title}}</td>
+		</tr>
+	</table>
+
+	<div ui-view></div>
+</div>

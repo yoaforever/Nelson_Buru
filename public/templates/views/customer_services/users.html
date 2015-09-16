@@ -1,0 +1,100 @@
+﻿<div class="page" data-ng-controller="ListUserCSCtrl as vm" data-ng-cloak>
+    <ol class="breadcrumb-alt">
+        <li><a href="#/dashboard/home">Home</a></li>       
+        <li class="active"><a href="#/dashboard/clientsList">Clients</a></li>
+		<li class="active"><a href="#/dashboard/users">User List</a></li>
+    </ol>
+    <div style="padding:5px; background-color:white;">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Users</strong></div>
+            <div class="panel-body">
+                <div class="row col-md-12">
+
+                    <div data-ng-if="customer_service" class="col-md-1">
+                        <ul class="nav nav-boxed nav-justified">
+                            <li><a href="#/dashboard/newUserCS"><i class="color-info-alt fa fa-plus-square"></i> Add User </a></li>
+                        </ul>
+                    </div>
+
+                    <div data-ng-if="customer_service" class="row form-group">
+                        <div class="row-space-top"></div>
+                        <div class="col-sm-4">
+                            <input type="text" name="search_filter" ng-model="search" placeholder="quick search" class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="btn-group">
+                                <button data-ng-show="vm.billervm.filterBy.allCol" data-ng-click="vm.billervm.filterBy.allCol =''" class="btn btn-default" type="button"><i class="fa fa-eraser fa-2x"></i></button>
+                                <button title="apply filter" data-ng-click="vm.search(vm.billervm, $event)" class="btn btn-default"><i class="fa fa-filter fa-2x"></i></button>
+                                <button title="clear filter" data-ng-click="vm.clearFilter(vm.billervm)" class="btn btn-default"><i class="fa fa-refresh fa-2x"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <section class="table-flip-scroll">
+                        <table class="table table-bordered table-striped cf">
+                            <div data-ng-show="vm.isLoading" class="col-sm-6 pull-right"><i class="fa fa-spinner fa-spin fa-3x"></i>Loading ...</div>
+                            <thead class="navbar-inverse">
+                                <tr class="th-font">
+                                    <th></th>
+                                    <th>Status</th>
+									<th>Name</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+									<th>Telephone</th>
+                                    <th>Role</th>
+                                    <th>User Type</th>
+									<th>Online Status</th>
+									<th>Lock/Unlock</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="user in users|filter:search:stric">
+                                <tr data-ng-dblclick="vm.toggleDetail(user)">
+                                    <td class="text-center" style="cursor:pointer;" data-ng-click="vm.toggleDetail(user)" id="tddsh">
+										<i data-ng-show="!user.detailsVisbile" class="fa fa-plus-square-o "></i>
+                                        <i data-ng-show="user.detailsVisbile" class="fa fa-minus-square-o "></i>
+                                    </td>
+									<td>
+										<input type="checkbox" name="status" ng-click="SaveProfileStatus(user.id,user.active)" ng-checked="user.active == 1 ? true: false" ng-model="user.active" />
+										<!--<i data-ng-show="user.active == 1 ? true: false" class="fa fa-check-square-o"></i>
+                                        <i data-ng-show="user.active == 0 ? true: false" class="fa fa-square-o"></i>-->
+									</td>
+									<td>{{user.name}}</td>
+									<td>{{user.username}}</td>
+									<td><a href="mailto:{{user.email}}" target="_blank">{{user.email}}</a></td>
+									<td>{{user.phone}}</td>
+									<td ng-controller="RoleCtrl"><span ng-repeat="role in roles">
+									<p ng-if="role.id == user.role_id">{{role.display_name}}</p>
+									</span></td>
+									<td class="text-center">-</td>
+                                    <td class="text-center">
+									<span  data-ng-show="user.is_logged_in==1" class="icon glyphicon glyphicon-user color-success"></span>
+									<span  data-ng-show="user.is_logged_in==0" class="icon glyphicon glyphicon-user color-danger"></span>
+									
+									</td>
+                                    <td class="text-center">
+										<!--<i title="locked" data-ng-show="user.is_locked == 1 ? true: false" class="fa fa-check-square-o"></i>
+                                        <i data-ng-show="user.is_locked == 0 ? true: false" class="fa fa-square-o"></i>--> {{user.is_locked}}
+										<input type="checkbox" name="is_locked"  ng-true-value="1" ng-false-value="0" ng-checked="user.is_locked == 1 ? true: false" ng-model="user.is_locked" ng-click="SaveLockStatus(user.id,user.is_locked)" />
+									</td>
+                                   
+                                </tr>
+                                <tr data-ng-show="user.detailsVisbile">
+                                    <td colspan="8">
+                                        <div data-ng-if="user.detailsVisbile">
+                                            <ng-include src="'templates/views/customer_services/userTmplt.html'"></ng-include>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </section>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

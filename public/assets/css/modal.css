@@ -1,0 +1,118 @@
+/*body {
+	padding-bottom: 0;
+	background-color: #fff;
+	min-height: 100%;
+	font-family: 'Open Sans';
+	font-size: 13px;
+	color: #393939;
+	line-height: 1.5;
+}*/
+
+.modal-content {
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.wizard-steps {
+	list-style: none;
+	display: table;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+
+.wizard-steps li {
+	display: table-cell;
+	text-align: center;
+	width: 1%;
+}
+
+.wizard-steps li.active:before, .wizard-steps li.complete:before, .wizard-steps li.active .step, .wizard-steps li.complete .step {
+	border-color: #5293c4;
+}
+
+.wizard-steps li:first-child:before {
+	max-width: 51%;
+	left: 50%;
+}
+.wizard-steps li:before {
+	display: block;
+	content: "";
+	width: 100%;
+	height: 1px;
+	font-size: 0;
+	overflow: hidden;
+	border-top: 4px solid #ced1d6;
+	position: relative;
+	top: 21px;
+	z-index: 1;
+}
+
+.wizard-steps li.active:before, .wizard-steps li.complete:before, .wizard-steps li.active .step, .wizard-steps li.complete .step {
+	border-color: #5293c4;
+}
+
+.wizard-steps li .step {
+	border: 5px solid #ced1d6;
+	color: #546474;
+	font-size: 15px;
+	border-radius: 100%;
+	background-color: #FFF;
+	position: relative;
+	z-index: 2;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	line-height: 30px;
+	text-align: center;
+}
+
+.wizard-steps li.complete .title, .wizard-steps li.active .title {
+	color: #2b3d53;
+}
+
+.wizard-steps li .title {
+	display: block;
+	margin-top: 4px;
+	max-width: 100%;
+	color: #949ea7;
+	font-size: 14px;
+	z-index: 104;
+	text-align: center;
+	table-layout: fixed;
+	word-wrap: break-word;
+}
+
+.wizard-steps li:last-child:before {
+	max-width: 50%;
+	width: 50%;
+}
+
+.step-content .step-pane {
+	display: none;
+	min-height: 200px;
+	padding: 4px 8px 12px;
+}
+
+.step-content .active {
+	display: block;
+}
+
+.center, .align-center {
+	text-align: center!important;
+}
+
+.wizard-actions {
+	text-align: right;
+}
+
+.modal-footer {
+	padding-top: 12px;
+	padding-bottom: 14px;
+	border-top-color: #e4e9ee;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	background-color: #eff3f8;
+}

@@ -1,0 +1,137 @@
+<div class="page page-profile" data-ng-controller="EditCompanyProfileCSCtrl as vm" data-ng-cloak>
+   <toaster-container toaster-options="{'position-class': 'toast-bottom-right','close-button':true}"></toaster-container>
+   <div class="row">
+      <div id="panel_profile" class="panel panel-default nav-container ng-scope nav-horizontal">
+         <div class="panel-heading nav-wrapper ng-scope"><strong><span class="glyphicon glyphicon-th"></span>Company Profile Info</strong></div>
+         <ul  class="nav ng-scope"    style="overflow: hidden; width: auto; height: 100%;">
+            <li data-ng-if="customer_service">
+               <a> <i class="fa fa-dashboard"></i><span data-i18n="Dashboard">Dashboard</span> </a>
+            </li>
+            <li data-ng-if="customer_service">
+               <a  ui-sref=".newUser"><i class="fa fa-users"></i><span data-i18n="Users">Users</span></a>
+               <ul>
+                  <li value="{{company_profile.id}}" data-ng-model="obj.company_id"><a href="#/dashboard/users/{{company_profile.id}}" >List of Users</a></li>
+                  <li><a href="#/dashboard/newUserCS">Create User</a></li>
+               </ul>
+               <i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i>
+            </li>
+            <li data-ng-if="customer_service">
+               <a href="#/dashboard/customerFees"><i class="fa fa-dollar"></i><span data-i18n="Fees">fees</span></a>
+               <!--                        <ul>
+                  </ul>-->
+               <!--                        <i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i>-->
+            </li>
+			<li data-ng-if="customer_service">
+               <a href="#/dashboard/transactionsList"><i class="fa fa-dollar"></i><span data-i18n="Transactions">Transactions</span></a>
+            </li>
+            <li data-ng-if="customer_service">
+               <a ><i class="fa fa-bank"></i><span data-i18n="Bank Info">Bank Info</span></a>
+               <!--                        <ul>
+                  </ul>-->
+               <!--                        <i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i>-->
+            </li>
+            <li data-ng-if="customer_service">
+               <a href=""><i class="fa fa-paper-plane"></i><span data-i18n="Reports">Reports</span></a>
+                                     <ul>
+                  <li><a>ACH Reconciliation</a></li>
+                  <li><a>Failure Report</a></li>
+               </ul>
+               <!--                        <i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i>-->
+            </li>
+            <li data-ng-if="customer_service">
+               <a href=""><i class="fa fa-warning"></i><span data-i18n="Alerts">Alerts</span></a>
+               <!--                        <ul>
+                  <li><a >My Profile</a></li>
+                  </ul>-->
+               <!--                        <i class="fa fa-caret-down icon-has-ul-h"></i><i class="fa fa-caret-right icon-has-ul"></i>-->
+            </li>
+            <!--<li data-ng-if="customer_service" class="nav-task">
+               <a >
+               <i class="fa fa-tree"></i><span data-i18n="Branch">Branch</span>
+               </a>
+            </li>-->
+         </ul>
+         <div class="panel-body">
+            <div class="media">
+               <div class="media-body">
+                  <ul class="list-unstyled list-info">
+                     <li>
+                        <span class="icon glyphicon glyphicon-user"></span>
+                        <label>Name</label>
+                        <input type="text" name="Name"
+                           class="form-control"
+                           data-ng-model="company_profile.legal_name" />
+                        <span class="error-custom" ></span>
+                     </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-header"></span>
+                        <label>Company Id</label>
+                        <input type="text" name="company_id"
+                           readonly="true"
+                           class="form-control"
+                           data-ng-model="company_profile.id" />
+                        <span class="error-custom" ></span>
+                     </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label>Email</label>
+                        <input type="text" name="Name"
+                           class="form-control"
+                           data-ng-model="company_profile.email" />
+                        <span class="error-custom" ></span>
+                     </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-home"></span>
+                        <label>Address</label>
+                        <input type="text" name="Name"
+                           class="form-control"
+                           data-ng-model="company_profile.address" />
+                        <span class="error-custom" ></span>
+                     </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-earphone"></span>
+                        <label>Contact</label>
+                        <input type="text" name="phone"
+                           class="form-control"
+                           data-ng-model="company_profile.phone" />
+                     </li>
+                     <li>
+                        <div class=" checkbox">
+                           <label>
+                           <input type="checkbox"  ng-true-value="1" ng-false-value="0" ng-checked="company_profile.active == 1" data-ng-model="company_profile.active"/> Active
+                           </label>
+                        </div>
+                        <div class=" checkbox">
+                           <label>
+                           <input type="checkbox"  ng-true-value="1" ng-checked="company_profile.HQ_ID == 1" ng-false-value="0" data-ng-model="company_profile.HQ_ID"/> HQ
+                           </label>
+                        </div>
+                     </li>
+                     <li>
+                        <span class="icon glyphicon glyphicon-registration-mark"></span>
+                        <label >OFAC</label>
+                        <input type="text" name="ofac_id_ver"
+                           readonly="true"
+                           class="form-control"
+                           data-ng-if="company.ofac_sdn_name == null"
+                           value="Verified does not match" />
+                        <input type="text" name="ofac_id_notverif"
+                           readonly="true"
+                           class="form-control"
+                           data-ng-if="company.ofac_sdn_name != null"
+                           value="Match found" />
+                        <span class="error-custom" ></span>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-12">
+         <div class="btn-group pull-right">
+            <button ng-click="payor.detailsVisbile = false;isLoading = 1;" class="btn btn-warning">Cancel</button>
+            <button data-ng-click="submit()" class=" btn btn-primary"><span class="fa fa-save"></span> Save</button>
+         </div>
+      </div>
+   </div>
+</div>

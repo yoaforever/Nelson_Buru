@@ -1,0 +1,25 @@
+
+<div class="page">
+    <div class="row">
+        <div class="col-sm-3">
+            <ng-include src="'/templates/views/mail/leftbar.html'"></ng-include>
+        </div>
+        <div class="col-sm-9" ng-controller="DraftsCtrl">
+            <section class="panel panel-default mail-container">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Drafts</strong></div>
+                <div class="mail-options">
+                    <label class="ui-checkbox"><input name="checkbox1" type="checkbox" value="option1" ><span>Toggle All</span></label>
+                </div>
+                <table class="table table-hover">
+                    <tr ng-repeat="detail in details" ng-class="(detail.unread == 'U') ? 'mail-unread' : ''">
+					<td><label class="ui-checkbox"><input name="checkbox1" type="checkbox" value="option1" ><span></span></label></td>
+					<td ng-click="MessageDetails(detail.uid,detail.msgno,'Draft')">{{detail.fromName}}</td>
+					<td ng-click="MessageDetails(detail.uid,detail.msgno,'Draft')">{{detail.subject}}</td>
+                    <td ng-click="MessageDetails(detail.uid,detail.msgno,'Draft')"><i class="fa fa-paperclip"></i></td>
+                    <td ng-click="MessageDetails(detail.uid,detail.msgno,'Draft')">{{detail.udate * 1000 | date:'dd/MM/yyyy @ h:mma'}}</td>
+					</tr>
+                </table>
+            </section>
+        </div>
+    </div>
+</div>
